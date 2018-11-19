@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Stratis 0.5 Release Notes</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="style.css">
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header>
+<h1 class="title">Stratis 0.5 Release Notes</h1>
+</header>
+<h1 id="march-8-2018">March 8, 2018</h1>
+<p>This release is suitable for developers and early testers. It should not be used with valuable data, and pools created with this release will not be supported in Stratis 1.0, due to upcoming on-disk format changes.</p>
+<h2 id="new-features">New Features</h2>
+<ul>
+<li>Snapshots. In addition to being created from scratch (with <code>fs create</code>), a new filesystem may now be created as a read/write snapshot of an existing filesystem, using the <code>fs snapshot</code> command.</li>
+<li>Cache tier. Using the <code>blockdev add-cache</code> command, a high-performing blockdev, such as an SSD, may be added to a pool to act as a cache for the regular data tier. The existing <code>blockdev add</code> command has been renamed <code>blockdev add-data</code>.</li>
+<li>Event-driven. stratisd now uses the new device-mapper (DM) event mechanism, instead of polling its devices every ten seconds. stratisd also expands a pool’s thinpool metadata and data devices based upon the lowater threshold event.</li>
+<li>Devices under /dev. Stratis now represents its pools and their filesystems under <code>/dev/stratis</code>, making it easier to mount and use them.</li>
+<li>Thin Check. When activating a pool, Stratis will now automatically run <code>thin_check</code>, and if needed, <code>thin_repair</code>.</li>
+<li>Block devices that make up a pool are now exposed via the D-Bus API, as well as the <code>blockdev list</code> command.</li>
+<li>Udev integration. Stratis will now track incomplete pools, and use udev device-added notifications to complete and activate them, if added later.</li>
+</ul>
+<h2 id="known-issues">Known issues</h2>
+<ul>
+<li>It is currently only possible for the <code>fs create</code> command to create one filesystem at a time. <a href="https://github.com/stratis-storage/stratisd/issues/694">(issue)</a></li>
+<li>Automatic management of filesystem size is not working. <a href="https://github.com/stratis-storage/stratisd/issues/695">(issue)</a></li>
+</ul>
+</body>
+</html>
