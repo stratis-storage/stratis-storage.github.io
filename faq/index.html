@@ -106,6 +106,9 @@
                     <a href="https://stratis-storage.github.io/faq/#why-and-when-would-i-use-stratis" class="toc-link">Why and when would I use Stratis?</a>
                     
                 </li>
+		<li>
+		<a href="https://stratis-storage.github.io/faq/#is-stratis-a-filesystem" class="toc-link">Is Stratis a Filesystem?</a>	
+		</li>
                 
                 <li>
                     <a href="https://stratis-storage.github.io/faq/#how-does-stratis-compare-to-zfs-and-btrfs" class="toc-link">How does Stratis compare to ZFS and Btrfs?</a>
@@ -121,7 +124,9 @@
                     <a href="https://stratis-storage.github.io/faq/#does-stratis-work-with-lvm" class="toc-link">Does Stratis work with LVM?</a>
                     
                 </li>
-                
+                <li>
+			<a href="https://stratis-storage.github.io/faq/#How-do-I-mount-and-use-Stratis-filesystems" class="toc-link">How do I mount and use Stratis filesystems, once they’ve been created?</a>
+		</li>
                 <li>
                     <a href="https://stratis-storage.github.io/faq/#why-do-new-filesystems-show-up-as-huge-1-terabyte-when-using-df" class="toc-link">Why do new filesystems show up as huge (1 terabyte) when using df?</a>
                     
@@ -188,23 +193,23 @@
 </div>
 
   <h3 id="why-and-when-would-i-use-stratis">Why and when would I use Stratis?</h3>
-<p>Stratis automates the management of local storage. On a system with just a single disk, Stratis can make it more convenient to logically separate /home from /usr, and enable snapshot with rollback on each separately. On larger configurations, Stratis can make it easier to create a multi-disk, multi-tiered storage pool, monitor the pool, and then manage the pool with less administrator effort.
-Is Stratis a filesystem?</p>
-<p>It’s not a traditional filesystem like ext4, <a href="https://en.wikipedia.org/wiki/XFS">XFS</a>, or FAT32. Stratis manages block devices and filesystems to support features akin to “volume-managing filesystems” (VMFs) like ZFS and Btrfs. Whereas a traditional filesystem acts to support directory and file operations on top of a single block device, VMFs can incorporate multiple block devices into a “pool”. Multiple independent filesystems can be created, each backed by the storage pool.</p>
+<p>Stratis automates the management of local storage. On a system with just a single disk, Stratis can make it more convenient to logically separate /home from /usr, and enable snapshot with rollback on each separately. On larger configurations, Stratis can make it easier to create a multi-disk, multi-tiered storage pool, monitor the pool, and then manage the pool with less administrator effort.</p>
+<h3 id="is-stratis-a-filesystem">Is Stratis a filesystem?</h3>
+<p>It’s not a traditional filesystem like <a href="https://ext4.wiki.kernel.org/index.php/Main_Page">ext4</a>, <a href="https://en.wikipedia.org/wiki/XFS">XFS</a>, or FAT32. Stratis manages block devices and filesystems to support features akin to “volume-managing filesystems” (VMFs) like ZFS and Btrfs. Whereas a traditional filesystem acts to support directory and file operations on top of a single block device, VMFs can incorporate multiple block devices into a “pool”. Multiple independent filesystems can be created, each backed by the storage pool.</p>
 <h3 id="how-does-stratis-compare-to-zfs-and-btrfs">How does Stratis compare to ZFS and Btrfs?</h3>
 <p>In terms of features, Stratis 1.0 does not yet implement some that ZFS and Btrfs have, such as RAID and send/receive support. Not surprising, given their head start in development time.</p>
 <p>In terms of its design, Stratis is very different from the two, since they are both in-kernel filesystems. Stratis is a userspace daemon that configures and monitors existing components from Linux’s device-mapper subsystem, as well as the <a href="https://en.wikipedia.org/wiki/XFS">XFS</a> filesystem. This approach makes some things harder to achieve for Stratis, usually involving integration between block-based management and filesystem implementation. For example, the <a href="https://en.wikipedia.org/wiki/Thin_provisioning">thin-provisioning</a> layer and the XFS filesystem each make no assumption that it is being used along with the other. They are two independent components that Stratis is using together.</p>
-<p>But, there are two positives from this difference. First, this lets Stratis development advance more quickly because we does not have to reimplement these components from scratch, just tie them together. These components already were developed, have users, and are maintained and improved on their own. Second, being a userspace daemon makes it easier to perform periodic monitoring tasks, provide an API, as well as potentially integrating with other non-kernel storage-related APIs in the future, such as Ceph, Amazon EBS, or Kubernetes CSI.</p>
+<p>There are, however, two positives from this difference. First, this lets Stratis development advance more quickly because we do not have to reimplement these components from scratch, and instead, simply tie them together. These components already were developed, have users, and are maintained and improved on their own. Second, with Stratis being a userspace daemon, it is easier to perform periodic monitoring tasks, provide an API, as well as potentially integrating with other non-kernel storage-related APIs in the future, such as Ceph, Amazon EBS, or Kubernetes CSI.</p>
 <h3 id="what-linux-storage-devices-can-i-use-for-stratis">What Linux storage devices can I use for Stratis?</h3>
 <p>Stratis has been tested using block devices based on LUKS (crypto), LVM Logical Volumes, mdraid, dm-multipath, and iSCSI, as well as hard drives, SSDs, and NVMe storage devices.</p>
 <p>Since Stratis contains a <a href="https://en.wikipedia.org/wiki/Thin_provisioning">thin-provisioning</a> layer, placing a pool on block devices that are already thinly-provisioned is not recommended.</p>
 <p><strong><em>Note</em></strong>: For iSCSI or other block devices requiring network, see <code>man systemd.mount</code> for info on the <code>_netdev</code> mount option.</p>
 <h3 id="does-stratis-work-with-lvm">Does Stratis work with LVM?</h3>
-<p>Yes, Stratis will work with virtually any block device, and Stratis has been tested using LVM logical volumes as block devices for Stratis pools.
-How do I mount and use Stratis filesystems, once they’ve been created?</p>
+<p>Yes, Stratis will work with virtually any block device, and Stratis has been tested using LVM logical volumes as block devices for Stratis pools.</p>
+<h3 id="How-do-I-mount-and-use-Stratis-filesystems">How do I mount and use Stratis filesystems, once they’ve been created?</h3>
 <p>Stratis pools and filesystems both are given names are part of the creation process. Stratis creates links to filesystems under <code>/stratis/&lt;pool-name&gt;/&lt;filesystem-name&gt;</code>. These may be used in <code>/etc/fstab</code>, but if pools or filesystems are renamed in the future, be sure to update <code>/etc/fstab</code> accordingly. Alternatively you can use the blkid tool to get the <a href="https://en.wikipedia.org/wiki/XFS">XFS</a> filesystem UUID, and use that, which remains constant across renames. See <code>man fstab</code> for more information.</p>
 <h3 id="why-do-new-filesystems-show-up-as-huge-1-terabyte-when-using-df">Why do new filesystems show up as huge (1 terabyte) when using df?</h3>
-<p>Stratis filesystems are formatted with <a href="https://en.wikipedia.org/wiki/XFS">XFS</a>, but managed on behalf of the user. They show up in df as being the virtual size of the XFS filesystem. This is not the actual amount of space that the filesystem uses in the Stratis pool, due to “[thin provisioning]”. The actual space used by a filesystem can be shown using the stratis filesystem list command.</p>
+<p>Stratis filesystems are formatted with <a href="https://en.wikipedia.org/wiki/XFS">XFS</a>, but managed on behalf of the user. They show up in df as being the virtual size of the XFS filesystem. This is not the actual amount of space that the filesystem uses in the Stratis pool, due to “thin provisioning”. The actual space used by a filesystem can be shown using the `stratis filesystem list` command.</p>
 <p>If the data in a filesystem actually approaches its virtual size, Stratis will automatically grow the filesystem.</p>
 <h3 id="how-does-stratis-handle-hard-drive-or-other-hardware-failures">How does Stratis handle hard drive or other hardware failures?</h3>
 <p>For current releases of Stratis it doesn’t. In fact if you create a Stratis pool with multiple devices you increase the risk of data loss as you now have multiple devices which are required to be operational to access the data.</p>
@@ -219,7 +224,7 @@ How do I mount and use Stratis filesystems, once they’ve been created?</p>
 <h3 id="can-i-use-stratis-with-tools-like-puppet-chef-and-ansible">Can I use Stratis with tools like Puppet, Chef, and Ansible?</h3>
 <p>Yes, to the degree that recipes for these can be written that use Stratis’s command-line interface. Stratis is still too new to have recipes already available.</p>
 <h3 id="does-stratis-have-any-storage-limits">Does Stratis have any storage limits?</h3>
-<p>Stratis was designed to support theoretically thousands of pools, and millions of filesystems per pool. However, at this stage, testing on truly large systems has not taken place, so.. if you do, let us know what happens, ok?</p>
+<p>Stratis was designed to support theoretically thousands of pools, and millions of filesystems per pool. However, at this stage, testing on truly large systems has not taken place, so.. if you do, please let us know what happens!</p>
 <h3 id="why-are-parts-of-stratis-implemented-using-the-rust-programming-language">Why are parts of Stratis implemented using the <a href="https://www.rust-lang.org/">Rust</a> programming language ?</h3>
 <p>The Stratis daemon <code>stratisd</code> needs to be implemented in a compiled language in order to meet the requirement that it operate in a preboot environment. A small runtime memory footprint is also important, thus the <code>stratisd</code> daemon is written in Rust. The key features of Rust that make it a good choice for <code>stratisd</code> are:</p>
 <ul>
@@ -243,7 +248,7 @@ How do I mount and use Stratis filesystems, once they’ve been created?</p>
 </li>
 </ul>
 <h3 id="how-do-i-contribute-to-stratis">How do I contribute to Stratis?</h3>
-<p>Thank you for considering to make Stratis better, we welcome everyone. There’re potentially many different ways to contribute to Stratis, some ideas include:</p>
+<p>Thank you for considering to make Stratis better; we welcome everyone. There’s potentially many different ways to contribute to Stratis, including:</p>
 <ul>
 <li>Use it and write up any bugs or deficiencies you find</li>
 <li>Add support for other distributions</li>
