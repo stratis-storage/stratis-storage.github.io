@@ -1,37 +1,44 @@
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
     
         <url>
-            <loc>https://stratis-storage.github.io/faq/</loc>
+            <loc>https%3A//stratis-storage.github.io/</loc>
+            
+        </url>
+    
+        <url>
+            <loc>https%3A//stratis-storage.github.io/faq/</loc>
             
                 <lastmod>2018-11-27</lastmod>
             
         </url>
     
         <url>
-            <loc>https://stratis-storage.github.io/howto/</loc>
+            <loc>https%3A//stratis-storage.github.io/howto/</loc>
             
                 <lastmod>2018-11-27</lastmod>
             
         </url>
     
         <url>
-            <loc>https://stratis-storage.github.io/relnotes-0-5/</loc>
+            <loc>https%3A//stratis-storage.github.io/relnotes-0-5/</loc>
             
                 <lastmod>2018-09-28</lastmod>
             
         </url>
     
         <url>
-            <loc>https://stratis-storage.github.io/relnotes-1-0/</loc>
+            <loc>https%3A//stratis-storage.github.io/relnotes-1-0/</loc>
             
                 <lastmod>2018-09-28</lastmod>
             
         </url>
     
-    
         <url>
-            <loc>https://stratis-storage.github.io/</loc>
+            <loc>https%3A//stratis-storage.github.io/relnotes-stratisd-1-0-6/</loc>
+            
+                <lastmod>2019-10-02</lastmod>
+            
         </url>
-    
     
 </urlset>
