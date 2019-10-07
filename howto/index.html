@@ -45,9 +45,9 @@
                     <ul class="sidebar-nav">
                         
                         
-                           <li class="sidebar-nav-item"><a href="https://stratis-storage.github.io&#x2F;faq">FAQ</a></li>
+                           <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;faq">FAQ</a></li>
                         
-                           <li class="sidebar-nav-item"><a href="https://stratis-storage.github.io&#x2F;howto">How-To</a></li>
+                           <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;howto">How-To</a></li>
                         
                         
                     </ul>
@@ -55,11 +55,11 @@
                     <ul class="sidebar-nav">
                         
                         
-                        <li class="sidebar-nav-item"><a href="https://stratis-storage.github.io&#x2F;StratisSoftwareDesign.pdf">Software Design</a></li>
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;StratisSoftwareDesign.pdf">Software Design</a></li>
                         
-                        <li class="sidebar-nav-item"><a href="https://stratis-storage.github.io&#x2F;DBusAPIReference.pdf">DBUS API Reference</a></li>
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;DBusAPIReference.pdf">DBUS API Reference</a></li>
                         
-                        <li class="sidebar-nav-item"><a href="https://stratis-storage.github.io&#x2F;StratisStyleGuidelines.pdf">Programming Style Guidelines</a></li>
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;StratisStyleGuidelines.pdf">Programming Style Guidelines</a></li>
                         
                         
                     </ul>
@@ -96,105 +96,6 @@
   <h1 class="post-title">Stratis how-to&#x2F;walk-through</h1>
   <span class="post-date">2018-11-27</span>
 
-<div class="post-toc" id="post-toc">
-    <h2 class="post-toc-title">Contents</h2>
-    <div class="post-toc-content always-active">
-        <nav id="TableOfContents">
-            <ul>
-                
-                <li>
-                    <a href="https://stratis-storage.github.io/howto/#introduction" class="toc-link">Introduction</a>
-                    
-                    <ul>
-                        
-                        <li>
-                            <a href="https://stratis-storage.github.io/howto/#installation" class="toc-link">Installation</a>
-                        </li>
-                        
-                        <li>
-                            <a href="https://stratis-storage.github.io/howto/#starting-the-service" class="toc-link">Starting the service</a>
-                        </li>
-                        
-                        <li>
-                            <a href="https://stratis-storage.github.io/howto/#locate-an-empty-block-device" class="toc-link">Locate an empty block device</a>
-                        </li>
-                        
-                        <li>
-                            <a href="https://stratis-storage.github.io/howto/#creating-a-pool" class="toc-link">Creating a pool</a>
-                        </li>
-                        
-                        <li>
-                            <a href="https://stratis-storage.github.io/howto/#creating-a-filesystem-from-the-pool" class="toc-link">Creating a filesystem from the pool</a>
-                        </li>
-                        
-                        <li>
-                            <a href="https://stratis-storage.github.io/howto/#mount-the-file-system" class="toc-link">Mount the file system</a>
-                        </li>
-                        
-                        <li>
-                            <a href="https://stratis-storage.github.io/howto/#add-mount-point-to-etc-fstab-using-file-system-uuid" class="toc-link">Add mount point to &#x2F;etc&#x2F;fstab using file system UUID</a>
-                        </li>
-                        
-                    </ul>
-                    
-                </li>
-                
-                <li>
-                    <a href="https://stratis-storage.github.io/howto/#other-useful-pool-operations" class="toc-link">Other useful pool operations</a>
-                    
-                    <ul>
-                        
-                        <li>
-                            <a href="https://stratis-storage.github.io/howto/#add-data-add-a-disk-to-an-existing-pool" class="toc-link">add-data: Add a disk to an existing pool</a>
-                        </li>
-                        
-                        <li>
-                            <a href="https://stratis-storage.github.io/howto/#rename-rename-a-pool" class="toc-link">rename: Rename a pool</a>
-                        </li>
-                        
-                        <li>
-                            <a href="https://stratis-storage.github.io/howto/#add-cache-add-a-block-device-as-a-cache-device-typically-something-like-ssd" class="toc-link">add-cache: Add a block device as a cache device (typically something like SSD)</a>
-                        </li>
-                        
-                        <li>
-                            <a href="https://stratis-storage.github.io/howto/#destroy-destroy-a-pool-no-file-systems-can-exist-in-pool" class="toc-link">destroy: Destroy a pool, no file systems can exist in pool</a>
-                        </li>
-                        
-                    </ul>
-                    
-                </li>
-                
-                <li>
-                    <a href="https://stratis-storage.github.io/howto/#other-useful-file-system-operations" class="toc-link">Other useful file system operations</a>
-                    
-                    <ul>
-                        
-                        <li>
-                            <a href="https://stratis-storage.github.io/howto/#destroy-remove-a-stratis-provided-filesystem" class="toc-link">destroy: Remove a Stratis provided filesystem</a>
-                        </li>
-                        
-                        <li>
-                            <a href="https://stratis-storage.github.io/howto/#rename-rename-a-file-system" class="toc-link">rename: Rename a file system</a>
-                        </li>
-                        
-                        <li>
-                            <a href="https://stratis-storage.github.io/howto/#snapshot-create-a-snapshot" class="toc-link">snapshot: Create a snapshot</a>
-                        </li>
-                        
-                    </ul>
-                    
-                </li>
-                
-                <li>
-                    <a href="https://stratis-storage.github.io/howto/#misc-operations" class="toc-link">Misc. operations</a>
-                    
-                </li>
-                
-            </ul>
-        </nav>
-    </div>
-</div>
-
   <h1 id="introduction">Introduction</h1>
 <p>Stratis provides ZFS/Btrfs-style features by integrating layers of existing technology: Linux’s devicemapper subsystem, and the XFS filesystem. The stratisd daemon manages collections of block devices, and provides a D-Bus API. The stratis-cli provides a command-line tool stratis which itself uses the D-Bus API to communicate with stratisd.</p>
 <h2 id="installation">Installation</h2>
@@ -203,93 +104,93 @@
 </span></pre><h2 id="starting-the-service">Starting the service</h2>
 <pre style="background-color:#2b303b;">
 <span style="color:#c0c5ce;"># systemctl start stratisd
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;"># systemctl enable stratisd
-</span><span style="color:#c0c5ce;">Created symlink /etc/systemd/system/sysinit.target.wants/stratisd.service →
-</span><span style="color:#c0c5ce;">/usr/lib/systemd/system/stratisd.service.
+
+# systemctl enable stratisd
+Created symlink /etc/systemd/system/sysinit.target.wants/stratisd.service →
+/usr/lib/systemd/system/stratisd.service.
 </span></pre><h2 id="locate-an-empty-block-device">Locate an empty block device</h2>
 <p>Use utilities like lsblk and blkid to find a block device to use with Stratis.</p>
 <pre style="background-color:#2b303b;">
 <span style="color:#c0c5ce;"># lsblk
-</span><span style="color:#c0c5ce;">NAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
-</span><span style="color:#c0c5ce;">sda      8:0    0   28G  0 disk
-</span><span style="color:#c0c5ce;">├─sda1   8:1    0    1G  0 part /boot
-</span><span style="color:#c0c5ce;">├─sda2   8:2    0  2.8G  0 part [SWAP]
-</span><span style="color:#c0c5ce;">└─sda3   8:3    0   15G  0 part /
-</span><span style="color:#c0c5ce;">sdb      8:16   0    1T  0 disk
-</span><span style="color:#c0c5ce;">sdc      8:32   0    2T  0 disk
-</span><span style="color:#c0c5ce;">sdd      8:48   0    8G  0 disk
-</span><span style="color:#c0c5ce;">sde      8:64   0    8G  0 disk
-</span><span style="color:#c0c5ce;">sdf      8:80   0    8G  0 disk
-</span><span style="color:#c0c5ce;">sr0     11:0    1 1024M  0 rom
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;"># blkid -p /dev/sda
-</span><span style="color:#c0c5ce;">/dev/sda: PTUUID=&quot;b7168b63&quot; PTTYPE=&quot;dos&quot;
+NAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda      8:0    0   28G  0 disk
+├─sda1   8:1    0    1G  0 part /boot
+├─sda2   8:2    0  2.8G  0 part [SWAP]
+└─sda3   8:3    0   15G  0 part /
+sdb      8:16   0    1T  0 disk
+sdc      8:32   0    2T  0 disk
+sdd      8:48   0    8G  0 disk
+sde      8:64   0    8G  0 disk
+sdf      8:80   0    8G  0 disk
+sr0     11:0    1 1024M  0 rom
+
+# blkid -p /dev/sda
+/dev/sda: PTUUID=&quot;b7168b63&quot; PTTYPE=&quot;dos&quot;
 </span></pre>
 <p>Not empty, it contains a partition table.</p>
 <pre style="background-color:#2b303b;">
 <span style="color:#c0c5ce;"># blkid -p /dev/sdb
-</span><span style="color:#c0c5ce;">Empty, no known signatures found.
+Empty, no known signatures found.
 </span></pre>
 <p>If you are positive that you have a block device that you want to use and it has a signature on it, you need to clear the signature before using it in a Stratis pool. Otherwise you will get an error when you attempt to create the pool.</p>
 <p>To clear a device so that it can be used by Stratis.</p>
 <pre style="background-color:#2b303b;">
 <span style="color:#c0c5ce;"># blkid -p /dev/sdc
-</span><span style="color:#c0c5ce;">/dev/sdc: UUID=&quot;770587cc-cfd3-44cb-82e2-756902cf458b&quot; VERSION=&quot;1.0&quot; TYPE=&quot;ext4&quot; USAGE=&quot;filesystem&quot;
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;"># wipefs -a /dev/sdc
-</span><span style="color:#c0c5ce;">/dev/sdc: 2 bytes were erased at offset 0x00000438 (ext4): 53 ef
+/dev/sdc: UUID=&quot;770587cc-cfd3-44cb-82e2-756902cf458b&quot; VERSION=&quot;1.0&quot; TYPE=&quot;ext4&quot; USAGE=&quot;filesystem&quot;
+
+# wipefs -a /dev/sdc
+/dev/sdc: 2 bytes were erased at offset 0x00000438 (ext4): 53 ef
 </span></pre><h2 id="creating-a-pool">Creating a pool</h2>
 <p>A pool with one block device.</p>
 <pre style="background-color:#2b303b;">
 <span style="color:#c0c5ce;"># stratis pool create stratis_howto /dev/sdb
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;"># stratis pool list
-</span><span style="color:#c0c5ce;">Name             Total Physical Size  Total Physical Used
-</span><span style="color:#c0c5ce;">stratis_howto                  1 TiB               52 MiB
+
+# stratis pool list
+Name             Total Physical Size  Total Physical Used
+stratis_howto                  1 TiB               52 MiB
 </span></pre>
 <p>A pool with 2 block devices (no redundancy).</p>
 <pre style="background-color:#2b303b;">
 <span style="color:#c0c5ce;"># stratis pool create tale_of_2_disks /dev/sdd /dev/sdf
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;"># stratis pool list
-</span><span style="color:#c0c5ce;">Name               Total Physical Size  Total Physical Used
-</span><span style="color:#c0c5ce;">stratis_howto                    1 TiB               52 MiB
-</span><span style="color:#c0c5ce;">tale_of_2_disks                 16 GiB               56 MiB
+
+# stratis pool list
+Name               Total Physical Size  Total Physical Used
+stratis_howto                    1 TiB               52 MiB
+tale_of_2_disks                 16 GiB               56 MiB
 </span></pre><h2 id="creating-a-filesystem-from-the-pool">Creating a filesystem from the pool</h2>
 <pre style="background-color:#2b303b;">
 <span style="color:#c0c5ce;"># stratis filesystem create stratis_howto fs_howto
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;"># stratis filesystem list
-</span><span style="color:#c0c5ce;">Pool Name      Name      Used     Created            Device
-</span><span style="color:#c0c5ce;">stratis_howto  fs_howto  546 MiB  Nov 09 2018 11:08  /stratis/stratis_howto/fs_howto
+
+# stratis filesystem list
+Pool Name      Name      Used     Created            Device
+stratis_howto  fs_howto  546 MiB  Nov 09 2018 11:08  /stratis/stratis_howto/fs_howto
 </span></pre>
 <p>To create another file system, just repeat the same command with a different file system name. The file system names are required to be unique in a pool.</p>
 <pre style="background-color:#2b303b;">
 <span style="color:#c0c5ce;"># stratis filesystem create stratis_howto my_precious
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;"># stratis filesystem list
-</span><span style="color:#c0c5ce;">Pool Name      Name         Used     Created            Device
-</span><span style="color:#c0c5ce;">stratis_howto  fs_howto     546 MiB  Nov 09 2018 11:08  /stratis/stratis_howto/fs_howto
-</span><span style="color:#c0c5ce;">stratis_howto  my_precious  546 MiB  Nov 09 2018 11:09  /stratis/stratis_howto/my_precious
+
+# stratis filesystem list
+Pool Name      Name         Used     Created            Device
+stratis_howto  fs_howto     546 MiB  Nov 09 2018 11:08  /stratis/stratis_howto/fs_howto
+stratis_howto  my_precious  546 MiB  Nov 09 2018 11:09  /stratis/stratis_howto/my_precious
 </span></pre>
 <p>The file system is created on a thinly provisioned 1 TB block device. Stratis will take care of allocating blocks from the pool and re-sizing the XFS file system as needed during its lifetime.</p>
 <p>You can also constrain the file system list output by including the pool name.</p>
 <pre style="background-color:#2b303b;">
 <span style="color:#c0c5ce;"># stratis pool create olympic /dev/sdc
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;"># stratis filesystem create olympic backstroke
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;"># stratis filesystem
-</span><span style="color:#c0c5ce;">Pool Name      Name         Used     Created            Device
-</span><span style="color:#c0c5ce;">olympic        backstroke   546 MiB  Nov 09 2018 11:10  /stratis/olympic/backstroke
-</span><span style="color:#c0c5ce;">stratis_howto  fs_howto     546 MiB  Nov 09 2018 11:08  /stratis/stratis_howto/fs_howto
-</span><span style="color:#c0c5ce;">stratis_howto  my_precious  546 MiB  Nov 09 2018 11:09  /stratis/stratis_howto/my_precious
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;"># stratis filesystem list stratis_howto
-</span><span style="color:#c0c5ce;">Pool Name      Name         Used     Created            Device
-</span><span style="color:#c0c5ce;">stratis_howto  fs_howto     546 MiB  Nov 09 2018 11:08  /stratis/stratis_howto/fs_howto
-</span><span style="color:#c0c5ce;">stratis_howto  my_precious  546 MiB  Nov 09 2018 11:09  /stratis/stratis_howto/my_precious
+
+# stratis filesystem create olympic backstroke
+
+# stratis filesystem
+Pool Name      Name         Used     Created            Device
+olympic        backstroke   546 MiB  Nov 09 2018 11:10  /stratis/olympic/backstroke
+stratis_howto  fs_howto     546 MiB  Nov 09 2018 11:08  /stratis/stratis_howto/fs_howto
+stratis_howto  my_precious  546 MiB  Nov 09 2018 11:09  /stratis/stratis_howto/my_precious
+
+# stratis filesystem list stratis_howto
+Pool Name      Name         Used     Created            Device
+stratis_howto  fs_howto     546 MiB  Nov 09 2018 11:08  /stratis/stratis_howto/fs_howto
+stratis_howto  my_precious  546 MiB  Nov 09 2018 11:09  /stratis/stratis_howto/my_precious
 </span></pre><h2 id="mount-the-file-system">Mount the file system</h2>
 <pre style="background-color:#2b303b;">
 <span style="color:#c0c5ce;"># mount /stratis/stratis_howto/fs_howto /mnt
@@ -297,52 +198,52 @@
 <p>You can use <code>/stratis/&lt;pool name&gt;/&lt;file system name&gt;</code> but each time you rename a pool or file system you will need to update <code>/etc/fstab</code>, thus using file system UUID is recommended.</p>
 <pre style="background-color:#2b303b;">
 <span style="color:#c0c5ce;"># blkid -p /stratis/stratis_howto/fs_howto
-</span><span style="color:#c0c5ce;">/stratis/stratis_howto/fs_howto: UUID=&quot;a38780e5-04e3-49da-8b95-2575d77e947c&quot; TYPE=&quot;xfs&quot; USAGE=&quot;filesystem&quot;
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;"># echo &quot;UUID=a38780e5-04e3-49da-8b95-2575d77e947c /mnt xfs defaults 0 0&quot; &gt;&gt; /etc/fstab
+/stratis/stratis_howto/fs_howto: UUID=&quot;a38780e5-04e3-49da-8b95-2575d77e947c&quot; TYPE=&quot;xfs&quot; USAGE=&quot;filesystem&quot;
+
+# echo &quot;UUID=a38780e5-04e3-49da-8b95-2575d77e947c /mnt xfs defaults 0 0&quot; &gt;&gt; /etc/fstab
 </span></pre><h1 id="other-useful-pool-operations">Other useful pool operations</h1>
 <h2 id="add-data-add-a-disk-to-an-existing-pool"><code>add-data</code>: Add a disk to an existing pool</h2>
 <pre style="background-color:#2b303b;">
 <span style="color:#c0c5ce;"># stratis pool add-data tale_of_2_disks /dev/sdc
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;"># stratis pool list
-</span><span style="color:#c0c5ce;">Name               Total Physical Size  Total Physical Used
-</span><span style="color:#c0c5ce;">stratis_howto                    1 TiB               52 MiB
-</span><span style="color:#c0c5ce;">tale_of_2_disks               2.02 TiB               60 MiB
+
+# stratis pool list
+Name               Total Physical Size  Total Physical Used
+stratis_howto                    1 TiB               52 MiB
+tale_of_2_disks               2.02 TiB               60 MiB
 </span></pre><h2 id="rename-rename-a-pool"><code>rename</code>: Rename a pool</h2>
 <pre style="background-color:#2b303b;">
 <span style="color:#c0c5ce;"># stratis pool rename tale_of_2_disks 3_amigos
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;"># stratis pool list
-</span><span style="color:#c0c5ce;">Name             Total Physical Size  Total Physical Used
-</span><span style="color:#c0c5ce;">3_amigos                    2.02 TiB               60 MiB
-</span><span style="color:#c0c5ce;">stratis_howto                  1 TiB               52 MiB
+
+# stratis pool list
+Name             Total Physical Size  Total Physical Used
+3_amigos                    2.02 TiB               60 MiB
+stratis_howto                  1 TiB               52 MiB
 </span></pre><h2 id="add-cache-add-a-block-device-as-a-cache-device-typically-something-like-ssd"><code>add-cache</code>: Add a block device as a cache device (typically something like SSD)</h2>
 <pre style="background-color:#2b303b;">
 <span style="color:#c0c5ce;"># stratis pool add-cache 3_amigos /dev/sde
 </span></pre><h2 id="destroy-destroy-a-pool-no-file-systems-can-exist-in-pool"><code>destroy</code>: Destroy a pool, no file systems can exist in pool</h2>
 <pre style="background-color:#2b303b;">
 <span style="color:#c0c5ce;"># stratis pool destroy 3_amigos
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;"># stratis pool list
-</span><span style="color:#c0c5ce;">Name             Total Physical Size  Total Physical Used
-</span><span style="color:#c0c5ce;">stratis_howto                  1 TiB               52 MiB
+
+# stratis pool list
+Name             Total Physical Size  Total Physical Used
+stratis_howto                  1 TiB               52 MiB
 </span></pre><h1 id="other-useful-file-system-operations">Other useful file system operations</h1>
 <h2 id="destroy-remove-a-stratis-provided-filesystem"><code>destroy</code>: Remove a Stratis provided filesystem</h2>
 <p>To remove a Stratis provided filesystem, make sure that it’s not in use, and then destroy it.</p>
 <pre style="background-color:#2b303b;">
 <span style="color:#c0c5ce;"># stratis filesystem list
-</span><span style="color:#c0c5ce;">Pool Name      Name         Used     Created            Device
-</span><span style="color:#c0c5ce;">olympic        backstroke   546 MiB  Nov 09 2018 11:10  /stratis/olympic/backstroke
-</span><span style="color:#c0c5ce;">stratis_howto  fs_howto     546 MiB  Nov 09 2018 11:08  /stratis/stratis_howto/fs_howto
-</span><span style="color:#c0c5ce;">stratis_howto  my_precious  546 MiB  Nov 09 2018 11:09  /stratis/stratis_howto/my_precious
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;"># stratis filesystem destroy stratis_howto my_precious
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;"># stratis filesystem list
-</span><span style="color:#c0c5ce;">Pool Name      Name        Used     Created            Device
-</span><span style="color:#c0c5ce;">olympic        backstroke  546 MiB  Nov 09 2018 11:10  /stratis/olympic/backstroke
-</span><span style="color:#c0c5ce;">stratis_howto  fs_howto    546 MiB  Nov 09 2018 11:08  /stratis/stratis_howto/fs_howto
+Pool Name      Name         Used     Created            Device
+olympic        backstroke   546 MiB  Nov 09 2018 11:10  /stratis/olympic/backstroke
+stratis_howto  fs_howto     546 MiB  Nov 09 2018 11:08  /stratis/stratis_howto/fs_howto
+stratis_howto  my_precious  546 MiB  Nov 09 2018 11:09  /stratis/stratis_howto/my_precious
+
+# stratis filesystem destroy stratis_howto my_precious
+
+# stratis filesystem list
+Pool Name      Name        Used     Created            Device
+olympic        backstroke  546 MiB  Nov 09 2018 11:10  /stratis/olympic/backstroke
+stratis_howto  fs_howto    546 MiB  Nov 09 2018 11:08  /stratis/stratis_howto/fs_howto
 </span></pre><h2 id="rename-rename-a-file-system"><code>rename</code>: Rename a file system</h2>
 <pre style="background-color:#2b303b;">
 <span style="color:#c0c5ce;"># stratis filesystem rename olympic backstroke some_fs
@@ -350,32 +251,32 @@
 <p>To create a snaphot, which is a read/writeable thinly provisioned point in time copy of the source FS.</p>
 <pre style="background-color:#2b303b;">
 <span style="color:#c0c5ce;"># stratis filesystem snapshot olympic some_fs some_fs_snapshot
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;"># stratis filesystem list olympic
-</span><span style="color:#c0c5ce;">Pool Name  Name              Used     Created            Device
-</span><span style="color:#c0c5ce;">olympic    some_fs           546 MiB  Nov 09 2018 11:10  /stratis/olympic/some_fs
-</span><span style="color:#c0c5ce;">olympic    some_fs_snapshot  546 MiB  Nov 09 2018 11:26  /stratis/olympic/some_fs_snapshot
+
+# stratis filesystem list olympic
+Pool Name  Name              Used     Created            Device
+olympic    some_fs           546 MiB  Nov 09 2018 11:10  /stratis/olympic/some_fs
+olympic    some_fs_snapshot  546 MiB  Nov 09 2018 11:26  /stratis/olympic/some_fs_snapshot
 </span></pre><h1 id="misc-operations">Misc. operations</h1>
 <p>Query which block devices belong to a pool or all of Stratis.</p>
 <pre style="background-color:#2b303b;">
 <span style="color:#c0c5ce;"># stratis blockdev list olympic
-</span><span style="color:#c0c5ce;">Pool Name  Device Node    Physical Size   State  Tier
-</span><span style="color:#c0c5ce;">olympic    /dev/sdc            2.00 TiB  In-use  Data
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#c0c5ce;"># stratis blockdev list
-</span><span style="color:#c0c5ce;">Pool Name      Device Node    Physical Size   State  Tier
-</span><span style="color:#c0c5ce;">olympic        /dev/sdc            2.00 TiB  In-use  Data
-</span><span style="color:#c0c5ce;">stratis_howto  /dev/sdb               1 TiB  In-use  Data
+Pool Name  Device Node    Physical Size   State  Tier
+olympic    /dev/sdc            2.00 TiB  In-use  Data
+
+# stratis blockdev list
+Pool Name      Device Node    Physical Size   State  Tier
+olympic        /dev/sdc            2.00 TiB  In-use  Data
+stratis_howto  /dev/sdb               1 TiB  In-use  Data
 </span></pre>
 <p>Query redundancies that Stratis supports.</p>
 <pre style="background-color:#2b303b;">
 <span style="color:#c0c5ce;"># stratis daemon redundancy
-</span><span style="color:#c0c5ce;">NONE: 0
+NONE: 0
 </span></pre>
 <p>Query the Stratis daemon (<code>stratisd</code>) version.</p>
 <pre style="background-color:#2b303b;">
 <span style="color:#c0c5ce;"># stratis daemon version
-</span><span style="color:#c0c5ce;">1.0.1
+1.0.1
 </span></pre>
 </div>
 
