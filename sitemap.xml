@@ -7,6 +7,34 @@
         </url>
     
         <url>
+            <loc>https%3A//stratis-storage.github.io/2018-03-08/</loc>
+            
+                <lastmod>2018-03-08</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https%3A//stratis-storage.github.io/2018-09-28/</loc>
+            
+                <lastmod>2018-09-28</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https%3A//stratis-storage.github.io/a/</loc>
+            
+                <lastmod>2019-10-02</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https%3A//stratis-storage.github.io/b/</loc>
+            
+                <lastmod>2019-10-02</lastmod>
+            
+        </url>
+    
+        <url>
             <loc>https%3A//stratis-storage.github.io/faq/</loc>
             
                 <lastmod>2018-11-27</lastmod>
@@ -17,27 +45,6 @@
             <loc>https%3A//stratis-storage.github.io/howto/</loc>
             
                 <lastmod>2018-11-27</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https%3A//stratis-storage.github.io/relnotes-0-5/</loc>
-            
-                <lastmod>2018-09-28</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https%3A//stratis-storage.github.io/relnotes-1-0/</loc>
-            
-                <lastmod>2018-09-28</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https%3A//stratis-storage.github.io/relnotes-stratisd-1-0-6/</loc>
-            
-                <lastmod>2019-10-02</lastmod>
             
         </url>
     
