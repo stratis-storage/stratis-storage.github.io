@@ -91,17 +91,12 @@
 
         <div class="content container">
             
-                <div class="posts">
-                    
-                      <div class="post">
-						<article class="post">
-							<h1 class="post-title">
-							  <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;2019-11-06&#x2F;">
-								Stratis 2.0.0 Release Notes
-							  </a>
-							</h1>
-							<div class="post__summary">
-								<p>Wednesday November 6, 2019</p>
+
+<div class="post">
+  <h1 class="post-title">Stratis 2.0.0 Release Notes</h1>
+  <span class="post-date">2019-11-06</span>
+
+  <p>Wednesday November 6, 2019</p>
 <p>Stratis 2.0 is a significant update for both the daemon and the CLI. The
 changes to the daemon are covered first, followed by the changes to the
 CLI.</p>
@@ -161,117 +156,10 @@ user, the stratisd D-Bus API is the programmable interface. See
 <p>As always, anyone wishing to implement a program that uses Stratis for
 storage management is strongly advised to make use of the stratisd D-Bus API
 rather than the CLI.</p>
+<p id="zola-continue-reading"><a name="continue-reading"></a></p>
 
-							</div>
-							<div class="read-more">
-								<a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;2019-11-06&#x2F;">Read more...</a>
-							</div>
-						</article>
-						
-                      </div>
-                    
-                      <div class="post">
-						<article class="post">
-							<h1 class="post-title">
-							  <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;b&#x2F;">
-								stratis-cli 1.1.0 Release Notes
-							  </a>
-							</h1>
-							<div class="post__summary">
-								<p>Wednesday October 2, 2019</p>
-<p>With this release stratis now recognizes an environment variable,
-<code>STRATIS_DBUS_TIMEOUT</code>. This environment variable controls the timeout for
-any individual D-Bus call that stratis makes. You may want to set it to a
-higher value than the default, which is 120 seconds, if you are running
-tests or otherwise scripting via stratis, and wish to avoid erroneous errors
-resulting from slow operations in your testing environment. See
-<a href="https://github.com/stratis-storage/stratis-cli/issues/252">stratis-cli issue 252</a> for further details.</p>
-<p>This release also introduces simplified and more complete error-reporting.
-For stratis, it constitutes an error if any command issued results in a
-Python stack trace. If you experience any such incident, please
-report it in a GitHub issue, including the full stack trace, and
-circumstances that led up to the incident.</p>
+</div>
 
-							</div>
-							<div class="read-more">
-								<a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;b&#x2F;">Read more...</a>
-							</div>
-						</article>
-						
-                      </div>
-                    
-                      <div class="post">
-						<article class="post">
-							<h1 class="post-title">
-							  <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;a&#x2F;">
-								stratisd 1.0.6 Release Notes
-							  </a>
-							</h1>
-							<div class="post__summary">
-								<p>Wednesday October 2, 2019</p>
-<p>This release includes one significant bug fix and a substantial refactoring.</p>
-<p>The bug was caused by an inconsistency in the metadata handling which led to
-a failure to properly update the Stratis metadata if stratisd was restarted
-in an environment where the system clock indicated a time earlier than when
-it had previously been running. See <a href="https://github.com/stratis-storage/stratisd/issues/1509">stratisd issue 1509</a> for further
-details.</p>
-<p>This release also includes significant refactoring of the stratisd metadata
-handling for clarity and modularity and to use types to enforce distinctions
-among the sizes of different metadata regions (<a href="https://github.com/stratis-storage/stratisd/issues/1573">stratisd issue 1573</a>).</p>
-
-							</div>
-							<div class="read-more">
-								<a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;a&#x2F;">Read more...</a>
-							</div>
-						</article>
-						
-                      </div>
-                    
-                      <div class="post">
-						<article class="post">
-							<h1 class="post-title">
-							  <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;2018-09-28&#x2F;">
-								Stratis 1.0 Release Notes
-							  </a>
-							</h1>
-							<div class="post__summary">
-								<p>Friday September 28, 2018</p>
-<h1 id="new-features">New Features</h1>
-<h2 id="initial-stable-stratis-release">Initial Stable Stratis Release</h2>
-<p>Stratis is a Linux local storage management tool that aims to enable easy use of advanced storage features such as thin provisioning, snapshots, and pool-based management and monitoring.</p>
-<p>After two years of development, Stratis 1.0 has stabilized its on-disk metadata format and command-line interface, and is ready for more widespread testing and evaluation by potential users. Stratis is implemented as a daemon – <code>stratisd</code> – as well as a command-line configuration tool called stratis, and works with Linux kernel versions 4.14 and up.</p>
-
-							</div>
-							<div class="read-more">
-								<a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;2018-09-28&#x2F;">Read more...</a>
-							</div>
-						</article>
-						
-                      </div>
-                    
-                      <div class="post">
-						<article class="post">
-							<h1 class="post-title">
-							  <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;2018-03-08&#x2F;">
-								Stratis 0.5 Release Notes
-							  </a>
-							</h1>
-							<div class="post__summary">
-								<p>March 8, 2018</p>
-<p>This release is suitable for developers and early testers. It should not be
-used with valuable data, and pools created with this release will not be
-supported in Stratis 1.0, due to upcoming on-disk format changes.</p>
-
-							</div>
-							<div class="read-more">
-								<a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;2018-03-08&#x2F;">Read more...</a>
-							</div>
-						</article>
-						
-                      </div>
-                    
-                </div>
-            
         </div>
 
     </body>
