@@ -35,6 +35,13 @@
         </url>
     
         <url>
+            <loc>https%3A//stratis-storage.github.io/2020-02-daemon/</loc>
+            
+                <lastmod>2020-02-10</lastmod>
+            
+        </url>
+    
+        <url>
             <loc>https%3A//stratis-storage.github.io/2020-cli/</loc>
             
                 <lastmod>2020-01-21</lastmod>
