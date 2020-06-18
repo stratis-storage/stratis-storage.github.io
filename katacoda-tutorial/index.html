@@ -95,69 +95,16 @@
             
 
 <div class="post">
-  <h1 class="post-title">Stratis 2.0.0 Release Notes</h1>
-  <span class="post-date">2019-11-06</span>
+  <h1 class="post-title">Katacoda Tutorial</h1>
+  <span class="post-date">2020-06-16</span>
 
-  <p>Wednesday November 6, 2019</p>
-<p>Stratis 2.0 is a significant update for both the daemon and the CLI. The
-changes to the daemon are covered first, followed by the changes to the
-CLI.</p>
-<h2 id="stratisd-2-0-0">stratisd 2.0.0</h2>
-<p>This release makes the D-Bus API more robust, reliable, predictable, and
-extensible. There are several significant changes:</p>
-<ul>
-<li>
-<p>The set of D-Bus properties has been reduced to a core set of fundamental
-and stable properties. Other filesystem, pool, or block devices properties are
-now obtainable via methods in the <code>FetchProperties</code> interface. This change
-increases the robustness of the D-Bus interface to failures occurring in any
-particular pool, filesystem, or block device, and decreases the computational
-cost of most operations requested by the Stratis CLI. Several properties,
-formerly returned as D-Bus properties, are now unavailable by means of the
-D-Bus. In every case, the reason for removing the property was that it did not
-represent a well-defined value. See <a href="https://github.com/stratis-storage/project/issues/52">project issue 52</a> for further details.</p>
-</li>
-<li>
-<p>All D-Bus method calls are idempotent. This should make writing scripts
-using the D-Bus API much simpler and make reasoning about the behavior
-of the engine more straightforward. Henceforth, we will treat as a bug any
-non-idempotent behavior in the D-Bus API. See <a href="https://github.com/stratis-storage/project/issues/51">project issue 51</a> for further
-details.</p>
-</li>
-<li>
-<p>All D-Bus size values are now returned in bytes. Again, this should make
-writing scripts against the D-Bus more straightforward, since it will be
-unnecessary for the script writer to change their interpretation of the number
-returned on the D-Bus depending on the value that it represents. See
-<a href="https://github.com/stratis-storage/stratisd/issues/1243">stratisd issue 1243</a> for further details.</p>
-</li>
-</ul>
-<p>Future enhancements to the D-Bus API will be implemented by means of
-additional versioned interfaces.</p>
-<p>Please consult the D-Bus API Reference for the precise D-Bus specification.</p>
-<h2 id="stratis-cli-2-0-0">stratis-cli 2.0.0</h2>
-<p>This release requires stratisd 2.0.0. The user will observe the following
-significant improvements:</p>
-<ul>
-<li>
-<p>The CLI is significantly more robust. Previously, there was a category of
-error conditions in pools, filesystems, and block devices that would make the
-CLI virtually unusable; this problem has now been entirely resolved. See
-<a href="https://github.com/stratis-storage/project/issues/52">project issue 52</a> for further details.</p>
-</li>
-<li>
-<p>The CLI now reports errors consistently in conditions where a human user
-would generally expect an error to be reported. Previously, many commands in
-the CLI were idempotent, to facilitate scripting. Now there is a clear
-distinction between the CLI behavior and the stratisd D-Bus API behavior: the
-CLI behavior is designed strictly according to the expectations of a human
-user, the stratisd D-Bus API is the programmable interface. See
-<a href="https://github.com/stratis-storage/project/issues/51">project issue 51</a> for further details.</p>
-</li>
-</ul>
-<p>As always, anyone wishing to implement a program that uses Stratis for
-storage management is strongly advised to make use of the stratisd D-Bus API
-rather than the CLI.</p>
+  <p>We would like to thank Red Hat for hosting a Katacoda tutorial for Stratis at
+<a href="https://lab.redhat.com/stratis">lab.redhat.com/stratis</a>. We hope that the tutorial will provide an easy and
+pleasant introduction to Stratis for new users.</p>
+<p>Please note that the tutorial does not include the latest work on encryption,
+as it makes use of a prior version of Stratis, 2.0.0.</p>
+<p>We hope to post links to additional Katacoda tutorials covering more advanced
+or recent Stratis functionality as they become available.</p>
 <p id="zola-continue-reading"><a name="continue-reading"></a></p>
 
 </div>

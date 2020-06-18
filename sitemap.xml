@@ -77,6 +77,13 @@
         </url>
     
         <url>
+            <loc>https%3A//stratis-storage.github.io/katacoda-tutorial/</loc>
+            
+                <lastmod>2020-06-16</lastmod>
+            
+        </url>
+    
+        <url>
             <loc>https%3A//stratis-storage.github.io/stratis-release-notes-2-1-0/</loc>
             
                 <lastmod>2020-06-08</lastmod>
