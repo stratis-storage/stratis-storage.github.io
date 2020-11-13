@@ -170,22 +170,6 @@ returns a D-Bus object that maps the UUIDs of locked pools to their
 corresponding key descriptions.</li>
 </ul>
 <p>Please consult the D-Bus API Reference for the precise D-Bus specification.</p>
-<p>This release allows the user to specify their preferred log level more
-directly and succinctly with the <code>--log-level</code> CLI option.</p>
-<p>This release includes management of terminal settings for interactive
-encryption-key entry.</p>
-<p>This release includes some unsupported scripts which may be built from the
-source distribution but are not intended to be released as part of any
-package. These scripts depend on the <code>extras</code> feature in <code>Cargo.toml</code>.</p>
-<p>This release also includes a number of minor bug fixes.</p>
-<h2 id="stratis-cli-2-2-0">stratis-cli 2.2.0</h2>
-<p>This release requires stratisd 2.2.0. Some commands have been updated to
-make use of the new stratisd D-Bus interfaces.</p>
-<p>This release drops management of terminal settings for interactive
-encryption-key entry; management of terminal settings is now handled in
-stratisd 2.2.0.</p>
-<p>We would like to thank our external contributors carzacc and poizen18 for
-their work on bash tab-completion.</p>
 
 							</div>
 							<div class="read-more">
@@ -206,9 +190,6 @@ their work on bash tab-completion.</p>
 								<p>stratis-cli 2.1.1 fixes a bug where if one encrypted pool could not be
 unlocked, execution terminated, and no attempt was made to unlock any other
 pools that might need to be unlocked (<a href="https://github.com/stratis-storage/stratis-cli/issues/618">stratis issue 618</a>).</p>
-<p>It also introduces an improved error message in the case where the daemon
-is not running and extends the documentation for the <code>--capture-key</code> and
-<code>--keyfile-path</code> command-line options.</p>
 
 							</div>
 							<div class="read-more">
@@ -231,8 +212,6 @@ is not running and extends the documentation for the <code>--capture-key</code> 
 pleasant introduction to Stratis for new users.</p>
 <p>Please note that the tutorial does not include the latest work on encryption,
 as it makes use of a prior version of Stratis, 2.0.0.</p>
-<p>We hope to post links to additional Katacoda tutorials covering more advanced
-or recent Stratis functionality as they become available.</p>
 
 							</div>
 							<div class="read-more">
@@ -348,7 +327,7 @@ exactly the same manner as an unencrypted pool.</p>
                       <div class="post">
 						<article class="post">
 							<h1 class="post-title">
-							  <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;2020-02-daemon&#x2F;">
+							  <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratisd-release-notes-2-0-1&#x2F;">
 								stratisd 2.0.1 Release Notes
 							  </a>
 							</h1>
@@ -356,18 +335,10 @@ exactly the same manner as an unencrypted pool.</p>
 								<p>February 10, 2020</p>
 <p>stratisd 2.0.1 contains a number of internal improvements as well as
 enhanced logging.</p>
-<p>A code defect which made it possible to leave the thinpool suspended on an
-error was fixed (<a href="https://github.com/stratis-storage/stratisd/issues/1730">stratisd issue 1730</a>).</p>
-<p>The device discovery implementation was improved; computational complexity
-was reduced and additional logging on unusual events was added.</p>
-<p>The D-Bus layer was restructured to more cleanly suppport multiple versioned
-D-Bus interfaces.</p>
-<p>All macros were rewritten to use fully qualified names to improve code
-stability.</p>
 
 							</div>
 							<div class="read-more">
-								<a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;2020-02-daemon&#x2F;">Read more...</a>
+								<a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratisd-release-notes-2-0-1&#x2F;">Read more...</a>
 							</div>
 						</article>
 						
@@ -376,7 +347,7 @@ stability.</p>
                       <div class="post">
 						<article class="post">
 							<h1 class="post-title">
-							  <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;2020-cli&#x2F;">
+							  <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-cli-release-notes-2-0-1&#x2F;">
 								stratis-cli 2.0.1 Release Notes
 							  </a>
 							</h1>
@@ -384,19 +355,10 @@ stability.</p>
 								<p>Sunday January 21, 2020</p>
 <p>stratis-cli 2.0.1 contains a number of internal improvements as well as
 some improvements to certain error messages.</p>
-<p>We expect that most current users will notice very little if any change;
-we hope that new users will benefit from error messages that they can
-more directly relate to the commands that they have typed. In order to
-achieve this, the internal exception hierarchy was refined, and some new
-exception classes were added.</p>
-<p>The man pages have been updated to include a precise specification of every
-field displayed by any of the <code>list</code> subcommands.</p>
-<p>Contributors to the source will observe that our CI now requires 100% code
-coverage.</p>
 
 							</div>
 							<div class="read-more">
-								<a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;2020-cli&#x2F;">Read more...</a>
+								<a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-cli-release-notes-2-0-1&#x2F;">Read more...</a>
 							</div>
 						</article>
 						
@@ -405,7 +367,7 @@ coverage.</p>
                       <div class="post">
 						<article class="post">
 							<h1 class="post-title">
-							  <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;2020-01-13&#x2F;">
+							  <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;cryptsetup&#x2F;">
 								Cryptsetup Rust bindings release
 							  </a>
 							</h1>
@@ -428,7 +390,7 @@ GPL-compatible.</p>
 
 							</div>
 							<div class="read-more">
-								<a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;2020-01-13&#x2F;">Read more...</a>
+								<a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;cryptsetup&#x2F;">Read more...</a>
 							</div>
 						</article>
 						
@@ -437,7 +399,7 @@ GPL-compatible.</p>
                       <div class="post">
 						<article class="post">
 							<h1 class="post-title">
-							  <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;2019-11-06&#x2F;">
+							  <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-2-0-0&#x2F;">
 								Stratis 2.0.0 Release Notes
 							  </a>
 							</h1>
@@ -505,7 +467,7 @@ rather than the CLI.</p>
 
 							</div>
 							<div class="read-more">
-								<a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;2019-11-06&#x2F;">Read more...</a>
+								<a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-2-0-0&#x2F;">Read more...</a>
 							</div>
 						</article>
 						
@@ -514,7 +476,7 @@ rather than the CLI.</p>
                       <div class="post">
 						<article class="post">
 							<h1 class="post-title">
-							  <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;b&#x2F;">
+							  <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-cli-release-notes-1-1-0&#x2F;">
 								stratis-cli 1.1.0 Release Notes
 							  </a>
 							</h1>
@@ -535,7 +497,7 @@ circumstances that led up to the incident.</p>
 
 							</div>
 							<div class="read-more">
-								<a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;b&#x2F;">Read more...</a>
+								<a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-cli-release-notes-1-1-0&#x2F;">Read more...</a>
 							</div>
 						</article>
 						
@@ -544,7 +506,7 @@ circumstances that led up to the incident.</p>
                       <div class="post">
 						<article class="post">
 							<h1 class="post-title">
-							  <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;a&#x2F;">
+							  <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratisd-release-notes-1-0-6&#x2F;">
 								stratisd 1.0.6 Release Notes
 							  </a>
 							</h1>
@@ -556,13 +518,10 @@ a failure to properly update the Stratis metadata if stratisd was restarted
 in an environment where the system clock indicated a time earlier than when
 it had previously been running. See <a href="https://github.com/stratis-storage/stratisd/issues/1509">stratisd issue 1509</a> for further
 details.</p>
-<p>This release also includes significant refactoring of the stratisd metadata
-handling for clarity and modularity and to use types to enforce distinctions
-among the sizes of different metadata regions (<a href="https://github.com/stratis-storage/stratisd/issues/1573">stratisd issue 1573</a>).</p>
 
 							</div>
 							<div class="read-more">
-								<a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;a&#x2F;">Read more...</a>
+								<a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratisd-release-notes-1-0-6&#x2F;">Read more...</a>
 							</div>
 						</article>
 						
@@ -571,7 +530,7 @@ among the sizes of different metadata regions (<a href="https://github.com/strat
                       <div class="post">
 						<article class="post">
 							<h1 class="post-title">
-							  <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;2018-09-28&#x2F;">
+							  <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-1-0-0&#x2F;">
 								Stratis 1.0 Release Notes
 							  </a>
 							</h1>
@@ -584,7 +543,7 @@ among the sizes of different metadata regions (<a href="https://github.com/strat
 
 							</div>
 							<div class="read-more">
-								<a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;2018-09-28&#x2F;">Read more...</a>
+								<a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-1-0-0&#x2F;">Read more...</a>
 							</div>
 						</article>
 						
@@ -593,7 +552,7 @@ among the sizes of different metadata regions (<a href="https://github.com/strat
                       <div class="post">
 						<article class="post">
 							<h1 class="post-title">
-							  <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;2018-03-08&#x2F;">
+							  <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-0-5&#x2F;">
 								Stratis 0.5 Release Notes
 							  </a>
 							</h1>
@@ -605,7 +564,7 @@ supported in Stratis 1.0, due to upcoming on-disk format changes.</p>
 
 							</div>
 							<div class="read-more">
-								<a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;2018-03-08&#x2F;">Read more...</a>
+								<a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-0-5&#x2F;">Read more...</a>
 							</div>
 						</article>
 						

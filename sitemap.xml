@@ -7,58 +7,9 @@
         </url>
     
         <url>
-            <loc>https%3A//stratis-storage.github.io/2018-03-08/</loc>
-            
-                <lastmod>2018-03-08</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https%3A//stratis-storage.github.io/2018-09-28/</loc>
-            
-                <lastmod>2018-09-28</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https%3A//stratis-storage.github.io/2019-11-06/</loc>
-            
-                <lastmod>2019-11-06</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https%3A//stratis-storage.github.io/2020-01-13/</loc>
+            <loc>https%3A//stratis-storage.github.io/cryptsetup/</loc>
             
                 <lastmod>2020-01-13</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https%3A//stratis-storage.github.io/2020-02-daemon/</loc>
-            
-                <lastmod>2020-02-10</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https%3A//stratis-storage.github.io/2020-cli/</loc>
-            
-                <lastmod>2020-01-21</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https%3A//stratis-storage.github.io/a/</loc>
-            
-                <lastmod>2019-10-02</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https%3A//stratis-storage.github.io/b/</loc>
-            
-                <lastmod>2019-10-02</lastmod>
             
         </url>
     
@@ -84,9 +35,44 @@
         </url>
     
         <url>
+            <loc>https%3A//stratis-storage.github.io/stratis-cli-release-notes-1-1-0/</loc>
+            
+                <lastmod>2019-10-02</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https%3A//stratis-storage.github.io/stratis-cli-release-notes-2-0-1/</loc>
+            
+                <lastmod>2020-01-21</lastmod>
+            
+        </url>
+    
+        <url>
             <loc>https%3A//stratis-storage.github.io/stratis-cli-release-notes-2-1-1/</loc>
             
                 <lastmod>2020-07-14</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https%3A//stratis-storage.github.io/stratis-release-notes-0-5/</loc>
+            
+                <lastmod>2018-03-08</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https%3A//stratis-storage.github.io/stratis-release-notes-1-0-0/</loc>
+            
+                <lastmod>2018-09-28</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https%3A//stratis-storage.github.io/stratis-release-notes-2-0-0/</loc>
+            
+                <lastmod>2019-11-06</lastmod>
             
         </url>
     
@@ -108,6 +94,20 @@
             <loc>https%3A//stratis-storage.github.io/stratis-release-notes-2-2-1/</loc>
             
                 <lastmod>2020-11-09</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https%3A//stratis-storage.github.io/stratisd-release-notes-1-0-6/</loc>
+            
+                <lastmod>2019-10-02</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https%3A//stratis-storage.github.io/stratisd-release-notes-2-0-1/</loc>
+            
+                <lastmod>2020-02-10</lastmod>
             
         </url>
     

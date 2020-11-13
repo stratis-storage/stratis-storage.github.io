@@ -95,25 +95,30 @@
             
 
 <div class="post">
-  <h1 class="post-title">stratis-cli 2.0.1 Release Notes</h1>
-  <span class="post-date">2020-01-21</span>
+  <h1 class="post-title">stratisd 1.0.6 Release Notes</h1>
+  <span class="post-date">2019-10-02</span>
 
-  <p>Sunday January 21, 2020</p>
-<p>stratis-cli 2.0.1 contains a number of internal improvements as well as
-some improvements to certain error messages.</p>
-<p>We expect that most current users will notice very little if any change;
-we hope that new users will benefit from error messages that they can
-more directly relate to the commands that they have typed. In order to
-achieve this, the internal exception hierarchy was refined, and some new
-exception classes were added.</p>
-<p>The man pages have been updated to include a precise specification of every
-field displayed by any of the <code>list</code> subcommands.</p>
-<p>Contributors to the source will observe that our CI now requires 100% code
-coverage.</p>
+  <p>Wednesday October 2, 2019</p>
+<p>This release includes one significant bug fix and a substantial refactoring.</p>
+<p>The bug was caused by an inconsistency in the metadata handling which led to
+a failure to properly update the Stratis metadata if stratisd was restarted
+in an environment where the system clock indicated a time earlier than when
+it had previously been running. See <a href="https://github.com/stratis-storage/stratisd/issues/1509">stratisd issue 1509</a> for further
+details.</p>
 <p id="zola-continue-reading"><a name="continue-reading"></a></p>
-<p>Please consult the changelog for additional information about the release.</p>
-<p>We would like to thank our external contributor carzacc for further work
-on bash tab-completion (<a href="https://github.com/stratis-storage/stratis-cli/pull/446">stratis-cli pull 446</a>).</p>
+<p>This release also includes significant refactoring of the stratisd metadata
+handling for clarity and modularity and to use types to enforce distinctions
+among the sizes of different metadata regions (<a href="https://github.com/stratis-storage/stratisd/issues/1573">stratisd issue 1573</a>).</p>
+<p>Additional changes include demoting a log message to a level appropriate
+to its significance (<a href="https://github.com/stratis-storage/stratisd/issues/1485">stratisd issue 1485</a>) and specifying the stratisd PID
+file using the path <code>/run/stratisd.pid</code> instead of <code>/var/run/stratisd.pid</code>
+(<a href="https://github.com/stratis-storage/stratisd/issues/1632">stratisd issue 1632</a>).</p>
+<p>We would like to thank our external contributors:</p>
+<ul>
+<li>sergeystepanovx for reporting <a href="https://github.com/stratis-storage/stratisd/issues/1509">stratisd issue 1509</a> and for testing the fix</li>
+<li>GuillaumeGomez for many metadata refactoring contributions
+(<a href="https://github.com/stratis-storage/stratisd/issues/1573">stratisd issue 1573</a>)</li>
+</ul>
 
 </div>
 
