@@ -95,24 +95,25 @@
             
 
 <div class="post">
-  <h1 class="post-title">stratisd 2.0.1 Release Notes</h1>
-  <span class="post-date">2020-02-10</span>
+  <h1 class="post-title">stratis-cli 2.0.1 Release Notes</h1>
+  <span class="post-date">2020-01-21</span>
 
-  <p>February 10, 2020</p>
-<p>stratisd 2.0.1 contains a number of internal improvements as well as
-enhanced logging.</p>
-<p>A code defect which made it possible to leave the thinpool suspended on an
-error was fixed (<a href="https://github.com/stratis-storage/stratisd/issues/1730">stratisd issue 1730</a>).</p>
-<p>The device discovery implementation was improved; computational complexity
-was reduced and additional logging on unusual events was added.</p>
-<p>The D-Bus layer was restructured to more cleanly suppport multiple versioned
-D-Bus interfaces.</p>
-<p>All macros were rewritten to use fully qualified names to improve code
-stability.</p>
+  <p>Sunday January 21, 2020</p>
+<p>stratis-cli 2.0.1 contains a number of internal improvements as well as
+some improvements to certain error messages.</p>
 <p id="zola-continue-reading"><a name="continue-reading"></a></p>
+<p>We expect that most current users will notice very little if any change;
+we hope that new users will benefit from error messages that they can
+more directly relate to the commands that they have typed. In order to
+achieve this, the internal exception hierarchy was refined, and some new
+exception classes were added.</p>
+<p>The man pages have been updated to include a precise specification of every
+field displayed by any of the <code>list</code> subcommands.</p>
+<p>Contributors to the source will observe that our CI now requires 100% code
+coverage.</p>
 <p>Please consult the changelog for additional information about the release.</p>
-<p>We would like to thank our external contributor GuillaumeGomez for further
-work on metadata refactoring (<a href="https://github.com/stratis-storage/stratisd/issues/1573">stratisd issue 1573</a>).</p>
+<p>We would like to thank our external contributor carzacc for further work
+on bash tab-completion (<a href="https://github.com/stratis-storage/stratis-cli/pull/446">stratis-cli pull 446</a>).</p>
 
 </div>
 

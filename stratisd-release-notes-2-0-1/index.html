@@ -95,30 +95,24 @@
             
 
 <div class="post">
-  <h1 class="post-title">stratisd 1.0.6 Release Notes</h1>
-  <span class="post-date">2019-10-02</span>
+  <h1 class="post-title">stratisd 2.0.1 Release Notes</h1>
+  <span class="post-date">2020-02-10</span>
 
-  <p>Wednesday October 2, 2019</p>
-<p>This release includes one significant bug fix and a substantial refactoring.</p>
-<p>The bug was caused by an inconsistency in the metadata handling which led to
-a failure to properly update the Stratis metadata if stratisd was restarted
-in an environment where the system clock indicated a time earlier than when
-it had previously been running. See <a href="https://github.com/stratis-storage/stratisd/issues/1509">stratisd issue 1509</a> for further
-details.</p>
-<p>This release also includes significant refactoring of the stratisd metadata
-handling for clarity and modularity and to use types to enforce distinctions
-among the sizes of different metadata regions (<a href="https://github.com/stratis-storage/stratisd/issues/1573">stratisd issue 1573</a>).</p>
+  <p>February 10, 2020</p>
+<p>stratisd 2.0.1 contains a number of internal improvements as well as
+enhanced logging.</p>
 <p id="zola-continue-reading"><a name="continue-reading"></a></p>
-<p>Additional changes include demoting a log message to a level appropriate
-to its significance (<a href="https://github.com/stratis-storage/stratisd/issues/1485">stratisd issue 1485</a>) and specifying the stratisd PID
-file using the path <code>/run/stratisd.pid</code> instead of <code>/var/run/stratisd.pid</code>
-(<a href="https://github.com/stratis-storage/stratisd/issues/1632">stratisd issue 1632</a>).</p>
-<p>We would like to thank our external contributors:</p>
-<ul>
-<li>sergeystepanovx for reporting <a href="https://github.com/stratis-storage/stratisd/issues/1509">stratisd issue 1509</a> and for testing the fix</li>
-<li>GuillaumeGomez for many metadata refactoring contributions
-(<a href="https://github.com/stratis-storage/stratisd/issues/1573">stratisd issue 1573</a>)</li>
-</ul>
+<p>A code defect which made it possible to leave the thinpool suspended on an
+error was fixed (<a href="https://github.com/stratis-storage/stratisd/issues/1730">stratisd issue 1730</a>).</p>
+<p>The device discovery implementation was improved; computational complexity
+was reduced and additional logging on unusual events was added.</p>
+<p>The D-Bus layer was restructured to more cleanly suppport multiple versioned
+D-Bus interfaces.</p>
+<p>All macros were rewritten to use fully qualified names to improve code
+stability.</p>
+<p>Please consult the changelog for additional information about the release.</p>
+<p>We would like to thank our external contributor GuillaumeGomez for further
+work on metadata refactoring (<a href="https://github.com/stratis-storage/stratisd/issues/1573">stratisd issue 1573</a>).</p>
 
 </div>
 
