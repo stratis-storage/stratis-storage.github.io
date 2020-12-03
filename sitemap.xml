@@ -98,6 +98,13 @@
         </url>
     
         <url>
+            <loc>https%3A//stratis-storage.github.io/stratis-release-notes-2-3-0/</loc>
+            
+                <lastmod>2020-12-02</lastmod>
+            
+        </url>
+    
+        <url>
             <loc>https%3A//stratis-storage.github.io/stratisd-release-notes-1-0-6/</loc>
             
                 <lastmod>2019-10-02</lastmod>
