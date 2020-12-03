@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+	<link rel="icon" type="image/png" href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-favicon.png">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+      <!-- Enable responsiveness on mobile devices-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+      <title>Stratis Storage</title>
+
+      <!-- CSS -->
+      <link rel="stylesheet" href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;print.css" media="print">
+      <link rel="stylesheet" href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;poole.css">
+      <link rel="stylesheet" href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;hyde.css">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+	  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+      
+
+      
+      
+    </head>
+
+    <body class="theme-base-10 ">
+        
+            <div class="sidebar">
+                <div class="container ">
+					<div>
+						<a href="https:&#x2F;&#x2F;stratis-storage.github.io">
+							<img src="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;imgs&#x2F;stratis_sidebar.png" />
+						</a>
+					</div>
+                    <div class="sidebar-about">
+                        
+                            <!-- <a href="https:&#x2F;&#x2F;stratis-storage.github.io"><h1>Stratis Storage</h1></a> -->
+                            
+                            <p class="about lead">Easy to use local storage management for Linux.</p>
+                            
+                        
+                    </div>
+
+                    User Links:</br>
+                    <ul class="sidebar-nav">
+                        
+                        
+                           <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;lab.redhat.com&#x2F;stratis">Tutorial</a></li>
+                        
+                           <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;faq">FAQ</a></li>
+                        
+                           <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;howto">How-To</a></li>
+                        
+                        
+                    </ul>
+                    Developer Links:</br>
+                    <ul class="sidebar-nav">
+                        
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;StratisSoftwareDesign.pdf">Software Design</a></li>
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;DBusAPIReference.pdf">DBUS API Reference</a></li>
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;StratisStyleGuidelines.pdf">Programming Style Guidelines</a></li>
+                        
+                        
+                    </ul>
+                    Contact Links:</br>
+                    <ul class="sidebar-nav">
+                        
+                        
+                        <li class="sidebar-nav-item" style="display: inline-block">
+						  <a href="https:&#x2F;&#x2F;github.com&#x2F;stratis-storage">
+						    
+							  <i class="fab fa-github"></i>
+							
+					      </a>
+						</li>
+                        
+                        <li class="sidebar-nav-item" style="display: inline-block">
+						  <a href="https:&#x2F;&#x2F;twitter.com&#x2F;stratisstorage">
+						    
+							  <i class="fab fa-twitter"></i>
+							
+					      </a>
+						</li>
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div class="content container">
+            
+
+<div class="post">
+  <h1 class="post-title">Stratis 2.3.0 Release Notes</h1>
+  <span class="post-date">2020-12-02</span>
+
+  <p>Stratis 2.3.0 adds additional flexibility to its encryption support via
+Clevis <a href="https://github.com/latchset/clevis">clevis</a>.</p>
+<h2 id="stratis-2-3-0">stratis 2.3.0</h2>
+<p>This release extends the <code>pool unlock</code> command, and adds two new commands,
+<code>pool bind</code> and <code>pool unbind</code>.</p>
+<p>The <code>pool bind</code> command establishes an alternative mechanism for unlocking
+a pool. The user may select either the &quot;tang&quot; mechanism, which implements
+NBDE (Network-bound Disc Encryption) by means of a Tang server, or the
+&quot;tpm2&quot; mechanism, which uses TPM 2.0 (Trusted Platform Module) encryption.
+Binding the devices in a pool to a supplementary Clevis encryption policy does
+not remove the primary encryption mechanism, which uses a key in the kernel
+keyring.</p>
+<p>The <code>pool unbind</code> command simply unbinds a previously added encryption
+policy from all the devices in the specified pool.</p>
+<p>In the <code>pool unlock</code> command it is now necessary to specify the mechanism.
+Use <code>clevis</code> to make use of the Clevis unlocking policy previously
+specified for the devices in the pool. Use <code>keyring</code>, to make use of the
+mechanism that uses a key in the kernel keyring, which was introduced
+in Stratis 2.1.0. Note that the <code>pool unlock</code> command unlocks all currently
+locked pools.</p>
+<h2 id="stratisd-2-3-0">stratisd 2.3.0</h2>
+<p>This release introduces two D-Bus interface revisions, which differ in the
+following way from the previous revisions.</p>
+<p><code>org.storage.stratis2.Manager.r3</code> modifies the <code>UnlockPool</code> method to take
+an additional parameter, <code>unlock_method</code>, which may be <code>keyring</code> or <code>clevis</code>.</p>
+<p><code>org.storage.stratis2.pool.r3</code> adds two new method: <code>Bind</code> and <code>Unbind</code>.
+The <code>Bind</code> method takes two arguments, <code>pin</code> and <code>json</code>. The <code>pin</code> argument
+designates the Clevis pin as a string, and the <code>json</code> argument encodes
+a Clevis configuration appropriate to the designated pin. The configuration
+is a JSON object. Besides Clevis information, it may include Stratis-specific
+keys that encode configuration decisions that Stratis may implement. At
+present there is just one such key: <code>stratis:tang:trust_url</code>.
+The <code>Unbind</code> method reverses a <code>Bind</code> action.</p>
+<h2 id="remarks">Remarks</h2>
+<p>The <code>Bind</code> method may be called with any Clevis pin and configuration;
+we expect that any valid Clevis pin and configuration can be used to bind the
+devices in a pool. However the Stratis project officially supports only the
+&quot;tang&quot; and &quot;tpm2&quot; pins as those are the pins that may be designated via
+<code>stratis</code>. Support for additional Clevis policies may be introduced into
+<code>stratis</code> in later releases.</p>
+<p>When binding a supplementary encryption policy to the devices in a pool
+using Clevis, the primary key, which is the key in the kernel keyring which
+was originally used to encrypt each device, must be supplied. stratisd
+obtains the appropriate key from the kernel keyring in order to provide it
+to the Clevis binding mechanism. The correct key must be present in the
+keyring for the bind operation to succeed. It is not necessary for the user
+to specify the key, stratisd obtains the necessary information from the
+LUKS2 metadata on the devices in the pool.</p>
+<p>In general, it is unwise to write a key consisting of arbitrary binary data
+to a keyfile. An accidental newline character in the data may cause the
+contents of the file to be truncated at the newline when read in one context
+while all the data may be read from the file in some other context.</p>
+<p>We are not aware that such a mistake would result in any error in Stratis's
+operation when Stratis is used in the way that we recommend. We explicitly
+acknowledge that it might be possible, through some direct interaction with
+the stratisd D-Bus API, or by, e.g., setting a key in the kernel keyring
+without using stratis, to manufacture a situation where stratisd could not
+bind the devices in a pool, even when the correct key is set in the kernel
+keyring. We would not treat such a situation as evidence of a bug in Stratis.</p>
+<p id="zola-continue-reading"><a name="continue-reading"></a></p>
+<p>Please consult the changelogs for additional information about the release.</p>
+
+</div>
+
+        </div>
+
+    </body>
+
+</html>
