@@ -47,8 +47,6 @@
                         
                            <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;lab.redhat.com&#x2F;stratis">Tutorial</a></li>
                         
-                           <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;faq">FAQ</a></li>
-                        
                            <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;howto">How-To</a></li>
                         
                         
@@ -97,6 +95,109 @@
 <div class="post">
   <h1 class="post-title">Stratis how-to&#x2F;walk-through</h1>
   <span class="post-date">2018-11-27</span>
+
+<div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content always-active">
+        <nav id="TableOfContents">
+            <ul>
+                
+                <li>
+                    <a href="https://stratis-storage.github.io/howto/#introduction" class="toc-link">Introduction</a>
+                    
+                    <ul>
+                        
+                        <li>
+                            <a href="https://stratis-storage.github.io/howto/#installation" class="toc-link">Installation</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://stratis-storage.github.io/howto/#starting-the-service" class="toc-link">Starting the service</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://stratis-storage.github.io/howto/#locate-an-empty-block-device" class="toc-link">Locate an empty block device</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://stratis-storage.github.io/howto/#creating-a-pool" class="toc-link">Creating a pool</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://stratis-storage.github.io/howto/#creating-a-filesystem-from-the-pool" class="toc-link">Creating a filesystem from the pool</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://stratis-storage.github.io/howto/#mount-the-file-system" class="toc-link">Mount the file system</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://stratis-storage.github.io/howto/#add-mount-point-to-etc-fstab-using-file-system-uuid" class="toc-link">Add mount point to &#x2F;etc&#x2F;fstab using file system UUID</a>
+                        </li>
+                        
+                    </ul>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://stratis-storage.github.io/howto/#other-useful-pool-operations" class="toc-link">Other useful pool operations</a>
+                    
+                    <ul>
+                        
+                        <li>
+                            <a href="https://stratis-storage.github.io/howto/#add-data-add-a-disk-to-an-existing-pool" class="toc-link">add-data: Add a disk to an existing pool</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://stratis-storage.github.io/howto/#rename-rename-a-pool" class="toc-link">rename: Rename a pool</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://stratis-storage.github.io/howto/#init-cache-initialize-cache-and-add-block-device-as-cache-device-typically-something-like-ssd" class="toc-link">init-cache: Initialize cache and add block device as cache device (typically something like SSD)</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://stratis-storage.github.io/howto/#add-cache-add-a-block-device-as-cache-to-a-pool-with-an-existing-cache" class="toc-link">add-cache: Add a block device as cache to a pool with an existing cache</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://stratis-storage.github.io/howto/#destroy-destroy-a-pool-no-file-systems-can-exist-in-pool" class="toc-link">destroy: Destroy a pool, no file systems can exist in pool</a>
+                        </li>
+                        
+                    </ul>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://stratis-storage.github.io/howto/#other-useful-file-system-operations" class="toc-link">Other useful file system operations</a>
+                    
+                    <ul>
+                        
+                        <li>
+                            <a href="https://stratis-storage.github.io/howto/#destroy-remove-a-stratis-provided-filesystem" class="toc-link">destroy: Remove a Stratis provided filesystem</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://stratis-storage.github.io/howto/#rename-rename-a-file-system" class="toc-link">rename: Rename a file system</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://stratis-storage.github.io/howto/#snapshot-create-a-snapshot" class="toc-link">snapshot: Create a snapshot</a>
+                        </li>
+                        
+                    </ul>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://stratis-storage.github.io/howto/#misc-operations" class="toc-link">Misc. operations</a>
+                    
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
 
   <h1 id="introduction">Introduction</h1>
 <p>Stratis provides ZFS/Btrfs-style features by integrating layers of existing technology: Linux’s devicemapper subsystem, and the XFS filesystem. The stratisd daemon manages collections of block devices, and provides a D-Bus API. The stratis-cli provides a command-line tool stratis which itself uses the D-Bus API to communicate with stratisd.</p>
