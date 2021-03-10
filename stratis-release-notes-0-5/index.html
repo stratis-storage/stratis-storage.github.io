@@ -47,8 +47,6 @@
                         
                            <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;lab.redhat.com&#x2F;stratis">Tutorial</a></li>
                         
-                           <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;faq">FAQ</a></li>
-                        
                            <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;howto">How-To</a></li>
                         
                         
@@ -98,12 +96,32 @@
   <h1 class="post-title">Stratis 0.5 Release Notes</h1>
   <span class="post-date">2018-03-08</span>
 
+<div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content always-active">
+        <nav id="TableOfContents">
+            <ul>
+                
+                <li>
+                    <a href="https://stratis-storage.github.io/stratis-release-notes-0-5/#new-features" class="toc-link">New Features</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://stratis-storage.github.io/stratis-release-notes-0-5/#known-issues" class="toc-link">Known issues</a>
+                    
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
   <p>March 8, 2018</p>
 <p>This release is suitable for developers and early testers. It should not be
 used with valuable data, and pools created with this release will not be
 supported in Stratis 1.0, due to upcoming on-disk format changes.</p>
-<p id="zola-continue-reading"><a name="continue-reading"></a></p>
-<h2 id="new-features">New Features</h2>
+<span id="continue-reading"></span><h2 id="new-features">New Features</h2>
 <ul>
 <li>Snapshots. In addition to being created from scratch (with <code>fs create</code>), a
 new filesystem may now be created as a read/write snapshot of an existing

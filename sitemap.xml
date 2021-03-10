@@ -1,118 +1,111 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     
         <url>
-            <loc>https%3A//stratis-storage.github.io/</loc>
+            <loc>https://stratis-storage.github.io/</loc>
             
         </url>
     
         <url>
-            <loc>https%3A//stratis-storage.github.io/cryptsetup/</loc>
+            <loc>https://stratis-storage.github.io/cryptsetup/</loc>
             
                 <lastmod>2020-01-13</lastmod>
             
         </url>
     
         <url>
-            <loc>https%3A//stratis-storage.github.io/faq/</loc>
+            <loc>https://stratis-storage.github.io/howto/</loc>
             
                 <lastmod>2018-11-27</lastmod>
             
         </url>
     
         <url>
-            <loc>https%3A//stratis-storage.github.io/howto/</loc>
-            
-                <lastmod>2018-11-27</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https%3A//stratis-storage.github.io/katacoda-tutorial/</loc>
+            <loc>https://stratis-storage.github.io/katacoda-tutorial/</loc>
             
                 <lastmod>2020-06-16</lastmod>
             
         </url>
     
         <url>
-            <loc>https%3A//stratis-storage.github.io/stratis-cli-release-notes-1-1-0/</loc>
+            <loc>https://stratis-storage.github.io/stratis-cli-release-notes-1-1-0/</loc>
             
                 <lastmod>2019-10-02</lastmod>
             
         </url>
     
         <url>
-            <loc>https%3A//stratis-storage.github.io/stratis-cli-release-notes-2-0-1/</loc>
+            <loc>https://stratis-storage.github.io/stratis-cli-release-notes-2-0-1/</loc>
             
                 <lastmod>2020-01-21</lastmod>
             
         </url>
     
         <url>
-            <loc>https%3A//stratis-storage.github.io/stratis-cli-release-notes-2-1-1/</loc>
+            <loc>https://stratis-storage.github.io/stratis-cli-release-notes-2-1-1/</loc>
             
                 <lastmod>2020-07-14</lastmod>
             
         </url>
     
         <url>
-            <loc>https%3A//stratis-storage.github.io/stratis-release-notes-0-5/</loc>
+            <loc>https://stratis-storage.github.io/stratis-release-notes-0-5/</loc>
             
                 <lastmod>2018-03-08</lastmod>
             
         </url>
     
         <url>
-            <loc>https%3A//stratis-storage.github.io/stratis-release-notes-1-0-0/</loc>
+            <loc>https://stratis-storage.github.io/stratis-release-notes-1-0-0/</loc>
             
                 <lastmod>2018-09-28</lastmod>
             
         </url>
     
         <url>
-            <loc>https%3A//stratis-storage.github.io/stratis-release-notes-2-0-0/</loc>
+            <loc>https://stratis-storage.github.io/stratis-release-notes-2-0-0/</loc>
             
                 <lastmod>2019-11-06</lastmod>
             
         </url>
     
         <url>
-            <loc>https%3A//stratis-storage.github.io/stratis-release-notes-2-1-0/</loc>
+            <loc>https://stratis-storage.github.io/stratis-release-notes-2-1-0/</loc>
             
                 <lastmod>2020-06-08</lastmod>
             
         </url>
     
         <url>
-            <loc>https%3A//stratis-storage.github.io/stratis-release-notes-2-2-0/</loc>
+            <loc>https://stratis-storage.github.io/stratis-release-notes-2-2-0/</loc>
             
                 <lastmod>2020-09-29</lastmod>
             
         </url>
     
         <url>
-            <loc>https%3A//stratis-storage.github.io/stratis-release-notes-2-2-1/</loc>
+            <loc>https://stratis-storage.github.io/stratis-release-notes-2-2-1/</loc>
             
                 <lastmod>2020-11-09</lastmod>
             
         </url>
     
         <url>
-            <loc>https%3A//stratis-storage.github.io/stratis-release-notes-2-3-0/</loc>
+            <loc>https://stratis-storage.github.io/stratis-release-notes-2-3-0/</loc>
             
                 <lastmod>2020-12-02</lastmod>
             
         </url>
     
         <url>
-            <loc>https%3A//stratis-storage.github.io/stratisd-release-notes-1-0-6/</loc>
+            <loc>https://stratis-storage.github.io/stratisd-release-notes-1-0-6/</loc>
             
                 <lastmod>2019-10-02</lastmod>
             
         </url>
     
         <url>
-            <loc>https%3A//stratis-storage.github.io/stratisd-release-notes-2-0-1/</loc>
+            <loc>https://stratis-storage.github.io/stratisd-release-notes-2-0-1/</loc>
             
                 <lastmod>2020-02-10</lastmod>
             

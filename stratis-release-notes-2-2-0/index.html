@@ -47,8 +47,6 @@
                         
                            <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;lab.redhat.com&#x2F;stratis">Tutorial</a></li>
                         
-                           <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;faq">FAQ</a></li>
-                        
                            <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;howto">How-To</a></li>
                         
                         
@@ -98,6 +96,27 @@
   <h1 class="post-title">Stratis 2.2.0 Release Notes</h1>
   <span class="post-date">2020-09-29</span>
 
+<div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content always-active">
+        <nav id="TableOfContents">
+            <ul>
+                
+                <li>
+                    <a href="https://stratis-storage.github.io/stratis-release-notes-2-2-0/#stratisd-2-2-0" class="toc-link">stratisd 2.2.0</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://stratis-storage.github.io/stratis-release-notes-2-2-0/#stratis-cli-2-2-0" class="toc-link">stratis-cli 2.2.0</a>
+                    
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
   <p>Stratis 2.2.0 now places Stratis filesystem symlinks in <code>/dev/stratis</code>,
 rather than <code>/stratis</code>. Stratis creates and maintains the symlinks by means
 of udev rules, rather than directly via stratisd as previously.
@@ -136,7 +155,7 @@ returns a D-Bus object that maps the UUIDs of locked pools to their
 corresponding key descriptions.</li>
 </ul>
 <p>Please consult the D-Bus API Reference for the precise D-Bus specification.</p>
-<p id="zola-continue-reading"><a name="continue-reading"></a></p>
+<span id="continue-reading"></span>
 <p>This release allows the user to specify their preferred log level more
 directly and succinctly with the <code>--log-level</code> CLI option.</p>
 <p>This release includes management of terminal settings for interactive
