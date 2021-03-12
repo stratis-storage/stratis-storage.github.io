@@ -245,14 +245,14 @@ any D-Bus messages.</p>
 into <code>stratisd</code>. These capabilities do not solve all the problems that
 multi-threading is intended to solve, but lay the essential foundation for
 multi-threaded event handling.</p>
-<p>We have chosen to implement multi-threading using the Rust [tokio] crate.
+<p>We have chosen to implement multi-threading using the Rust <a href="https://tokio.rs/">tokio</a> crate.
 The alternative is to use operating system threads explicitly via the
-Rust standard library [thread] module. We have chosen <code>tokio</code> in order to
+Rust standard library <a href="https://doc.rust-lang.org/std/thread/">thread</a> module. We have chosen <code>tokio</code> in order to
 get the benefits of code reuse from the <code>tokio</code> runtime, and because we
 expect that this choice will allow <code>stratisd</code> to operate efficiently while
 consuming fewer operating system resources.</p>
-<p>We have also made use of the newest version of the [dbus] crate, which
-includes support for multi-threading via the [dbus-tokio] crate.</p>
+<p>We have also made use of the newest version of the <a href="https://crates.io/crates/dbus">dbus</a> crate, which
+includes support for multi-threading via the <a href="https://crates.io/crates/dbus-tokio/">dbus-tokio</a> crate.</p>
 <h1 id="nomenclature">Nomenclature</h1>
 <p>The following words have a precise definition in the context of
 multi-threading:</p>
@@ -550,11 +550,6 @@ which at <code>stratisd</code>'s current size is an increase of approximately 20
 <p>Preliminary multi-threading support will be included in the next <code>stratisd</code>
 release, 2.4.0.</p>
 <span id="continue-reading"></span>
-<p>[tokio] https://tokio.rs/
-[thread] https://doc.rust-lang.org/std/thread/
-[dbus] https://crates.io/crates/dbus
-[dbus-tokio] https://crates.io/crates/dbus-tokio/</p>
-
 </div>
 
         </div>
