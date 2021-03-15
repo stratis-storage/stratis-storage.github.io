@@ -101,7 +101,8 @@
 							  </a>
 							</h1>
 							<div class="post__summary">
-								<h1 id="introducing-support-for-multi-threading-in-stratisd">Introducing Support for Multi-threading in stratisd</h1>
+								<p><em>mulhern, Stratis Team</em></p>
+<h1 id="introducing-support-for-multi-threading-in-stratisd">Introducing Support for Multi-threading in stratisd</h1>
 <p><code>stratisd</code> is an entirely single-threaded application;
 it is a daemon with a single event loop that consults a list of possible
 event sources in a prescribed order, handling the events on each event
@@ -454,7 +455,8 @@ release, 2.4.0.</p>
 							  </a>
 							</h1>
 							<div class="post__summary">
-								<p>Stratis 2.3.0 adds additional flexibility to its encryption support via
+								<p><em>mulhern, Stratis Team</em></p>
+<p>Stratis 2.3.0 adds additional flexibility to its encryption support via
 <a href="https://github.com/latchset/clevis">Clevis</a>.</p>
 <h2 id="stratis-2-3-0">stratis 2.3.0</h2>
 <p>This release extends the <code>pool unlock</code> command, and adds two new commands,
@@ -530,7 +532,8 @@ keyring. We would not treat such a situation as evidence of a bug in Stratis.</p
 							  </a>
 							</h1>
 							<div class="post__summary">
-								<p>Stratis 2.2.1 is a bug fix release. It fixes the following bugs:</p>
+								<p><em>mulhern, Stratis Team</em></p>
+<p>Stratis 2.2.1 is a bug fix release. It fixes the following bugs:</p>
 <ul>
 <li>It was possible to cause stratisd to hang by leaving open a D-Bus
 connection when setting a key in the kernel keyring.</li>
@@ -559,7 +562,8 @@ were increased.</p>
 							  </a>
 							</h1>
 							<div class="post__summary">
-								<p>Stratis 2.2.0 now places Stratis filesystem symlinks in <code>/dev/stratis</code>,
+								<p><em>mulhern, Stratis Team</em></p>
+<p>Stratis 2.2.0 now places Stratis filesystem symlinks in <code>/dev/stratis</code>,
 rather than <code>/stratis</code>. Stratis creates and maintains the symlinks by means
 of udev rules, rather than directly via stratisd as previously.
 The <code>/stratis</code> directory is neither created nor used by stratisd 2.2.0.</p>
@@ -614,7 +618,8 @@ corresponding key descriptions.</li>
 							  </a>
 							</h1>
 							<div class="post__summary">
-								<p>stratis-cli 2.1.1 fixes a bug where if one encrypted pool could not be
+								<p><em>mulhern, Stratis Team</em></p>
+<p>stratis-cli 2.1.1 fixes a bug where if one encrypted pool could not be
 unlocked, execution terminated, and no attempt was made to unlock any other
 pools that might need to be unlocked (<a href="https://github.com/stratis-storage/stratis-cli/issues/618">stratis issue 618</a>).</p>
 
@@ -634,7 +639,8 @@ pools that might need to be unlocked (<a href="https://github.com/stratis-storag
 							  </a>
 							</h1>
 							<div class="post__summary">
-								<p>We would like to thank Red Hat for hosting a Katacoda tutorial for Stratis at
+								<p><em>mulhern, Stratis Team</em></p>
+<p>We would like to thank Red Hat for hosting a Katacoda tutorial for Stratis at
 <a href="https://lab.redhat.com/stratis">lab.redhat.com/stratis</a>. We hope that the tutorial will provide an easy and
 pleasant introduction to Stratis for new users.</p>
 <p>Please note that the tutorial does not include the latest work on encryption,
@@ -656,7 +662,8 @@ as it makes use of a prior version of Stratis, 2.0.0.</p>
 							  </a>
 							</h1>
 							<div class="post__summary">
-								<p>Stratis 2.1.0 introduces support for encryption.</p>
+								<p><em>mulhern, Stratis Team</em></p>
+<p>Stratis 2.1.0 introduces support for encryption.</p>
 <p>It supports per-pool encryption of the devices that form a pool's data
 tier. A pool may be encrypted, or its constituent encrypted devices may
 be activated, by means of a key stored in the kernel keyring.</p>
@@ -759,7 +766,7 @@ exactly the same manner as an unencrypted pool.</p>
 							  </a>
 							</h1>
 							<div class="post__summary">
-								<p>February 10, 2020</p>
+								<p><em>mulhern, Stratis Team</em></p>
 <p>stratisd 2.0.1 contains a number of internal improvements as well as
 enhanced logging.</p>
 
@@ -779,7 +786,7 @@ enhanced logging.</p>
 							  </a>
 							</h1>
 							<div class="post__summary">
-								<p>Sunday January 21, 2020</p>
+								<p><em>mulhern, Stratis Team</em></p>
 <p>stratis-cli 2.0.1 contains a number of internal improvements as well as
 some improvements to certain error messages.</p>
 
@@ -799,7 +806,7 @@ some improvements to certain error messages.</p>
 							  </a>
 							</h1>
 							<div class="post__summary">
-								<p>Monday January 13, 2020</p>
+								<p><em>John Baublitz, Stratis Team</em></p>
 <p>One major focus in the Stratis project recently has been adding an encryption layer
 for data in Stratis pools. Cryptsetup provides a library backend for programmatically
 setting up device encryption, so we decided to write Rust bindings to access the
@@ -831,7 +838,7 @@ GPL-compatible.</p>
 							  </a>
 							</h1>
 							<div class="post__summary">
-								<p>Wednesday November 6, 2019</p>
+								<p><em>mulhern, Stratis Team</em></p>
 <p>Stratis 2.0 is a significant update for both the daemon and the CLI. The
 changes to the daemon are covered first, followed by the changes to the
 CLI.</p>
@@ -908,7 +915,7 @@ rather than the CLI.</p>
 							  </a>
 							</h1>
 							<div class="post__summary">
-								<p>Wednesday October 2, 2019</p>
+								<p><em>mulhern, Stratis Team</em></p>
 <p>With this release stratis now recognizes an environment variable,
 <code>STRATIS_DBUS_TIMEOUT</code>. This environment variable controls the timeout for
 any individual D-Bus call that stratis makes. You may want to set it to a
@@ -938,7 +945,7 @@ circumstances that led up to the incident.</p>
 							  </a>
 							</h1>
 							<div class="post__summary">
-								<p>Wednesday October 2, 2019</p>
+								<p><em>mulhern, Stratis Team</em></p>
 <p>This release includes one significant bug fix and a substantial refactoring.</p>
 <p>The bug was caused by an inconsistency in the metadata handling which led to
 a failure to properly update the Stratis metadata if stratisd was restarted
