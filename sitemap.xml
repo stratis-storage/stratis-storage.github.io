@@ -105,6 +105,13 @@
         </url>
     
         <url>
+            <loc>https://stratis-storage.github.io/stratis-rootfs/</loc>
+            
+                <lastmod>2021-04-12</lastmod>
+            
+        </url>
+    
+        <url>
             <loc>https://stratis-storage.github.io/stratisd-release-notes-1-0-6/</loc>
             
                 <lastmod>2019-10-02</lastmod>
