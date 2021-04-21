@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+	<link rel="icon" type="image/png" href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-favicon.png">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+      <!-- Enable responsiveness on mobile devices-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+      <title>Stratis Storage</title>
+
+      <!-- CSS -->
+      <link rel="stylesheet" href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;print.css" media="print">
+      <link rel="stylesheet" href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;poole.css">
+      <link rel="stylesheet" href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;hyde.css">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+	  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+      
+
+      
+      
+    </head>
+
+    <body class="theme-base-10 ">
+        
+            <div class="sidebar">
+                <div class="container ">
+					<div>
+						<a href="https:&#x2F;&#x2F;stratis-storage.github.io">
+							<img src="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;imgs&#x2F;stratis_sidebar.png" />
+						</a>
+					</div>
+                    <div class="sidebar-about">
+                        
+                            <!-- <a href="https:&#x2F;&#x2F;stratis-storage.github.io"><h1>Stratis Storage</h1></a> -->
+                            
+                            <p class="about lead">Easy to use local storage management for Linux.</p>
+                            
+                        
+                    </div>
+
+                    User Links:</br>
+                    <ul class="sidebar-nav">
+                        
+                        
+                           <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;lab.redhat.com&#x2F;stratis">Tutorial</a></li>
+                        
+                           <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;howto">How-To</a></li>
+                        
+                        
+                    </ul>
+                    Developer Links:</br>
+                    <ul class="sidebar-nav">
+                        
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;StratisSoftwareDesign.pdf">Software Design</a></li>
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;DBusAPIReference.pdf">DBUS API Reference</a></li>
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;StratisStyleGuidelines.pdf">Programming Style Guidelines</a></li>
+                        
+                        
+                    </ul>
+                    Contact Links:</br>
+                    <ul class="sidebar-nav">
+                        
+                        
+                        <li class="sidebar-nav-item" style="display: inline-block">
+						  <a href="https:&#x2F;&#x2F;github.com&#x2F;stratis-storage">
+						    
+							  <i class="fab fa-github"></i>
+							
+					      </a>
+						</li>
+                        
+                        <li class="sidebar-nav-item" style="display: inline-block">
+						  <a href="https:&#x2F;&#x2F;twitter.com&#x2F;stratisstorage">
+						    
+							  <i class="fab fa-twitter"></i>
+							
+					      </a>
+						</li>
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div class="content container">
+            
+
+<div class="post">
+  <h1 class="post-title">Stratis filesystems as the root filesystem</h1>
+  <span class="post-date">2021-04-12</span>
+
+<div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content always-active">
+        <nav id="TableOfContents">
+            <ul>
+                
+                <li>
+                    <a href="https://stratis-storage.github.io/stratis-rootfs/#ipc" class="toc-link">IPC</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://stratis-storage.github.io/stratis-rootfs/#support-in-the-initramfs" class="toc-link">Support in the initramfs</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://stratis-storage.github.io/stratis-rootfs/#testing-on-fedora-using-anaconda" class="toc-link">Testing on Fedora using Anaconda</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://stratis-storage.github.io/stratis-rootfs/#etc-fstab-or-mount-files" class="toc-link">&#x2F;etc&#x2F;fstab or .mount files</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://stratis-storage.github.io/stratis-rootfs/#recovery-console" class="toc-link">Recovery console</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://stratis-storage.github.io/stratis-rootfs/#scope-of-dracut-modules-and-systemd-service-files" class="toc-link">Scope of dracut modules and systemd service files</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://stratis-storage.github.io/stratis-rootfs/#conclusion" class="toc-link">Conclusion</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://stratis-storage.github.io/stratis-rootfs/#release-version" class="toc-link">Release version</a>
+                    
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+  <p><em>John Baublitz, Stratis Team</em></p>
+<p>While Stratis unencrypted pools could previously be used as the root filesystem
+for a Linux installation with proper customization of the initramfs, our most
+recent feature provides all of the plumbing to fully support Stratis filesystems
+as the root filesystem of a Linux installation.</p>
+<h3 id="ipc">IPC</h3>
+<p>Stratis relies on D-Bus for interprocess communication between the daemon and the
+client. D-Bus does not currently ship in the initramfs so the first order of business
+was to choose an alternate form of IPC. Because we require the ability to pass a file
+descriptor from the client to the daemon, this made Unix sockets the only reasonable
+transport mechanism. After evaluating several JSON RPC libraries with Unix socket
+support, we decided to write a minimal RPC interface ourselves. This was due to a
+few constraints:</p>
+<ul>
+<li>JSON RPC libraries with Unix socket support did not support setting the ancillary
+data for packets required to send file descriptors.</li>
+<li>The libraries had relatively complicated threading models, and we preferred to take
+a simple approach of processing each new request using a Tokio task.</li>
+<li>It was relatively trivial to serialize full data structures as JSON thanks to
+<a href="https://github.com/serde-rs/json"><code>serde_json</code></a>.</li>
+</ul>
+<p>This approach proved successful and we were able to implement an IPC mechanism
+that left our internal stratisd API unchanged. The alternate IPC mechanism is
+distributed in a separate pair of executables, stratis-min and stratisd-min.</p>
+<h3 id="support-in-the-initramfs">Support in the initramfs</h3>
+<p>The next step was to integrate stratisd-min into the initramfs. This involved quite a
+bit of configuration for dracut and systemd.</p>
+<p>Our current model uses systemd generators that are enabled by passing information on
+the kernel command line at boot to properly set up and unlock any devices that need
+to be unlocked. We aim to do this in as user-friendly of a way as possible by
+leveraging existing tools like Plymouth to handle prompting users for a passphrase
+on the splash screen.</p>
+<p>To set up the generators and necessary dependencies, we wrote two dracut modules:
+stratis and stratis-clevis. stratis-clevis depends on stratis and is required for
+automated unlocking using clevis.</p>
+<p>The required information on the kernel command line is:</p>
+<ul>
+<li><code> root=[STRATIS_FS_SYMLINK]</code>: The symlink under <code>/dev/stratis</code> that corresponds to
+the desired Stratis filesystem. This is required by dracut.</li>
+<li><code> stratis.rootfs.pool_uuid=[POOL_UUID]</code>: The UUID of the pool that contains the
+root filesystem.</li>
+<li><code> stratis.rootfs.uuid_paths=/dev/disk/by-uuid/[DEVICE_UUID]</code>: The UUID of one of the
+devices required to assemble the Stratis pool. All devices in the pool must be
+specified and this kernel command line parameter can be specified multiple times.</li>
+</ul>
+<p>If the user requires networking (for example, unlocking a pool using Tang), the
+parameter <code>rd.neednet=1</code> is required as well.</p>
+<h3 id="testing-on-fedora-using-anaconda">Testing on Fedora using Anaconda</h3>
+<p>This process was relatively simple once it came time to test with Fedora. Anaconda
+provides the parameter <code>--dirinstall</code> which allows the user to install into a path
+with the mounted Stratis filesystem as the root directory. It requires a bit more
+configuration after the fact (manual <code>/etc/fstab</code> or <code>.mount</code> file configuration) but
+works quite well.</p>
+<h3 id="etc-fstab-or-mount-files"><code>/etc/fstab</code> or <code>.mount</code> files</h3>
+<p>We now also provide a systemd service to manage setting up devices in /etc/fstab.
+For devices that require a passphrase or are critical for a working system, the
+following line can be used:</p>
+<p><code>/dev/stratis/[STRATIS_SYMLINK] [MOUNT_POINT] xfs defaults,x-systemd.requires=stratis-fstab-setup@[POOL_UUID],x-systemd.after=stratis-fstab-setup@[POOL_UUID]</code></p>
+<p>The absence of <code>nofail</code> here is due to the fact that <code>nofail</code> causes the boot to
+proceed prior to a successful mount. This means that passphrase prompts
+will not work properly, and most users will want critical system partitions to be
+mounted successfully or else have the boot fail.</p>
+<p>For devices that do not require interaction to set up, such as unencrypted devices or
+devices that have Clevis bindings, and are not critical for a working system, the
+following line can be optionally used:</p>
+<p><code>/dev/stratis/[STRATIS_SYMLINK] [MOUNT_POINT] xfs defaults,x-systemd.requires=stratis-fstab-setup@[POOL_UUID],x-systemd.after=stratis-fstab-setup@[POOL_UUID],nofail</code></p>
+<p>The addition of <code>nofail</code> here will cause mounting of this device to proceed
+independently from the boot which can speed up boot times. The set up process will
+continue running in the background until it either succeeds or fails.</p>
+<h3 id="recovery-console">Recovery console</h3>
+<p>While we mention above that stratisd could previously be used in the initramfs, there
+is one major caveat: it could be started but commands could not be issued. This had
+one major drawback of not allowing users to interact with stratisd in the recovery
+console. D-Bus is not available in the recovery console, so the move to stratis-min
+and stratisd-min now allows users to perform recovery actions in the emergency console
+by starting stratisd-min and running the necessary commands using stratis-min. This
+will make rescuing systems that do not boot significantly easier moving forward.</p>
+<h3 id="scope-of-dracut-modules-and-systemd-service-files">Scope of dracut modules and systemd service files</h3>
+<p>While our dracut modules and systemd service files are meant to work for almost all
+users, they may not meet the requirements of everyone using them. We encourage those
+with more advanced configurations to design their own configurations and reach out
+for guidance as needed. Our configuration is also meant as a template that you can
+build on!</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>While this took quite a bit of effort to put all of the pieces together, the Linux
+boot utilities had all of the features we needed to accomplish this. We're excited
+for future work with other teams to make using Stratis as the root filesystem
+for Linux installations even easier!</p>
+<h3 id="release-version">Release version</h3>
+<p>All of the utilities required for booting from a Stratis filesystem as the root
+filesystem will be included in stratisd 2.4.0.</p>
+<span id="continue-reading"></span>
+</div>
+
+        </div>
+
+    </body>
+
+</html>
