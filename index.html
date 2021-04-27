@@ -96,6 +96,61 @@
                       <div class="post">
 						<article class="post">
 							<h1 class="post-title">
+							  <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-2-4-0&#x2F;">
+								Stratis 2.4.0 Release Notes
+							  </a>
+							</h1>
+							<div class="post__summary">
+								<p><em>mulhern, Stratis Team</em></p>
+<p>Stratis 2.4.0 includes two major user-visible changes:</p>
+<ul>
+<li>All the functionality required to boot from a Stratis-managed root
+filesystem. See the prior post <a href="https://stratis-storage.github.io/stratis-rootfs/">Stratis filesystems as the root filesystem</a>
+for a more detailed discussion.</li>
+<li>An enhancement to existing encryption support that allows the user to
+create a pool with encryption managed either by the kernel keyring or
+<a href="https://github.com/latchset/clevis">Clevis</a>, and to subsequently bind an already encrypted pool using either
+mechanism. Previously, the user could create an encrypted pool using the
+kernel keyring only, and could bind or unbind using Clevis only.</li>
+</ul>
+<p>More minor user-visible changes are:</p>
+<ul>
+<li>An enhancment to the FetchProperties D-Bus interface in order to disclose
+more information about sets of encrypted devices.</li>
+<li>The <code>engine_state_report</code> key in the report interface has been stabilized
+and is guaranteed to be supported in future releases.</li>
+<li>A new executable, <code>stratis-predict-usage</code> to predict free space on a newly
+created pool is distributed with stratisd.</li>
+</ul>
+<p>This release of Stratis also includes a number of significant but less
+visible changes:</p>
+<ul>
+<li>Support for multi-threading in stratisd. The new multi-threading
+implementation replaces the prior event-loop implementation. See the prior
+post <a href="https://stratis-storage.github.io/multi-threading/">Multi-threading Support in stratisd</a> for a detailed discussion.</li>
+<li>The management of Stratis filesystem symlinks has been simplified.
+Determining the filesystem and pool name that comprise the symlink path no
+longer requires communication with stratisd over the D-Bus; it is
+now accomplished via standard udev-based mechanisms.</li>
+<li>stratisd now emits a log message at the info level in connection with every
+mutating D-Bus method call that it completes without an error.</li>
+</ul>
+<p>The support for migrating symlinks introduced in Stratis 2.2.0 is no longer
+included in this release.</p>
+<p>The ongoing and perpetual but entirely routine work of improvements to
+individual log and error messages continues.</p>
+
+							</div>
+							<div class="read-more">
+								<a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-2-4-0&#x2F;">Read more...</a>
+							</div>
+						</article>
+						
+                      </div>
+                    
+                      <div class="post">
+						<article class="post">
+							<h1 class="post-title">
 							  <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-rootfs&#x2F;">
 								Stratis filesystems as the root filesystem
 							  </a>
