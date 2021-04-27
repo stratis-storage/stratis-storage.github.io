@@ -207,10 +207,10 @@ with the mounted Stratis filesystem as the root directory. It requires a bit mor
 configuration after the fact (manual <code>/etc/fstab</code> or <code>.mount</code> file configuration) but
 works quite well.</p>
 <h3 id="etc-fstab-or-mount-files"><code>/etc/fstab</code> or <code>.mount</code> files</h3>
-<p>We now also provide a systemd service to manage setting up devices in /etc/fstab.
-For devices that require a passphrase or are critical for a working system, the
-following line can be used:</p>
-<p><code>/dev/stratis/[STRATIS_SYMLINK] [MOUNT_POINT] xfs defaults,x-systemd.requires=stratis-fstab-setup@[POOL_UUID],x-systemd.after=stratis-fstab-setup@[POOL_UUID]</code></p>
+<p>We now also provide a systemd service to manage setting up non-root filesystems in
+/etc/fstab.  For devices that require a passphrase or are critical for a working
+system, the following line can be used:</p>
+<p><code>/dev/stratis/[STRATIS_SYMLINK] [MOUNT_POINT] xfs defaults,x-systemd.requires=stratis-fstab-setup@[POOL_UUID],x-systemd.after=stratis-fstab-setup@[POOL_UUID] 0 2</code></p>
 <p>The absence of <code>nofail</code> here is due to the fact that <code>nofail</code> causes the boot to
 proceed prior to a successful mount. This means that passphrase prompts
 will not work properly, and most users will want critical system partitions to be
@@ -218,10 +218,13 @@ mounted successfully or else have the boot fail.</p>
 <p>For devices that do not require interaction to set up, such as unencrypted devices or
 devices that have Clevis bindings, and are not critical for a working system, the
 following line can be optionally used:</p>
-<p><code>/dev/stratis/[STRATIS_SYMLINK] [MOUNT_POINT] xfs defaults,x-systemd.requires=stratis-fstab-setup@[POOL_UUID],x-systemd.after=stratis-fstab-setup@[POOL_UUID],nofail</code></p>
+<p><code>/dev/stratis/[STRATIS_SYMLINK] [MOUNT_POINT] xfs defaults,x-systemd.requires=stratis-fstab-setup@[POOL_UUID],x-systemd.after=stratis-fstab-setup@[POOL_UUID],nofail 0 2</code></p>
 <p>The addition of <code>nofail</code> here will cause mounting of this device to proceed
 independently from the boot which can speed up boot times. The set up process will
 continue running in the background until it either succeeds or fails.</p>
+<p>Because the root filesystem is mostly set up in the initramfs, the entry is slightly
+different and does not require the <code>stratis-fstab-setup</code> service. It should be:</p>
+<p><code>/dev/stratis/[STRATIS_SYMLINK] / xfs defaults 0 1</code></p>
 <h3 id="recovery-console">Recovery console</h3>
 <p>While we mention above that stratisd could previously be used in the initramfs, there
 is one major caveat: it could be started but commands could not be issued. This had
