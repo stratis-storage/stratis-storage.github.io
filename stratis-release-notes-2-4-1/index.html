@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+	<link rel="icon" type="image/png" href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-favicon.png">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+      <!-- Enable responsiveness on mobile devices-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+      <title>Stratis Storage</title>
+
+      <!-- CSS -->
+      <link rel="stylesheet" href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;print.css" media="print">
+      <link rel="stylesheet" href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;poole.css">
+      <link rel="stylesheet" href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;hyde.css">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+	  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+      
+
+      
+      
+    </head>
+
+    <body class="theme-base-10 ">
+        
+            <div class="sidebar">
+                <div class="container ">
+					<div>
+						<a href="https:&#x2F;&#x2F;stratis-storage.github.io">
+							<img src="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;imgs&#x2F;stratis_sidebar.png" />
+						</a>
+					</div>
+                    <div class="sidebar-about">
+                        
+                            <!-- <a href="https:&#x2F;&#x2F;stratis-storage.github.io"><h1>Stratis Storage</h1></a> -->
+                            
+                            <p class="about lead">Easy to use local storage management for Linux.</p>
+                            
+                        
+                    </div>
+
+                    User Links:</br>
+                    <ul class="sidebar-nav">
+                        
+                        
+                           <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;lab.redhat.com&#x2F;stratis">Tutorial</a></li>
+                        
+                           <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;howto">How-To</a></li>
+                        
+                        
+                    </ul>
+                    Developer Links:</br>
+                    <ul class="sidebar-nav">
+                        
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;StratisSoftwareDesign.pdf">Software Design</a></li>
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;DBusAPIReference.pdf">DBUS API Reference</a></li>
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;StratisStyleGuidelines.pdf">Programming Style Guidelines</a></li>
+                        
+                        
+                    </ul>
+                    Contact Links:</br>
+                    <ul class="sidebar-nav">
+                        
+                        
+                        <li class="sidebar-nav-item" style="display: inline-block">
+						  <a href="https:&#x2F;&#x2F;github.com&#x2F;stratis-storage">
+						    
+							  <i class="fab fa-github"></i>
+							
+					      </a>
+						</li>
+                        
+                        <li class="sidebar-nav-item" style="display: inline-block">
+						  <a href="https:&#x2F;&#x2F;twitter.com&#x2F;stratisstorage">
+						    
+							  <i class="fab fa-twitter"></i>
+							
+					      </a>
+						</li>
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div class="content container">
+            
+
+<div class="post">
+  <h1 class="post-title">Stratis 2.4.1 Release Notes</h1>
+  <span class="post-date">2021-05-14</span>
+
+  <p><em>mulhern, Stratis Team</em></p>
+<p>Stratis 2.4.1 is a bug fix release, which addresses a flaw in the
+multi-threading implementation.</p>
+<p>A user could observe the behavior caused by the flaw when CLI commands would
+either take far longer to complete than normal or the D-Bus connection would
+eventually time out.</p>
+<p>The cause of the observed problem was that stratisd was accepting a
+GetManagedObjects call on the D-Bus but not returning the result. This
+could occur when numerous object paths, i.e., several hundred, were being
+supported on the D-Bus, generally due to the creation of many filesystems.</p>
+<p>We have addressed this problem by:</p>
+<ul>
+<li>modifying the D-Bus message handling implementation</li>
+<li>implementing a custom ObjectManager class in the D-Bus layer</li>
+</ul>
+<p>In addition, we have refined the method by which individual threads are
+terminated when stratisd receives a shutdown signal to better terminate the
+D-Bus message handling thread.</p>
+<p>The stratisd 2.4.1 release includes one additional fix: the signals
+associated with r4 D-Bus interfaces were not being sent appropriately,
+now they are.</p>
+<p>In addition, stratisd 2.4.1 includes logging, at the trace level, of lock
+aquisitions and releases and additional logging in the systemd generators
+included with the release.</p>
+<p>The stratis-cli 2.4.1 release includes:</p>
+<ul>
+<li>an improvement to the listing of block devices</li>
+<li>a new report with key <code>managed_objects_report</code></li>
+</ul>
+<span id="continue-reading"></span>
+<p>Previously, stratisd made use of the dbus-tokio crate to implement the
+multi-threading aspects of D-Bus method handling. With this release, it no
+longer depends on dbus-tokio, but handles the implementation using the
+tokio crate directly.</p>
+<p>Please consult the <a href="https://github.com/stratis-storage/stratisd/blob/develop-2.4.0/CHANGES.txt">stratisd</a> and <a href="https://github.com/stratis-storage/stratis-cli/blob/develop-2.4.0/CHANGES.txt">stratis</a> changelogs for additional
+information about the 2.4.0 release.</p>
+
+</div>
+
+        </div>
+
+    </body>
+
+</html>
