@@ -96,6 +96,56 @@
                       <div class="post">
 						<article class="post">
 							<h1 class="post-title">
+							  <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratisd-rootfs-packaging&#x2F;">
+								Packaging for stratisd 2.4.1
+							  </a>
+							</h1>
+							<div class="post__summary">
+								<p><em>mulhern, Stratis Team</em></p>
+<p>For Fedora packaging, we have decided to split out the dracut support into
+a separate subpackage, <code>stratisd-dracut</code>. This package must be installed
+in order to support booting from a Stratis filesystem. All other
+functionality is included in the <code>stratisd</code> package.</p>
+<p>The motivation for this change is to allow users greater flexibility and
+robustness. We understand that some users may choose to use Stratis but not to
+use Stratis for their root filesystem. These users may choose to install only
+the <code>stratisd</code> package.</p>
+<p>Other users may prefer to use a Stratis root filesystem. They should install
+the <code>stratisd-dracut</code> package, which has a hard dependency on the <code>stratisd</code>
+package. The <code>stratisd-dracut</code> package also includes a hard dependency on
+<code>dracut</code> itself and on <code>plymouth</code>. <code>plymouth</code> is used in order to obtain a
+password to unlock an encrypted Stratis root filesystem. Please consult
+[Stratis filesystem as the root filesystem] for further information about
+Stratis support for a root filesystem.</p>
+<p>We decided to implement this division due to a problem which would ensue
+if stratisd was installed but plymouth was not. In that case, the regeneration
+of the initramfs on kernel updates would fail and render the system unbootable
+with the new kernel.</p>
+<p>The solution of adding plymouth as a hard requirement for stratisd would
+place an unnecessary dependency burden on a user who did not choose to
+maintain a Stratis root filesystem. However, without such a requirement a
+user who had stratisd but not plymouth installed would eventually end up
+with an unbootable system.</p>
+<p>We believe that a separate subpackage is the most robust and flexible
+solution; it is one which requires no manual intervention by the user.</p>
+<p>To properly construct the stratisd-dracut subpackage, it is imperative that
+the stratisd source code be compiled twice; once with the default features,
+in order to build stratisd itself, and again with a different set of
+features, in order to correctly build supporting scripts for the dracut
+module.</p>
+<p>We recommend that other downstream packagers adopt a similar scheme.</p>
+
+							</div>
+							<div class="read-more">
+								<a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratisd-rootfs-packaging&#x2F;">Read more...</a>
+							</div>
+						</article>
+						
+                      </div>
+                    
+                      <div class="post">
+						<article class="post">
+							<h1 class="post-title">
 							  <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-2-4-1&#x2F;">
 								Stratis 2.4.1 Release Notes
 							  </a>

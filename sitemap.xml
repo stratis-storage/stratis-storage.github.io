@@ -139,4 +139,11 @@
             
         </url>
     
+        <url>
+            <loc>https://stratis-storage.github.io/stratisd-rootfs-packaging/</loc>
+            
+                <lastmod>2021-05-18</lastmod>
+            
+        </url>
+    
 </urlset>

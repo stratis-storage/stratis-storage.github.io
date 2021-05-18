@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+	<link rel="icon" type="image/png" href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-favicon.png">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+      <!-- Enable responsiveness on mobile devices-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+      <title>Stratis Storage</title>
+
+      <!-- CSS -->
+      <link rel="stylesheet" href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;print.css" media="print">
+      <link rel="stylesheet" href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;poole.css">
+      <link rel="stylesheet" href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;hyde.css">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+	  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+      
+
+      
+      
+    </head>
+
+    <body class="theme-base-10 ">
+        
+            <div class="sidebar">
+                <div class="container ">
+					<div>
+						<a href="https:&#x2F;&#x2F;stratis-storage.github.io">
+							<img src="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;imgs&#x2F;stratis_sidebar.png" />
+						</a>
+					</div>
+                    <div class="sidebar-about">
+                        
+                            <!-- <a href="https:&#x2F;&#x2F;stratis-storage.github.io"><h1>Stratis Storage</h1></a> -->
+                            
+                            <p class="about lead">Easy to use local storage management for Linux.</p>
+                            
+                        
+                    </div>
+
+                    User Links:</br>
+                    <ul class="sidebar-nav">
+                        
+                        
+                           <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;lab.redhat.com&#x2F;stratis">Tutorial</a></li>
+                        
+                           <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;howto">How-To</a></li>
+                        
+                        
+                    </ul>
+                    Developer Links:</br>
+                    <ul class="sidebar-nav">
+                        
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;StratisSoftwareDesign.pdf">Software Design</a></li>
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;DBusAPIReference.pdf">DBUS API Reference</a></li>
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;StratisStyleGuidelines.pdf">Programming Style Guidelines</a></li>
+                        
+                        
+                    </ul>
+                    Contact Links:</br>
+                    <ul class="sidebar-nav">
+                        
+                        
+                        <li class="sidebar-nav-item" style="display: inline-block">
+						  <a href="https:&#x2F;&#x2F;github.com&#x2F;stratis-storage">
+						    
+							  <i class="fab fa-github"></i>
+							
+					      </a>
+						</li>
+                        
+                        <li class="sidebar-nav-item" style="display: inline-block">
+						  <a href="https:&#x2F;&#x2F;twitter.com&#x2F;stratisstorage">
+						    
+							  <i class="fab fa-twitter"></i>
+							
+					      </a>
+						</li>
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div class="content container">
+            
+
+<div class="post">
+  <h1 class="post-title">Packaging for stratisd 2.4.1</h1>
+  <span class="post-date">2021-05-18</span>
+
+  <p><em>mulhern, Stratis Team</em></p>
+<p>For Fedora packaging, we have decided to split out the dracut support into
+a separate subpackage, <code>stratisd-dracut</code>. This package must be installed
+in order to support booting from a Stratis filesystem. All other
+functionality is included in the <code>stratisd</code> package.</p>
+<p>The motivation for this change is to allow users greater flexibility and
+robustness. We understand that some users may choose to use Stratis but not to
+use Stratis for their root filesystem. These users may choose to install only
+the <code>stratisd</code> package.</p>
+<p>Other users may prefer to use a Stratis root filesystem. They should install
+the <code>stratisd-dracut</code> package, which has a hard dependency on the <code>stratisd</code>
+package. The <code>stratisd-dracut</code> package also includes a hard dependency on
+<code>dracut</code> itself and on <code>plymouth</code>. <code>plymouth</code> is used in order to obtain a
+password to unlock an encrypted Stratis root filesystem. Please consult
+[Stratis filesystem as the root filesystem] for further information about
+Stratis support for a root filesystem.</p>
+<p>We decided to implement this division due to a problem which would ensue
+if stratisd was installed but plymouth was not. In that case, the regeneration
+of the initramfs on kernel updates would fail and render the system unbootable
+with the new kernel.</p>
+<p>The solution of adding plymouth as a hard requirement for stratisd would
+place an unnecessary dependency burden on a user who did not choose to
+maintain a Stratis root filesystem. However, without such a requirement a
+user who had stratisd but not plymouth installed would eventually end up
+with an unbootable system.</p>
+<p>We believe that a separate subpackage is the most robust and flexible
+solution; it is one which requires no manual intervention by the user.</p>
+<p>To properly construct the stratisd-dracut subpackage, it is imperative that
+the stratisd source code be compiled twice; once with the default features,
+in order to build stratisd itself, and again with a different set of
+features, in order to correctly build supporting scripts for the dracut
+module.</p>
+<p>We recommend that other downstream packagers adopt a similar scheme.</p>
+<span id="continue-reading"></span>
+<p>Please consult the <a href="https://src.fedoraproject.org/rpms/stratisd">Fedora stratisd package repository</a> for an example
+of the packaging approach used.</p>
+<p><code>stratis</code>, the Stratis CLI, will continue to have a hard dependency on
+the stratisd package, but not on the stratisd-dracut subpackage.</p>
+<p>We would like to thank our users who correctly identified and reported
+the problems that we have addressed in this and other recent packaging
+improvements: Matthias Berndt, Vojtech Trefny, and Yanko Kaneti.</p>
+
+</div>
+
+        </div>
+
+    </body>
+
+</html>
