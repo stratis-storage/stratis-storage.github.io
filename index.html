@@ -96,6 +96,49 @@
                       <div class="post">
 						<article class="post">
 							<h1 class="post-title">
+							  <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-announce-3-0-0&#x2F;">
+								stratisd 3.0.0 Release Announcement
+							  </a>
+							</h1>
+							<div class="post__summary">
+								<p><em>mulhern, Stratis Team</em></p>
+<p>The next version of stratisd will be 3.0.0.</p>
+<p>We have already decided on two breaking changes for this release:</p>
+<ul>
+<li>We will collapse all the non-zero error codes returned over the D-Bus
+on an engine error into a single error code, 1.</li>
+<li>We will remove all the backwards compatible D-Bus interfaces corresponding
+to stratisd 2 and will supply just a single D-Bus interface for stratisd 3.
+Subsequent minor releases of stratisd 3 will retain their backwards compatible
+interfaces as described in the <a href="https://stratis-storage.github.io/DBusAPIReference.pdf">DBus API Reference</a>. Each interface will have 
+a simplified naming convention, always specifying the major version and
+using the stratisd minor version in the revision number. For example, the name
+of the filesystem D-Bus interface under the new system for stratisd 3.0.0 is 
+<code>org.storage.stratis3.filesystem.r0</code>.</li>
+</ul>
+<p>The motivation for both these changes is the most typical of all: the
+implementation of stratisd will become unwieldly and bug-ridden if we try to
+maintain backwards compatibility in the D-Bus layer while simultaneously
+doing necessary redesign, re-implementation, and enhancement of the stratisd
+engine. In particular, changes to the way errors are managed internally will
+not allow us to ensure consistency of error codes returned over the D-Bus with
+the ones that were previously used.</p>
+<p>Since we are increasing the major version, dropping the stratisd 2 D-Bus API is
+an obvious next step.</p>
+<p>We are reviewing other possible API changes at this time in order to minimize
+the number of subsequent major version increases that we will be obliged to do.</p>
+
+							</div>
+							<div class="read-more">
+								<a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-announce-3-0-0&#x2F;">Read more...</a>
+							</div>
+						</article>
+						
+                      </div>
+                    
+                      <div class="post">
+						<article class="post">
+							<h1 class="post-title">
 							  <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-2-4-2&#x2F;">
 								stratisd 2.4.2 Release Notes
 							  </a>
