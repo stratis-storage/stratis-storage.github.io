@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+	<link rel="icon" type="image/png" href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-favicon.png">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+      <!-- Enable responsiveness on mobile devices-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+      <title>Stratis Storage</title>
+
+      <!-- CSS -->
+      <link rel="stylesheet" href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;print.css" media="print">
+      <link rel="stylesheet" href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;poole.css">
+      <link rel="stylesheet" href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;hyde.css">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+	  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+      
+
+      
+      
+    </head>
+
+    <body class="theme-base-10 ">
+        
+            <div class="sidebar">
+                <div class="container ">
+					<div>
+						<a href="https:&#x2F;&#x2F;stratis-storage.github.io">
+							<img src="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;imgs&#x2F;stratis_sidebar.png" />
+						</a>
+					</div>
+                    <div class="sidebar-about">
+                        
+                            <!-- <a href="https:&#x2F;&#x2F;stratis-storage.github.io"><h1>Stratis Storage</h1></a> -->
+                            
+                            <p class="about lead">Easy to use local storage management for Linux.</p>
+                            
+                        
+                    </div>
+
+                    User Links:</br>
+                    <ul class="sidebar-nav">
+                        
+                        
+                           <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;lab.redhat.com&#x2F;stratis-configure">Tutorial</a></li>
+                        
+                           <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;howto">How-To</a></li>
+                        
+                        
+                    </ul>
+                    Developer Links:</br>
+                    <ul class="sidebar-nav">
+                        
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;StratisSoftwareDesign.pdf">Software Design</a></li>
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;DBusAPIReference.pdf">DBUS API Reference</a></li>
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;StratisStyleGuidelines.pdf">Programming Style Guidelines</a></li>
+                        
+                        
+                    </ul>
+                    Contact Links:</br>
+                    <ul class="sidebar-nav">
+                        
+                        
+                        <li class="sidebar-nav-item" style="display: inline-block">
+						  <a href="https:&#x2F;&#x2F;github.com&#x2F;stratis-storage">
+						    
+							  <i class="fab fa-github"></i>
+							
+					      </a>
+						</li>
+                        
+                        <li class="sidebar-nav-item" style="display: inline-block">
+						  <a href="https:&#x2F;&#x2F;twitter.com&#x2F;stratisstorage">
+						    
+							  <i class="fab fa-twitter"></i>
+							
+					      </a>
+						</li>
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div class="content container">
+            
+
+<div class="post">
+  <h1 class="post-title">Stratis 3.0.0 Release Notes</h1>
+  <span class="post-date">2021-11-15</span>
+
+  <p><em>mulhern, Stratis Team</em></p>
+<p>Stratis 3.0.0 includes many internal improvements, bug fixes, and
+user-visible changes.</p>
+<p>Users of the Stratis CLI may observe the following changes:</p>
+<ul>
+<li>It is now possible to set the filesystem logical size when creating a
+filesystem.</li>
+<li>It is possible to rebind a pool using a Clevis tang server or with a key
+in the kernel keyring.</li>
+<li>Filesystem and pool list output have been extended and improved. The pool
+listing includes an <code>Alerts</code> column. Currently this column is used to indicate
+whether the pool is in a restricted operation mode. A new subcommand,
+<code>stratis pool explain</code>, which provides a fuller explanation of the codes
+displayed in the <code>Alerts</code> column has been added.  The filesystem listing
+now displays a filesystem's logical size.</li>
+<li>With encrypted pools it was previously possible for the display of block
+device paths to change format if <code>stratisd</code> was restarted after an encrypted
+pool had been created. Now the display of the block device paths is consistent
+across <code>stratisd</code> restarts.</li>
+</ul>
+<p>In stratisd 3.0.0 the D-Bus API has undergone a revision and the prior
+interfaces are all removed. The <code>FetchProperties</code> interfaces that
+were supported by all objects have been removed. The values that were
+previously obtainable via the <code>FetchProperties</code> methods
+are now conventional D-Bus properties. The possible values of error codes
+returned by the D-Bus methods have been reduced to 0 and 1, with the usual
+interpretation.</p>
+<p>stratisd 3.0.0 includes a number of significant internal improvements and a few
+bug fixes.</p>
+<p><code>stratisd</code> bug fixes:</p>
+<ul>
+<li>Previously the Stratis release included a dracut.conf.d file which made
+the Stratis dracut modules required in the initramfs. The consequence of this
+was that the initramfs could not be built unless all files required for the
+Stratis modules were present; if the initramfs is not built a reboot will fail.
+That file has been removed in this release.</li>
+<li>The <code>--prompt</code> option was not passed to <code>stratis-min</code> in the
+<code>stratis-fstab-setup</code> script; this prevented the user from entering the
+password necessary to unlock an encrypted pool during boot. This is
+no longer the case.</li>
+<li>Previously, stratisd did not increase the amount of space allocated to
+its spare metadata device when its in-use thinpool metadata device was
+extended. In some situations, when setting up a pool, stratisd might attempt
+a repair operation on the thinpool metadata device; if the space allocated
+for the spare metadata device was not large enough to accommodate all the
+metadata, then the repair operation would fail. Now the space allocated for
+the spare metadata device is increased whenever the metadata device is extended.</li>
+<li><code>stratisd</code> was not immediately updating the devicemapper device stack when
+a cache was initialized with the result that the cache was not immediately
+put in use. This is no longer the case.</li>
+<li><code>stratisd</code> was not immediately updating the Clevis encryption info associated
+with a pool on a command to bind an encrypted pool with Clevis. This problem
+has been corrected.</li>
+<li><code>stratisd</code> was sending an incorrect D-Bus signal on a pool name change; this
+has been fixed.</li>
+<li>Previously, when <code>stratisd-min</code>, which runs during boot before D-Bus
+functionality is available, gave way to <code>stratisd</code> when the D-Bus had been set
+up, it was possible for inconsistencies to arise if the Stratis engine was
+performing an operation which required invoking a distinct executable. The
+executable might be terminated during its execution, and <code>stratisd-min</code> would
+take the action appropriate to the command failure before exiting. Now, systemd
+is instructed to send a kill signal only to <code>stratisd-min</code> and not to any of
+<code>stratisd-min</code>'s child processes when shutting down <code>stratisd-min</code>.</li>
+<li>Previously, if the same device was specified using two different paths
+when creating or extending a pool the different paths would be
+interpreted as two different devices and an error would be returned when
+<code>stratisd</code> attempted to initialize the device a second time. Now, the
+different paths are canonicalized eagerly, and converted into a single
+canonical representation of the device, <code>stratisd</code> initializes the device only
+once, and no error is returned.</li>
+<li>Previously, <code>stratisd</code> did not report all existing object paths in the
+result of a D-Bus Introspect() call. This was due to a bug in version
+0.9.1 and previous of <code>stratisd</code>'s dbus-tree dependency. <code>stratisd</code> now
+requires dbus-tree 0.9.2, so all nodes are reported.</li>
+</ul>
+<p>Other <code>stratisd</code> improvements:</p>
+<ul>
+<li>Previously, <code>stratisd</code> relied entirely on udev information when deciding
+whether a storage device was not in use by another application and could
+safely be overwritten with Stratis metadata. Now it performs a supplementary
+check using libblkid and exits with an error if libblkid reports that the
+device is in use.</li>
+<li>Handling of errors returned by internal methods is improved; a chaining
+mechanism has been introduced and the error chains can be scrutinized
+programatically to identify expected scenarios like rollback failures.</li>
+<li>A set of states indicating that a pool has reduced capability have been
+added internally and are published on the D-Bus. A pool's capability is
+reduced on an error being returned internally which contains, somewhere in
+its chain, the appropriate identifying error variant.</li>
+<li>The code used to roll back failed encryption operations on a list of
+pool devices has been refactored and generalized. It is now capable of
+returning an error that can be used to identify a restricted pool capability
+due to a rollback failure.</li>
+<li><code>stratisd</code> uses sha-256 instead of sha-1 for Clevis-related encryption
+operations to conform with Clevis's own usage.</li>
+<li><code>stratisd</code> exits more elegantly and less frequently if it encounters an
+error during execution of the distinct tasks that are assigned to the
+individual threads that it manages internally.</li>
+<li>In preparation for edition 2021 of the Rust language, <code>stratisd</code> source code
+has been updated to conform entirely to edition 2018 recommendations.</li>
+</ul>
+<span id="continue-reading"></span>
+<p>NOTE: <code>stratisd</code> depends directly on the <code>chrono</code> crate against which
+<a href="https://rustsec.org/advisories/RUSTSEC-2020-0159">RUSTSEC-2020-0159</a> has been filed. We have demonstrated that <code>stratisd</code> is
+not affected by this CVE by building and testing <code>stratisd</code> against a
+clone of the <code>chrono</code> crate from which all the code affected by the CVE
+has been removed, proving that <code>stratisd</code> has no dependency on that code.</p>
+<p>Please consult the <a href="https://github.com/stratis-storage/stratisd/blob/develop-2.4.2/CHANGES.txt">stratisd</a> and <a href="https://github.com/stratis-storage/stratis-cli/blob/develop-2.4.1/CHANGES.txt">stratis-cli</a> changelogs for additional
+information about the 3.0.0 release.</p>
+<p>We would like to thank mvollmer for contributions to this release.</p>
+
+</div>
+
+        </div>
+
+    </body>
+
+</html>
