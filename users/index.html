@@ -108,24 +108,45 @@
             
 
 <div class="post">
-  <h1 class="post-title">stratisd 2.0.1 Release Notes</h1>
-  <span class="post-date">2020-02-10</span>
+  <h1 class="post-title">Stratis Clients and Supported Operating Systems</h1>
+  <span class="post-date">2021-12-23</span>
 
-  <p><em>mulhern, Stratis Team</em></p>
-<p>stratisd 2.0.1 contains a number of internal improvements as well as
-enhanced logging.</p>
-<span id="continue-reading"></span>
-<p>A code defect which made it possible to leave the thinpool suspended on an
-error was fixed (<a href="https://github.com/stratis-storage/stratisd/issues/1730">stratisd issue 1730</a>).</p>
-<p>The device discovery implementation was improved; computational complexity
-was reduced and additional logging on unusual events was added.</p>
-<p>The D-Bus layer was restructured to more cleanly suppport multiple versioned
-D-Bus interfaces.</p>
-<p>All macros were rewritten to use fully qualified names to improve code
-stability.</p>
-<p>Please consult the changelog for additional information about the release.</p>
-<p>We would like to thank our external contributor GuillaumeGomez for further
-work on metadata refactoring (<a href="https://github.com/stratis-storage/stratisd/issues/1573">stratisd issue 1573</a>).</p>
+<div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content always-active">
+        <nav id="TableOfContents">
+            <ul>
+                
+                <li>
+                    <a href="https://stratis-storage.github.io/users/#supported-operating-systems" class="toc-link">Supported Operating Systems</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://stratis-storage.github.io/users/#clients" class="toc-link">Clients</a>
+                    
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+  <p>Stratis is supported on a number of operating systems and by a number of client
+frameworks, itemized below. Please file a GitHub <a href="https://github.com/stratis-storage/stratis-docs/issues">issue</a> or <a href="https://github.com/stratis-storage/stratis-docs/pulls">pull request</a> if
+you would like any others to be added to the list.</p>
+<h1 id="supported-operating-systems">Supported Operating Systems</h1>
+<ul>
+<li>Arch Linux: <a href="https://archlinux.org/packages/community/x86_64/stratisd/">https://archlinux.org/packages/community/x86_64/stratisd/</a></li>
+<li>Fedora: <a href="https://src.fedoraproject.org/rpms/stratisd/">https://src.fedoraproject.org/rpms/stratisd/</a>, <a href="https://src.fedoraproject.org/rpms/stratis-cli">https://src.fedoraproject.org/rpms/stratis-cli</a></li>
+</ul>
+<h1 id="clients">Clients</h1>
+<ul>
+<li>Cockpit: <a href="https://cockpit-project.org/blog/cockpit-256.html">https://cockpit-project.org/blog/cockpit-256.html</a></li>
+<li>Blivet: <a href="https://github.com/storaged-project/blivet/pull/952">https://github.com/storaged-project/blivet/pull/952</a>, <a href="https://github.com/storaged-project/blivet-gui/pull/277">https://github.com/storaged-project/blivet-gui/pull/277</a></li>
+<li>BOOM: <a href="https://github.com/snapshotmanager/boom/blob/8d377444b1f3a3efb636270cc0963f420ee1fdb9/boom/stratis.py">https://github.com/snapshotmanager/boom/blob/8d377444b1f3a3efb636270cc0963f420ee1fdb9/boom/stratis.py</a></li>
+<li>Munin: <a href="https://gallery.munin-monitoring.org/plugins/munin-contrib/stratis/">https://gallery.munin-monitoring.org/plugins/munin-contrib/stratis/</a></li>
+</ul>
 
 </div>
 
