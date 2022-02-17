@@ -137,6 +137,33 @@ Stratis may also incorporate additional technologies in the future.</p>
                       <div class="post">
                         <article class="post">
                             <h1 class="post-title">
+                              <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratisd-release-notes-3-0-4&#x2F;">
+                                stratisd 3.0.4 Release Notes
+                              </a>
+                            </h1>
+                            <div class="post__summary">
+                                <p><em>mulhern, Stratis Team</em></p>
+<p>stratisd 3.0.4 contains two fixes to bugs in its D-Bus API. </p>
+<p>The D-Bus property changed signal sent on a change to the LockedPools
+property of the &quot;org.storage.stratis3.Manager.r0&quot; interface misidentified the
+interface as the &quot;org.storage.stratis3.pool.r0&quot; interface; the interface
+being sent with the signal is now correct.</p>
+<p>The introspection data obtained via the &quot;org.freedesktop.DBus.Introspectable&quot;
+interface's &quot;Introspect&quot; method was not correct for the &quot;GetManagedObjects&quot;
+method of the &quot;org.freedesktop.DBus.ObjectManager&quot; D-Bus interface; it did
+not include the specification of the out argument. This has been corrected.</p>
+
+                            </div>
+                            <div class="read-more">
+                                <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratisd-release-notes-3-0-4&#x2F;">Read more...</a>
+                            </div>
+                        </article>
+                        
+                      </div>
+                    
+                      <div class="post">
+                        <article class="post">
+                            <h1 class="post-title">
                               <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratisd-release-notes-3-0-3&#x2F;">
                                 stratisd 3.0.3 Release Notes
                               </a>
