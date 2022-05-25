@@ -88,6 +88,10 @@
         <lastmod>2021-11-15</lastmod>
     </url>
     <url>
+        <loc>https://stratis-storage.github.io/stratis-release-notes-3-1-0/</loc>
+        <lastmod>2022-05-24</lastmod>
+    </url>
+    <url>
         <loc>https://stratis-storage.github.io/stratis-rootfs/</loc>
         <lastmod>2021-04-12</lastmod>
     </url>
@@ -110,6 +114,10 @@
     <url>
         <loc>https://stratis-storage.github.io/stratisd-rootfs-packaging/</loc>
         <lastmod>2021-05-18</lastmod>
+    </url>
+    <url>
+        <loc>https://stratis-storage.github.io/thin-provisioning-redesign/</loc>
+        <lastmod>2022-05-18</lastmod>
     </url>
     <url>
         <loc>https://stratis-storage.github.io/users/</loc>

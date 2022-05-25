@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <link rel="icon" type="image/png" href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-favicon.png">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+      <!-- Enable responsiveness on mobile devices-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+      <title>Stratis Storage</title>
+
+      <!-- CSS -->
+      <link rel="stylesheet" href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;print.css" media="print">
+      <link rel="stylesheet" href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;poole.css">
+      <link rel="stylesheet" href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;hyde.css">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+      
+
+      
+      
+    </head>
+
+    <body class="theme-base-10 ">
+        
+            <div class="sidebar">
+                <div class="container ">
+                    <div>
+                        <a href="https:&#x2F;&#x2F;stratis-storage.github.io">
+                            <img src="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;imgs&#x2F;stratis_sidebar.png" />
+                        </a>
+                    </div>
+                    <div class="sidebar-about">
+                        
+                            
+                            <p class="about lead">Easy to use local storage management for Linux.</p>
+                            
+                        
+                    </div>
+
+                    User Links:</br>
+                    <ul class="sidebar-nav">
+                        
+                        
+                           <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;lab.redhat.com&#x2F;stratis-configure">Tutorial</a></li>
+                        
+                           <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;howto">How-To</a></li>
+                        
+                           <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;users">Clients and Operating Systems</a></li>
+                        
+                        
+                    </ul>
+                    Developer Links:</br>
+                    <ul class="sidebar-nav">
+                        
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;StratisSoftwareDesign.pdf">Software Design</a></li>
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;DBusAPIReference.pdf">D-Bus API Reference</a></li>
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;StratisStyleGuidelines.pdf">Programming Style Guidelines</a></li>
+                        
+                        
+                    </ul>
+                    D-Bus Introspection Files:</br>
+                    <ul class="sidebar-nav">
+                        
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;manager.xml">Manager object</a></li>
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;pool.xml">Pool object</a></li>
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;filesystem.xml">Filesystem object</a></li>
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;blockdev.xml">Blockdev object</a></li>
+                        
+                        
+		    </ul>
+                    Contact Links:</br>
+                    <ul class="sidebar-nav">
+                        
+                        
+                        <li class="sidebar-nav-item" style="display: inline-block">
+                          <a href="https:&#x2F;&#x2F;github.com&#x2F;stratis-storage">
+                            
+                              <i class="fab fa-github"></i>
+                            
+                          </a>
+                        </li>
+                        
+                        <li class="sidebar-nav-item" style="display: inline-block">
+                          <a href="https:&#x2F;&#x2F;twitter.com&#x2F;stratisstorage">
+                            
+                              <i class="fab fa-twitter"></i>
+                            
+                          </a>
+                        </li>
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div class="content container">
+            
+
+<div class="post">
+  <h1 class="post-title">Stratis 3.1.0 Release Notes</h1>
+  <span class="post-date">2022-05-24</span>
+
+  <p><em>mulhern, Stratis Team</em></p>
+<p>Stratis 3.1.0 includes significant improvements to the management of the
+thin-provisioning layers, as well as a number of other user-visible
+enhancements and bug fixes.</p>
+<p>Please see [this post] for a detailed discussion of the thin-provisioning
+changes. To support these changes the Stratis CLI has been enhanced to:</p>
+<ul>
+<li>allow specifying whether or not a pool may be overprovisioned on creation</li>
+<li>allow changing whether or not a pool may be overprovisioned while it is
+running</li>
+<li>allow increasing the filesystem limit for a given pool</li>
+<li>display whether or not a pool is overprovisioned in the pool list view</li>
+</ul>
+<p>Users of the Stratis CLI may also observe the following changes:</p>
+<ul>
+<li>A <code>debug</code> subcommand has been added to the <code>pool</code>, <code>filesystem</code>, and
+<code>blockdev</code> subcommands. Debug commands are not fully supported and may change
+or be removed at any time.</li>
+<li>The <code>--redundancy</code> option is no longer available when creating a pool. This
+option had only one permitted value so specifying it never had any effect.</li>
+</ul>
+<p>stratisd 3.1.0 includes one additional user-visible change:</p>
+<ul>
+<li>The minimum size of a Stratis filesystem is increased to 512 MiB.</li>
+</ul>
+<p>stratisd 3.1.0 also includes a number of internal improvements:</p>
+<ul>
+<li>The size of any newly created MDV is increased to 512 MiB.</li>
+<li>A pool's MDV is mounted in a private mount namespace and remains mounted
+while the pool is in operation.</li>
+<li>Improved handling of udev events on device removal.</li>
+<li>The usual and customary improvements to log messages.</li>
+</ul>
+<span id="continue-reading"></span>
+<p>Please consult the <a href="https://github.com/stratis-storage/stratisd/blob/master/CHANGES.txt">stratisd</a> and <a href="https://github.com/stratis-storage/stratis-cli/blob/master/CHANGES.txt">stratis-cli</a> changelogs for additional
+information about the 3.1.0 release.</p>
+
+</div>
+
+        </div>
+
+    </body>
+
+</html>
