@@ -108,45 +108,39 @@
             
 
 <div class="post">
-  <h1 class="post-title">Stratis 3.1.0 Release Notes</h1>
-  <span class="post-date">2022-05-24</span>
+  <h1 class="post-title">Stratis 3.2.0 Release Notes</h1>
+  <span class="post-date">2022-07-07</span>
 
   <p><em>mulhern, Stratis Team</em></p>
-<p>Stratis 3.1.0 includes significant improvements to the management of the
-thin-provisioning layers, as well as a number of other user-visible
-enhancements and bug fixes.</p>
-<p>Please see [this post] for a detailed discussion of the thin-provisioning
-changes. To support these changes the Stratis CLI has been enhanced to:</p>
-<ul>
-<li>allow specifying whether or not a pool may be overprovisioned on creation</li>
-<li>allow changing whether or not a pool may be overprovisioned while it is
-running</li>
-<li>allow increasing the filesystem limit for a given pool</li>
-<li>display whether or not a pool is overprovisioned in the pool list view</li>
-</ul>
-<p>Users of the Stratis CLI may also observe the following changes:</p>
-<ul>
-<li>A <code>debug</code> subcommand has been added to the <code>pool</code>, <code>filesystem</code>, and
-<code>blockdev</code> subcommands. Debug commands are not fully supported and may change
-or be removed at any time.</li>
-<li>The <code>--redundancy</code> option is no longer available when creating a pool. This
-option had only one permitted value so specifying it never had any effect.</li>
-</ul>
-<p>stratisd 3.1.0 includes one additional user-visible change:</p>
-<ul>
-<li>The minimum size of a Stratis filesystem is increased to 512 MiB.</li>
-</ul>
-<p>stratisd 3.1.0 also includes a number of internal improvements:</p>
-<ul>
-<li>The size of any newly created MDV is increased to 512 MiB.</li>
-<li>A pool's MDV is mounted in a private mount namespace and remains mounted
-while the pool is in operation.</li>
-<li>Improved handling of udev events on device removal.</li>
-<li>The usual and customary improvements to log messages.</li>
-</ul>
+<p>Stratis 3.2.0 includes one significant enhancement, one bug fix, and a number
+of more minor improvements.</p>
+<p>Most significantly, Stratis 3.2.0 extends its functionality to allow users to
+stop and start a pool.</p>
+<p>Stopping a pool consists of tearing down its storage stack in an orderly way,
+but not destroying the pool metadata. It is a <code>pool destroy</code> operation
+without the final step of wiping the Stratis metadata. Starting a pool is
+setting up a pool according to the information stored in the pool level
+metadata of the devices associated with a pool. Whether a pool is stopped or
+started is stored in the pool-level metadata, with the consequence that users
+can control whether a pool is automatically started when <code>stratisd</code> is started
+up, or whether startup of the pool is deferred until explicitly requested.</p>
+<p><code>stratis</code> supports these changes with new commands to start and to stop a
+pool. It includes an additional <code>debug refresh</code> command which allows a user to
+request that the state of all pools be refreshed. The <code>pool list</code> command has
+been extended to allow a detailed view of individual pools and to allow the
+user to examine stopped pools. The <code>pool unlock</code> command has been removed
+in favor of the <code>pool start</code> command.</p>
+<p>Other changes include a fix to the algorithm for determining the size of data 
+and metadata devices that make up a thinpool device, the elimination of all
+uses of <code>udevadm settle</code> in the <code>stratisd</code> engine, and general improvements to
+the RPC layers used by <code>stratis-min</code> and <code>stratisd-min</code>.</p>
+<p>In addition, the <code>stratisd-min</code> service now requires the <code>systemd-udevd</code>
+service to ensure that Stratis filesystem symlinks are created when
+<code>stratisd-min</code> sets up a Stratis filesystem.</p>
 <span id="continue-reading"></span>
 <p>Please consult the <a href="https://github.com/stratis-storage/stratisd/blob/master/CHANGES.txt">stratisd</a> and <a href="https://github.com/stratis-storage/stratis-cli/blob/master/CHANGES.txt">stratis-cli</a> changelogs for additional
-information about the 3.1.0 release.</p>
+information about the 3.2.0 release.</p>
+<p>We would like to thank Ryan Gonzalez for reporting <a href="https://github.com/stratis-storage/stratisd/issues/3019">issue #3019</a>.</p>
 
 </div>
 

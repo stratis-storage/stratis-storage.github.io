@@ -137,6 +137,49 @@ Stratis may also incorporate additional technologies in the future.</p>
                       <div class="post">
                         <article class="post">
                             <h1 class="post-title">
+                              <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-3-2-0&#x2F;">
+                                Stratis 3.2.0 Release Notes
+                              </a>
+                            </h1>
+                            <div class="post__summary">
+                                <p><em>mulhern, Stratis Team</em></p>
+<p>Stratis 3.2.0 includes one significant enhancement, one bug fix, and a number
+of more minor improvements.</p>
+<p>Most significantly, Stratis 3.2.0 extends its functionality to allow users to
+stop and start a pool.</p>
+<p>Stopping a pool consists of tearing down its storage stack in an orderly way,
+but not destroying the pool metadata. It is a <code>pool destroy</code> operation
+without the final step of wiping the Stratis metadata. Starting a pool is
+setting up a pool according to the information stored in the pool level
+metadata of the devices associated with a pool. Whether a pool is stopped or
+started is stored in the pool-level metadata, with the consequence that users
+can control whether a pool is automatically started when <code>stratisd</code> is started
+up, or whether startup of the pool is deferred until explicitly requested.</p>
+<p><code>stratis</code> supports these changes with new commands to start and to stop a
+pool. It includes an additional <code>debug refresh</code> command which allows a user to
+request that the state of all pools be refreshed. The <code>pool list</code> command has
+been extended to allow a detailed view of individual pools and to allow the
+user to examine stopped pools. The <code>pool unlock</code> command has been removed
+in favor of the <code>pool start</code> command.</p>
+<p>Other changes include a fix to the algorithm for determining the size of data 
+and metadata devices that make up a thinpool device, the elimination of all
+uses of <code>udevadm settle</code> in the <code>stratisd</code> engine, and general improvements to
+the RPC layers used by <code>stratis-min</code> and <code>stratisd-min</code>.</p>
+<p>In addition, the <code>stratisd-min</code> service now requires the <code>systemd-udevd</code>
+service to ensure that Stratis filesystem symlinks are created when
+<code>stratisd-min</code> sets up a Stratis filesystem.</p>
+
+                            </div>
+                            <div class="read-more">
+                                <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-3-2-0&#x2F;">Read more...</a>
+                            </div>
+                        </article>
+                        
+                      </div>
+                    
+                      <div class="post">
+                        <article class="post">
+                            <h1 class="post-title">
                               <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-3-1-0&#x2F;">
                                 Stratis 3.1.0 Release Notes
                               </a>
@@ -146,7 +189,7 @@ Stratis may also incorporate additional technologies in the future.</p>
 <p>Stratis 3.1.0 includes significant improvements to the management of the
 thin-provisioning layers, as well as a number of other user-visible
 enhancements and bug fixes.</p>
-<p>Please see <a href="https://stratis-storage.github.io/thin-provisioning-redesign/">this post</a> for a detailed discussion of the thin-provisioning
+<p>Please see [this post] for a detailed discussion of the thin-provisioning
 changes. To support these changes the Stratis CLI has been enhanced to:</p>
 <ul>
 <li>allow specifying whether or not a pool may be overprovisioned on creation</li>
