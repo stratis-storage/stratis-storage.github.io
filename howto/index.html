@@ -44,8 +44,6 @@
                     <ul class="sidebar-nav">
                         
                         
-                           <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;lab.redhat.com&#x2F;stratis-configure">Tutorial</a></li>
-                        
                            <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;howto">How-To</a></li>
                         
                            <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;users">Clients and Operating Systems</a></li>
@@ -282,7 +280,7 @@ tale_of_2_disks                 16 GiB               56 MiB
 
 # stratis filesystem list
 Pool Name      Name      Used     Created            Device
-stratis_howto  fs_howto  546 MiB  Nov 09 2018 11:08  /stratis/stratis_howto/fs_howto
+stratis_howto  fs_howto  546 MiB  Nov 09 2018 11:08  /dev/stratis/stratis_howto/fs_howto
 </span></code></pre>
 <p>To create another file system, just repeat the same command with a different file system name. The file system names are required to be unique in a pool.</p>
 <pre style="background-color:#2b303b;">
@@ -290,8 +288,8 @@ stratis_howto  fs_howto  546 MiB  Nov 09 2018 11:08  /stratis/stratis_howto/fs_h
 
 # stratis filesystem list
 Pool Name      Name         Used     Created            Device
-stratis_howto  fs_howto     546 MiB  Nov 09 2018 11:08  /stratis/stratis_howto/fs_howto
-stratis_howto  my_precious  546 MiB  Nov 09 2018 11:09  /stratis/stratis_howto/my_precious
+stratis_howto  fs_howto     546 MiB  Nov 09 2018 11:08  /dev/stratis/stratis_howto/fs_howto
+stratis_howto  my_precious  546 MiB  Nov 09 2018 11:09  /dev/stratis/stratis_howto/my_precious
 </span></code></pre>
 <p>The file system is created on a thinly provisioned 1 TB block device. Stratis will take care of allocating blocks from the pool and re-sizing the XFS file system as needed during its lifetime.</p>
 <p>You can also constrain the file system list output by including the pool name.</p>
@@ -302,22 +300,22 @@ stratis_howto  my_precious  546 MiB  Nov 09 2018 11:09  /stratis/stratis_howto/m
 
 # stratis filesystem
 Pool Name      Name         Used     Created            Device
-olympic        backstroke   546 MiB  Nov 09 2018 11:10  /stratis/olympic/backstroke
-stratis_howto  fs_howto     546 MiB  Nov 09 2018 11:08  /stratis/stratis_howto/fs_howto
-stratis_howto  my_precious  546 MiB  Nov 09 2018 11:09  /stratis/stratis_howto/my_precious
+olympic        backstroke   546 MiB  Nov 09 2018 11:10  /dev/stratis/olympic/backstroke
+stratis_howto  fs_howto     546 MiB  Nov 09 2018 11:08  /dev/stratis/stratis_howto/fs_howto
+stratis_howto  my_precious  546 MiB  Nov 09 2018 11:09  /dev/stratis/stratis_howto/my_precious
 
 # stratis filesystem list stratis_howto
 Pool Name      Name         Used     Created            Device
-stratis_howto  fs_howto     546 MiB  Nov 09 2018 11:08  /stratis/stratis_howto/fs_howto
-stratis_howto  my_precious  546 MiB  Nov 09 2018 11:09  /stratis/stratis_howto/my_precious
+stratis_howto  fs_howto     546 MiB  Nov 09 2018 11:08  /dev/stratis/stratis_howto/fs_howto
+stratis_howto  my_precious  546 MiB  Nov 09 2018 11:09  /dev/stratis/stratis_howto/my_precious
 </span></code></pre><h2 id="mount-the-file-system">Mount the file system</h2>
 <pre style="background-color:#2b303b;">
-<code><span style="color:#c0c5ce;"># mount /stratis/stratis_howto/fs_howto /mnt
+<code><span style="color:#c0c5ce;"># mount /dev/stratis/stratis_howto/fs_howto /mnt
 </span></code></pre><h2 id="add-mount-point-to-etc-fstab-using-file-system-uuid">Add mount point to <code>/etc/fstab</code> using file system UUID</h2>
-<p>You can use <code>/stratis/&lt;pool name&gt;/&lt;file system name&gt;</code> but each time you rename a pool or file system you will need to update <code>/etc/fstab</code>, thus using file system UUID is recommended.</p>
+<p>You can use <code>/dev/stratis/&lt;pool name&gt;/&lt;file system name&gt;</code> but each time you rename a pool or file system you will need to update <code>/etc/fstab</code>, thus using file system UUID is recommended.</p>
 <pre style="background-color:#2b303b;">
-<code><span style="color:#c0c5ce;"># blkid -p /stratis/stratis_howto/fs_howto
-/stratis/stratis_howto/fs_howto: UUID=&quot;a38780e5-04e3-49da-8b95-2575d77e947c&quot; TYPE=&quot;xfs&quot; USAGE=&quot;filesystem&quot;
+<code><span style="color:#c0c5ce;"># blkid -p /dev/stratis/stratis_howto/fs_howto
+/dev/stratis/stratis_howto/fs_howto: UUID=&quot;a38780e5-04e3-49da-8b95-2575d77e947c&quot; TYPE=&quot;xfs&quot; USAGE=&quot;filesystem&quot;
 
 # echo &quot;UUID=a38780e5-04e3-49da-8b95-2575d77e947c /mnt xfs defaults 0 0&quot; &gt;&gt; /etc/fstab
 </span></code></pre><h1 id="other-useful-pool-operations">Other useful pool operations</h1>
@@ -356,16 +354,16 @@ stratis_howto                  1 TiB               52 MiB
 <pre style="background-color:#2b303b;">
 <code><span style="color:#c0c5ce;"># stratis filesystem list
 Pool Name      Name         Used     Created            Device
-olympic        backstroke   546 MiB  Nov 09 2018 11:10  /stratis/olympic/backstroke
-stratis_howto  fs_howto     546 MiB  Nov 09 2018 11:08  /stratis/stratis_howto/fs_howto
-stratis_howto  my_precious  546 MiB  Nov 09 2018 11:09  /stratis/stratis_howto/my_precious
+olympic        backstroke   546 MiB  Nov 09 2018 11:10  /dev/stratis/olympic/backstroke
+stratis_howto  fs_howto     546 MiB  Nov 09 2018 11:08  /dev/stratis/stratis_howto/fs_howto
+stratis_howto  my_precious  546 MiB  Nov 09 2018 11:09  /dev/stratis/stratis_howto/my_precious
 
 # stratis filesystem destroy stratis_howto my_precious
 
 # stratis filesystem list
 Pool Name      Name        Used     Created            Device
-olympic        backstroke  546 MiB  Nov 09 2018 11:10  /stratis/olympic/backstroke
-stratis_howto  fs_howto    546 MiB  Nov 09 2018 11:08  /stratis/stratis_howto/fs_howto
+olympic        backstroke  546 MiB  Nov 09 2018 11:10  /dev/stratis/olympic/backstroke
+stratis_howto  fs_howto    546 MiB  Nov 09 2018 11:08  /dev/stratis/stratis_howto/fs_howto
 </span></code></pre><h2 id="rename-rename-a-file-system"><code>rename</code>: Rename a file system</h2>
 <pre style="background-color:#2b303b;">
 <code><span style="color:#c0c5ce;"># stratis filesystem rename olympic backstroke some_fs
@@ -376,8 +374,8 @@ stratis_howto  fs_howto    546 MiB  Nov 09 2018 11:08  /stratis/stratis_howto/fs
 
 # stratis filesystem list olympic
 Pool Name  Name              Used     Created            Device
-olympic    some_fs           546 MiB  Nov 09 2018 11:10  /stratis/olympic/some_fs
-olympic    some_fs_snapshot  546 MiB  Nov 09 2018 11:26  /stratis/olympic/some_fs_snapshot
+olympic    some_fs           546 MiB  Nov 09 2018 11:10  /dev/stratis/olympic/some_fs
+olympic    some_fs_snapshot  546 MiB  Nov 09 2018 11:26  /dev/stratis/olympic/some_fs_snapshot
 </span></code></pre><h1 id="misc-operations">Misc. operations</h1>
 <p>Query which block devices belong to a pool or all of Stratis.</p>
 <pre style="background-color:#2b303b;">
