@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-    <link rel="icon" type="image/png" href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-favicon.png">
+    <link rel="icon" type="image/png" href="https://stratis-storage.github.io/stratis-favicon.png">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
@@ -11,9 +11,9 @@
       <title>Stratis Storage</title>
 
       <!-- CSS -->
-      <link rel="stylesheet" href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;print.css" media="print">
-      <link rel="stylesheet" href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;poole.css">
-      <link rel="stylesheet" href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;hyde.css">
+      <link rel="stylesheet" href="https://stratis-storage.github.io/print.css" media="print">
+      <link rel="stylesheet" href="https://stratis-storage.github.io/poole.css">
+      <link rel="stylesheet" href="https://stratis-storage.github.io/hyde.css">
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
@@ -29,7 +29,7 @@
                 <div class="container ">
                     <div>
                         <a href="https:&#x2F;&#x2F;stratis-storage.github.io">
-                            <img src="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;imgs&#x2F;stratis_sidebar.png" />
+                            <img src="https://stratis-storage.github.io/imgs/stratis_sidebar.png" />
                         </a>
                     </div>
                     <div class="sidebar-about">
@@ -127,6 +127,38 @@ Stratis may also incorporate additional technologies in the future.</p>
                             </div>
                             <div class="read-more">
                                 <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-intro&#x2F;">Read more...</a>
+                            </div>
+                        </article>
+                        
+                      </div>
+                    
+                      <div class="post">
+                        <article class="post">
+                            <h1 class="post-title">
+                              <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-3-4-0&#x2F;">
+                                Stratis 3.4.0 Release Notes
+                              </a>
+                            </h1>
+                            <div class="post__summary">
+                                <p><em>mulhern, Stratis Team</em></p>
+<p>Stratis 3.4.0 includes one significant enhancement as well as several smaller
+improvements.</p>
+<p>Most significantly, Stratis 3.4.0 extends its functionality to allow users to
+specify a pool by its name when starting a stopped pool. Previously it was
+only possible to identify a stopped pool by its UUID.</p>
+<p>In addition, <code>stratisd</code> enforces some checks on the compatibility of the block
+devices which make up a pool. It now takes into account the logical and
+physical sector sizes of the individual block devices when creating a pool,
+adding a cache, or extending the data or cache tier with additional devices.</p>
+<p>The <code>stratis pool start</code> command has been modified to accept either a UUID
+or a name option, while the <code>stratis pool list --stopped</code> command now displays
+the pool name if it is available.</p>
+<p>This release also includes improvements to <code>stratisd</code>'s internal locking
+mechanism.</p>
+
+                            </div>
+                            <div class="read-more">
+                                <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-3-4-0&#x2F;">Read more...</a>
                             </div>
                         </article>
                         
