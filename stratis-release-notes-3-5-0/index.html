@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <link rel="icon" type="image/png" href="https://stratis-storage.github.io/stratis-favicon.png">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+      <!-- Enable responsiveness on mobile devices-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+      <title>Stratis Storage</title>
+
+      <!-- CSS -->
+      <link rel="stylesheet" href="https://stratis-storage.github.io/print.css" media="print">
+      <link rel="stylesheet" href="https://stratis-storage.github.io/poole.css">
+      <link rel="stylesheet" href="https://stratis-storage.github.io/hyde.css">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+      
+
+      
+      
+    </head>
+
+    <body class="theme-base-10 ">
+        
+            <div class="sidebar">
+                <div class="container ">
+                    <div>
+                        <a href="https:&#x2F;&#x2F;stratis-storage.github.io">
+                            <img src="https://stratis-storage.github.io/imgs/stratis_sidebar.png" />
+                        </a>
+                    </div>
+                    <div class="sidebar-about">
+                        
+                            
+                            <p class="about lead">Easy to use local storage management for Linux.</p>
+                            
+                        
+                    </div>
+
+                    User Links:</br>
+                    <ul class="sidebar-nav">
+                        
+                        
+                           <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;howto">How-To</a></li>
+                        
+                           <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;users">Clients and Operating Systems</a></li>
+                        
+                        
+                    </ul>
+                    Developer Links:</br>
+                    <ul class="sidebar-nav">
+                        
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;StratisSoftwareDesign.pdf">Software Design</a></li>
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;DBusAPIReference.pdf">D-Bus API Reference</a></li>
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;StratisStyleGuidelines.pdf">Programming Style Guidelines</a></li>
+                        
+                        
+                    </ul>
+                    D-Bus Introspection Files:</br>
+                    <ul class="sidebar-nav">
+                        
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;manager.xml">Manager object</a></li>
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;pool.xml">Pool object</a></li>
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;filesystem.xml">Filesystem object</a></li>
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;blockdev.xml">Blockdev object</a></li>
+                        
+                        
+		    </ul>
+                    Contact Links:</br>
+                    <ul class="sidebar-nav">
+                        
+                        
+                        <li class="sidebar-nav-item" style="display: inline-block">
+                          <a href="https:&#x2F;&#x2F;github.com&#x2F;stratis-storage">
+                            
+                              <i class="fab fa-github"></i>
+                            
+                          </a>
+                        </li>
+                        
+                        <li class="sidebar-nav-item" style="display: inline-block">
+                          <a href="https:&#x2F;&#x2F;twitter.com&#x2F;stratisstorage">
+                            
+                              <i class="fab fa-twitter"></i>
+                            
+                          </a>
+                        </li>
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div class="content container">
+            
+
+<div class="post">
+  <h1 class="post-title">Stratis 3.5.0 Release Notes</h1>
+  <span class="post-date">2023-01-24</span>
+
+  <p><em>mulhern, Stratis Team</em></p>
+<p>Stratis 3.5.0 includes one significant enhancement as well as several smaller
+improvements.</p>
+<p>Most significantly, Stratis 3.5.0 extends its functionality to allow a user
+to add a cache to an encrypted pool. The cache devices are each encrypted with
+the same mechanism as the data devices; consequently the cache itself is
+encrypted.</p>
+<p>Stratis 3.5.0 also fixes a few bugs:</p>
+<ul>
+<li>It extends the thin metadata device more eagerly, and responds to
+thin metadata low water mark devicemapper events. This fix was included in
+the <code>stratisd</code> 3.4.2 release.</li>
+<li>It makes the pool name field in the Stratis LUKS2 metadata optional; this
+prevents a failure to start an encrypted pool when upgrading from a previous
+<code>stratisd</code> version to <code>stratisd</code> 3.4.0. This fix was included in the
+<code>stratisd</code> 3.4.3 release.</li>
+<li>It requires a new version of the Stratis devicemapper-rs library, which
+contains a fix which eliminates undefined behavior in the management of ioctls
+with large result values. This fix was included in the <code>stratisd</code> 3.4.4 release.</li>
+<li>It requires a new version of the Stratis libblkid-rs library, which fixes a
+memory leak in the <code>get_tag_value</code> method used by <code>'stratisd</code>. This fix is not
+included in any previous release.</li>
+</ul>
+<p>This release also reduces the problem of repetitive log messages and modifies
+the D-Bus API to eliminate the <code>redundancy</code> parameter previously required by 
+the <code>CreatePool</code> D-Bus method.</p>
+<span id="continue-reading"></span>
+<p>Please consult the <a href="https://github.com/stratis-storage/stratisd/blob/master/CHANGES.txt">stratisd</a> and <a href="https://github.com/stratis-storage/stratis-cli/blob/master/CHANGES.txt">stratis-cli</a> changelogs for additional
+information about the release.</p>
+
+</div>
+
+        </div>
+
+    </body>
+
+</html>

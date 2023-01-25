@@ -135,6 +135,49 @@ Stratis may also incorporate additional technologies in the future.</p>
                       <div class="post">
                         <article class="post">
                             <h1 class="post-title">
+                              <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-3-5-0&#x2F;">
+                                Stratis 3.5.0 Release Notes
+                              </a>
+                            </h1>
+                            <div class="post__summary">
+                                <p><em>mulhern, Stratis Team</em></p>
+<p>Stratis 3.5.0 includes one significant enhancement as well as several smaller
+improvements.</p>
+<p>Most significantly, Stratis 3.5.0 extends its functionality to allow a user
+to add a cache to an encrypted pool. The cache devices are each encrypted with
+the same mechanism as the data devices; consequently the cache itself is
+encrypted.</p>
+<p>Stratis 3.5.0 also fixes a few bugs:</p>
+<ul>
+<li>It extends the thin metadata device more eagerly, and responds to
+thin metadata low water mark devicemapper events. This fix was included in
+the <code>stratisd</code> 3.4.2 release.</li>
+<li>It makes the pool name field in the Stratis LUKS2 metadata optional; this
+prevents a failure to start an encrypted pool when upgrading from a previous
+<code>stratisd</code> version to <code>stratisd</code> 3.4.0. This fix was included in the
+<code>stratisd</code> 3.4.3 release.</li>
+<li>It requires a new version of the Stratis devicemapper-rs library, which
+contains a fix which eliminates undefined behavior in the management of ioctls
+with large result values. This fix was included in the <code>stratisd</code> 3.4.4 release.</li>
+<li>It requires a new version of the Stratis libblkid-rs library, which fixes a
+memory leak in the <code>get_tag_value</code> method used by <code>'stratisd</code>. This fix is not
+included in any previous release.</li>
+</ul>
+<p>This release also reduces the problem of repetitive log messages and modifies
+the D-Bus API to eliminate the <code>redundancy</code> parameter previously required by 
+the <code>CreatePool</code> D-Bus method.</p>
+
+                            </div>
+                            <div class="read-more">
+                                <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-3-5-0&#x2F;">Read more...</a>
+                            </div>
+                        </article>
+                        
+                      </div>
+                    
+                      <div class="post">
+                        <article class="post">
+                            <h1 class="post-title">
                               <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-3-4-0&#x2F;">
                                 Stratis 3.4.0 Release Notes
                               </a>
