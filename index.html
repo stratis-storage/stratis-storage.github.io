@@ -135,6 +135,40 @@ Stratis may also incorporate additional technologies in the future.</p>
                       <div class="post">
                         <article class="post">
                             <h1 class="post-title">
+                              <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratisd-release-notes-3-5-2&#x2F;">
+                                stratisd 3.5.2 Release Notes
+                              </a>
+                            </h1>
+                            <div class="post__summary">
+                                <p><em>mulhern, Stratis Team</em></p>
+<p><code>stratisd</code> 3.5.2 includes three significant enhancements as well as a bug
+fix.</p>
+<p>The enhancements are:</p>
+<ul>
+<li><code>stratisd</code> 3.5.2 is the first <code>stratisd</code> release to include a subpackage,
+<code>stratisd-tools</code>, which incorporates <code>stratis-dumpmetadata</code>, an application
+which may be used for troubleshooting.</li>
+<li><code>stratisd</code> 3.5.2 now depends on <code>devicemapper-rs</code> 0.33.1, which includes
+support for synchronization between udev and devicemapper<a href="https://github.com/stratis-storage/stratisd/pull/3069">stratisd pr 3069</a>. See
+the <a href="https://github.com/stratis-storage/devicemapper-rs/blob/master/CHANGES.txt">devicemapper-rs</a> changelog for additional details.</li>
+<li><code>stratisd</code> 3.5.2 modifies the way takeover by <code>stratisd</code> from <code>stratisd-min</code>
+is managed during early boot<a href="https://github.com/stratis-storage/stratisd/pull/3269">stratisd pr 3269</a>.</li>
+</ul>
+<p><code>stratisd</code> 3.5.2 also fixes a bug in a script used by the stratisd-dracut
+subpackage<a href="https://github.com/stratis-storage/stratisd/pull/3256">stratisd pr 3256</a>. This fix was included in the <code>stratisd</code> 3.5.1
+release.</p>
+
+                            </div>
+                            <div class="read-more">
+                                <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratisd-release-notes-3-5-2&#x2F;">Read more...</a>
+                            </div>
+                        </article>
+                        
+                      </div>
+                    
+                      <div class="post">
+                        <article class="post">
+                            <h1 class="post-title">
                               <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-3-5-0&#x2F;">
                                 Stratis 3.5.0 Release Notes
                               </a>
