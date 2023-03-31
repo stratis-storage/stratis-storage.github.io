@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <link rel="icon" type="image/png" href="https://stratis-storage.github.io/stratis-favicon.png">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+      <!-- Enable responsiveness on mobile devices-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+      <title>Stratis Storage</title>
+
+      <!-- CSS -->
+      <link rel="stylesheet" href="https://stratis-storage.github.io/print.css" media="print">
+      <link rel="stylesheet" href="https://stratis-storage.github.io/poole.css">
+      <link rel="stylesheet" href="https://stratis-storage.github.io/hyde.css">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+      
+
+      
+      
+    </head>
+
+    <body class="theme-base-10 ">
+        
+            <div class="sidebar">
+                <div class="container ">
+                    <div>
+                        <a href="https:&#x2F;&#x2F;stratis-storage.github.io">
+                            <img src="https://stratis-storage.github.io/imgs/stratis_sidebar.png" />
+                        </a>
+                    </div>
+                    <div class="sidebar-about">
+                        
+                            
+                            <p class="about lead">Easy to use local storage management for Linux.</p>
+                            
+                        
+                    </div>
+
+                    User Links:</br>
+                    <ul class="sidebar-nav">
+                        
+                        
+                           <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;howto">How-To</a></li>
+                        
+                           <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;users">Clients and Operating Systems</a></li>
+                        
+                        
+                    </ul>
+                    Developer Links:</br>
+                    <ul class="sidebar-nav">
+                        
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;StratisSoftwareDesign.pdf">Software Design</a></li>
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;DBusAPIReference.pdf">D-Bus API Reference</a></li>
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;StratisStyleGuidelines.pdf">Programming Style Guidelines</a></li>
+                        
+                        
+                    </ul>
+                    D-Bus Introspection Files:</br>
+                    <ul class="sidebar-nav">
+                        
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;manager.xml">Manager object</a></li>
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;pool.xml">Pool object</a></li>
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;filesystem.xml">Filesystem object</a></li>
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;blockdev.xml">Blockdev object</a></li>
+                        
+                        
+		    </ul>
+                    Contact Links:</br>
+                    <ul class="sidebar-nav">
+                        
+                        
+                        <li class="sidebar-nav-item" style="display: inline-block">
+                          <a href="https:&#x2F;&#x2F;github.com&#x2F;stratis-storage">
+                            
+                              <i class="fab fa-github"></i>
+                            
+                          </a>
+                        </li>
+                        
+                        <li class="sidebar-nav-item" style="display: inline-block">
+                          <a href="https:&#x2F;&#x2F;twitter.com&#x2F;stratisstorage">
+                            
+                              <i class="fab fa-twitter"></i>
+                            
+                          </a>
+                        </li>
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div class="content container">
+            
+
+<div class="post">
+  <h1 class="post-title">stratisd filesystem as root filesystem on Fedora</h1>
+  <span class="post-date">2023-03-30</span>
+
+  <p><em>John Baublitz, Stratis Team</em></p>
+<p>Based on recent questions, we wanted to develop a specific guide for additional steps that need to be taken
+on Fedora to enable Stratis as the root filesystem for a Fedora install.</p>
+<p>If you have not already looked at <a href="https://stratis-storage.github.io/stratis-rootfs/">the guide</a> for root filesystem work, please read that first. It is a
+prerequisite.</p>
+<p>For a little bit of background, stratisd provides an additional subpackage for our dracut modules that we
+use to set up the root filesystem during early boot. This package installs the necessary modules for dracut
+to automate the setup. However there are some steps that may not be obvious to users to get this all to work.
+We'll cover them below.</p>
+<p>Steps:</p>
+<ol>
+<li>Install the <code>stratisd-dracut</code> package. This is the subpackage mentioned above.</li>
+<li><em>Optional</em> If using Clevis for unlocking encrypted pools, add the following configuration
+under /etc/dracut.conf.d/99-stratisd.conf:</li>
+</ol>
+<pre><code>add_dracutmodules+=&quot; stratis-clevis &quot;
+</code></pre>
+<ol start="3">
+<li>Test your configuration or ensure you have a rescue kernel and initramfs in case the update of the
+initramfs renders your install unbootable.</li>
+<li>Once you've verified that everything works as expected, run <code>dracut --force --kver=[KERNEL_VERSION]</code></li>
+</ol>
+<span id="continue-reading"></span>
+</div>
+
+        </div>
+
+    </body>
+
+</html>
