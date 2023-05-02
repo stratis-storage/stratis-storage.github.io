@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <link rel="icon" type="image/png" href="https://stratis-storage.github.io/stratis-favicon.png">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+      <!-- Enable responsiveness on mobile devices-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+      <title>Stratis Storage</title>
+
+      <!-- CSS -->
+      <link rel="stylesheet" href="https://stratis-storage.github.io/print.css" media="print">
+      <link rel="stylesheet" href="https://stratis-storage.github.io/poole.css">
+      <link rel="stylesheet" href="https://stratis-storage.github.io/hyde.css">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+      
+
+      
+      
+    </head>
+
+    <body class="theme-base-10 ">
+        
+            <div class="sidebar">
+                <div class="container ">
+                    <div>
+                        <a href="https:&#x2F;&#x2F;stratis-storage.github.io">
+                            <img src="https://stratis-storage.github.io/imgs/stratis_sidebar.png" />
+                        </a>
+                    </div>
+                    <div class="sidebar-about">
+                        
+                            
+                            <p class="about lead">Easy to use local storage management for Linux.</p>
+                            
+                        
+                    </div>
+
+                    User Links:</br>
+                    <ul class="sidebar-nav">
+                        
+                        
+                           <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;howto">How-To</a></li>
+                        
+                           <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;users">Clients and Operating Systems</a></li>
+                        
+                        
+                    </ul>
+                    Developer Links:</br>
+                    <ul class="sidebar-nav">
+                        
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;StratisSoftwareDesign.pdf">Software Design</a></li>
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;DBusAPIReference.pdf">D-Bus API Reference</a></li>
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;StratisStyleGuidelines.pdf">Programming Style Guidelines</a></li>
+                        
+                        
+                    </ul>
+                    D-Bus Introspection Files:</br>
+                    <ul class="sidebar-nav">
+                        
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;manager.xml">Manager object</a></li>
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;pool.xml">Pool object</a></li>
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;filesystem.xml">Filesystem object</a></li>
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;blockdev.xml">Blockdev object</a></li>
+                        
+                        
+		    </ul>
+                    Contact Links:</br>
+                    <ul class="sidebar-nav">
+                        
+                        
+                        <li class="sidebar-nav-item" style="display: inline-block">
+                          <a href="https:&#x2F;&#x2F;github.com&#x2F;stratis-storage">
+                            
+                              <i class="fab fa-github"></i>
+                            
+                          </a>
+                        </li>
+                        
+                        <li class="sidebar-nav-item" style="display: inline-block">
+                          <a href="https:&#x2F;&#x2F;twitter.com&#x2F;stratisstorage">
+                            
+                              <i class="fab fa-twitter"></i>
+                            
+                          </a>
+                        </li>
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div class="content container">
+            
+
+<div class="post">
+  <h1 class="post-title">Stratis root filesystem installation with stratify.py</h1>
+  <span class="post-date">2023-04-18</span>
+
+<div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content always-active">
+        <nav id="TableOfContents">
+            <ul>
+                
+                <li>
+                    <a href="https://stratis-storage.github.io/stratify/#background" class="toc-link">Background</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://stratis-storage.github.io/stratify/#introducing-stratify-py" class="toc-link">Introducing stratify.py</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://stratis-storage.github.io/stratify/#requirements" class="toc-link">Requirements</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://stratis-storage.github.io/stratify/#getting-started" class="toc-link">Getting started</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://stratis-storage.github.io/stratify/#running-the-script" class="toc-link">Running the script</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://stratis-storage.github.io/stratify/#first-boot" class="toc-link">First boot</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://stratis-storage.github.io/stratify/#conclusion" class="toc-link">Conclusion</a>
+                    
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+  <p><em>Bryn Reeves, Stratis team</em></p>
+<p>Support for using Stratis as the root filesystem was added in version 2.4.0 but
+without support in distribution installers it can be tricky for users to build
+systems for testing.</p>
+<p>This blog post will look at a quick method for installing systems with Stratis
+as the root filesystem using the Fedora Live ISO, kickstart, and a Python script to
+simplify and automate the process.</p>
+<span id="continue-reading"></span><h3 id="background">Background</h3>
+<p>Stratis has supported use as the root filesystem since version 2.4.0 and the steps
+required to prepare a system with Stratis as the root filesystem are conceptually
+straightforward: allocate storage to a system and then create a Stratis pool and
+filesystem, copy the desired installation content to the new filesystem and then set
+up a boot loader to boot the newly installed system.</p>
+<p>Typically these details would all be handled by an operating system installer such as
+Fedora's <em>Anaconda</em> based on the parameters specified by the user. That's fine if the
+installer knows about the filesystem type you are using, but testing new filesystems
+typically requires a more manual approach. For Stratis the following steps are
+needed:</p>
+<ul>
+<li>Partition disks as required for EFI or BIOS boot</li>
+<li>Install packages needed for Stratis</li>
+<li>Create a Stratis pool and filesystem</li>
+<li>Install packages into the new root filesystem</li>
+<li>Install Grub2 or another bootloader on the installation disk</li>
+<li>Generate an initramfs image with the required components</li>
+<li>Configure the bootloader to boot the new system</li>
+</ul>
+<p>This can be done manually but it is a long and tedious process with plenty of
+opportunity for mistakes to creep in. A single error in any of the above steps may
+lead to an unbootable system and user frustration.</p>
+<h3 id="introducing-stratify-py">Introducing stratify.py</h3>
+<p>In this post we'll look at using the <code>stratify.py</code> script to automate the
+installation of a virtual machine using Stratis as the root filesystem. The script
+automates the preparation of the basic system layout and then runs Anaconda to
+perform the OS installation. Once the installer has done its work <code>stratify.py</code> will
+set up the boot loader and other details needed for a working system.</p>
+<p>Since Anaconda is used to carry out the OS installation we will use a <a href="https://pykickstart.readthedocs.io/en/latest/">kickstart
+file</a> to configure the installed
+system.</p>
+<p>Refer to the <a href="https://github.com/bmr-cymru/stratify">stratify documentation</a> for more
+details or press on to get started right away!</p>
+<h3 id="requirements">Requirements</h3>
+<p>In order to install a system with Stratis as the root filesystem you will need an
+<code>x86_64</code> virtual machine configured with the following specification:</p>
+<ul>
+<li>At least 3GiB memory</li>
+<li>BIOS or UEFI firmware</li>
+<li>One 10GiB or larger VirtIO disk for the installation</li>
+<li>The <a href="https://fedoraproject.org/workstation/download/">Fedora LiveCD media</a> (Fedora 37 or 38)</li>
+</ul>
+<h3 id="getting-started">Getting started</h3>
+<p>Configure the machine with your preferred virtualization solution and then boot the
+Live desktop environment. We'll download the necessary files to the root account home
+directory (<code>/root</code>) and then start the installation process.</p>
+<p>Once the system has booted dismiss the &quot;Install to hard disk&quot; dialog, open a terminal
+window and switch to the root account by running <code>su -</code>.</p>
+<p>Download the <code>stratify.py</code> script and example kickstart file from GitHub:</p>
+<pre><code># wget https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;bmr-cymru&#x2F;stratify&#x2F;main&#x2F;stratify.py
+# wget https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;bmr-cymru&#x2F;stratify&#x2F;main&#x2F;ks.cfg
+</code></pre>
+<p>The kickstart file can be customized before beginning the installation - for
+example to set the system language, timzeone, or package selection for the
+install. See the <a href="https://pykickstart.readthedocs.io/en/latest/">kickstart
+documentation</a> for further
+information.</p>
+<p>The kickstart file sets the root account password to &quot;changeme&quot; - edit the file
+to set a new password, or use the openssl command to generate an encrypted
+(hashed) password:</p>
+<pre><code>$ openssl passwd -6 &quot;newpassword&quot;
+$6$ly&#x2F;YwB6&#x2F;b5R6Pezz$zZGzBKgkPZvYHtefBwC7gJKB0BpW7ANJyt0sfjIf46yKS2IGfcnhfFW6wiXJLpYeQXvIBlJG&#x2F;W7wukX0&#x2F;S9Wu&#x2F;
+</code></pre>
+<p>In <code>ks.cfg</code>:</p>
+<pre><code># Root password
+rootpw --iscrypted $6$ly&#x2F;YwB6&#x2F;b5R6Pezz$zZGzBKgkPZvYHtefBwC7gJKB0BpW7ANJyt0sfjIf46yKS2IGfcnhfFW6wiXJLpYeQXvIBlJG&#x2F;W7wukX0&#x2F;S9Wu&#x2F;
+</code></pre>
+<h3 id="running-the-script">Running the script</h3>
+<p>Once the <code>stratify.py</code> script and kickstart file have been downloaded, start
+the installation process by running:</p>
+<pre><code>python stratify.py --target vda --kickstart &#x2F;root&#x2F;ks.cfg
+</code></pre>
+<p>This will install required packages in the Live environment, set up the Stratis root
+pool and filesystem, and run anaconda to perform the installation. The process logs
+to the terminal and to a file named <code>stratify.log</code>.</p>
+<p>To encrypt the pool with a passphrase add <code>--encrypt</code> to the command line - you will
+be prompted for the pool password when it is set up.</p>
+<p>The installation should take less than 20 minutes with a typical network and virtual
+machine configuration.</p>
+<p>When finished the script will print:</p>
+<pre><code>INFO - Stratis root fs installation complete.
+</code></pre>
+<p>At that point the machine is ready to reboot into the Stratis root filesystem. Use
+either the <code>reboot</code> command or the graphical desktop power menu to reboot the system.</p>
+<h3 id="first-boot">First boot</h3>
+<p>Once the system has booted up log in using the credentials set during the
+installation. The system is now running with Stratis as the root filesystem:</p>
+<pre><code># findmnt -s
+TARGET SOURCE              FSTYPE OPTIONS
+&#x2F;      &#x2F;dev&#x2F;stratis&#x2F;p1&#x2F;fs1 xfs    defaults
+&#x2F;boot  &#x2F;dev&#x2F;vda1           xfs    defaults
+</code></pre>
+<p>The <code>stratis</code> command shows the state of the thin pool and the block devices and
+filesystems that it contains:</p>
+<pre><code># stratis pool
+Name                Total &#x2F; Used &#x2F; Free    Properties                                   UUID   Alerts
+p1     19.02 GiB &#x2F; 2.71 GiB &#x2F; 16.31 GiB   ~Ca,~Cr, Op   f0401402-3710-422b-8ffb-ecb987e7d0c0
+# stratis filesystem
+Pool   Filesystem   Total &#x2F; Used &#x2F; Free              Created             Device                UUID
+p1     fs1          1 TiB &#x2F; 2.19 GiB &#x2F; 1021.81 GiB   Apr 21 2023 12:58   &#x2F;dev&#x2F;stratis&#x2F;p1&#x2F;fs1   68e52045-baa0-440b-8636-128936a0e512
+# stratis blockdev
+Pool Name   Device Node   Physical Size   Tier   UUID
+p1          &#x2F;dev&#x2F;vda2         19.02 GiB   DATA   6a9c7d7c-3d84-4287-80b8-829f0f4de602
+</code></pre>
+<h3 id="conclusion">Conclusion</h3>
+<p>Until operating system installers gain native support for Stratis users face a
+lengthy and complex process to deploy systems with Stratis as the root filesystem.
+The <code>stratify.py</code> script is a quick and easy method for administrators and developers
+to set up Stratis root systems for testing.</p>
+
+</div>
+
+        </div>
+
+    </body>
+
+</html>
