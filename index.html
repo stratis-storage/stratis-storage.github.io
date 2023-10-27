@@ -135,6 +135,60 @@ Stratis may also incorporate additional technologies in the future.</p>
                       <div class="post">
                         <article class="post">
                             <h1 class="post-title">
+                              <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-3-6-0&#x2F;">
+                                Stratis 3.6.0 Release Notes
+                              </a>
+                            </h1>
+                            <div class="post__summary">
+                                <p><em>mulhern, Stratis Team</em></p>
+<p>Stratis 3.6.0 includes one significant enhancement as well as several smaller
+improvements.</p>
+<p>Most significantly, Stratis 3.6.0 extends its functionality to allow a user
+to set a limit on the size of a filesystem. The limit can be set when the
+filesystem is created, or at a later time.</p>
+<p>In addition, Stratis 3.6.0 allows the user to stop a pool by specifying the pool
+to stop either by UUID or by name, and allows better management of partially
+constructed pools.</p>
+<p>A new <code>--only</code> option was added to <code>stratis-dumpmetadata</code>, to allow it to print
+only the pool-level metadata.</p>
+<p><code>stratis-min</code>, the minimal CLI for Stratis, was extended with <code>bind</code>, <code>unbind</code>,
+and <code>rebind</code> commands.</p>
+<p>The <code>devicemapper</code> dependency lower bound is increased to 0.34.0 which
+includes an enhancement to check for the presence of the udev daemon.
+<code>stratisd</code> and <code>stratisd-min</code> now exit on startup if the udev daemon is not
+present.</p>
+<p>The <code>libcryptsetup-rs</code> dependency lower bound is increased to 0.9.1 and a
+direct dependency is introduced on <code>libcryptsetup-rs-sys</code> 0.3.0 to allow
+registering callbacks with libcryptsetup.</p>
+<p>The <code>nix</code> dependency lower bound is increased to 0.26.3, to avoid compilation
+errors induced by a fix to a lifetime bug in a function in <code>nix</code>'s public API.</p>
+<p>The <code>serde_derive</code> dependency lower bound is increased to 1.0.185 to avoid
+vendoring the <code>serde_derive</code> executable included in some prior versions of the
+package.</p>
+<p><code>stratisd</code> also contains sundry internal improvements, error message
+enhancements, and so forth.</p>
+<p>The <code>stratis-cli</code> command-line interface has been extended with an additional
+option to set the filesystem size limit on creation and two new filesystem
+commands, <code>set-size-limit</code> and <code>unset-size-limit</code>, to set or unset the
+filesystem size limit after a filesystem has been created.</p>
+<p><code>stratis-cli</code> now incorporates password verification when it is used to
+set a key in the kernel keyring via manual entry.</p>
+<p><code>stratis-cli</code> now allows specifying a pool by name or by UUID when stopping
+a pool.</p>
+<p><code>stratis-cli</code> also contains sundry internal improvements, and enforces
+a python requirement of at least 3.9 in its package configuration.</p>
+
+                            </div>
+                            <div class="read-more">
+                                <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-3-6-0&#x2F;">Read more...</a>
+                            </div>
+                        </article>
+                        
+                      </div>
+                    
+                      <div class="post">
+                        <article class="post">
+                            <h1 class="post-title">
                               <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratisd-release-notes-3-5-8&#x2F;">
                                 stratisd 3.5.8 Release Notes
                               </a>

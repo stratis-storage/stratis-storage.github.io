@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <link rel="icon" type="image/png" href="https://stratis-storage.github.io/stratis-favicon.png">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+      <!-- Enable responsiveness on mobile devices-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+      <title>Stratis Storage</title>
+
+      <!-- CSS -->
+      <link rel="stylesheet" href="https://stratis-storage.github.io/print.css" media="print">
+      <link rel="stylesheet" href="https://stratis-storage.github.io/poole.css">
+      <link rel="stylesheet" href="https://stratis-storage.github.io/hyde.css">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+      
+
+      
+      
+    </head>
+
+    <body class="theme-base-10 ">
+        
+            <div class="sidebar">
+                <div class="container ">
+                    <div>
+                        <a href="https:&#x2F;&#x2F;stratis-storage.github.io">
+                            <img src="https://stratis-storage.github.io/imgs/stratis_sidebar.png" />
+                        </a>
+                    </div>
+                    <div class="sidebar-about">
+                        
+                            
+                            <p class="about lead">Easy to use local storage management for Linux.</p>
+                            
+                        
+                    </div>
+
+                    User Links:</br>
+                    <ul class="sidebar-nav">
+                        
+                        
+                           <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;howto">How-To</a></li>
+                        
+                           <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;users">Clients and Operating Systems</a></li>
+                        
+                        
+                    </ul>
+                    Developer Links:</br>
+                    <ul class="sidebar-nav">
+                        
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;StratisSoftwareDesign.pdf">Software Design</a></li>
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;DBusAPIReference.pdf">D-Bus API Reference</a></li>
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;StratisStyleGuidelines.pdf">Programming Style Guidelines</a></li>
+                        
+                        
+                    </ul>
+                    D-Bus Introspection Files:</br>
+                    <ul class="sidebar-nav">
+                        
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;manager.xml">Manager object</a></li>
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;pool.xml">Pool object</a></li>
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;filesystem.xml">Filesystem object</a></li>
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;blockdev.xml">Blockdev object</a></li>
+                        
+                        
+		    </ul>
+                    Contact Links:</br>
+                    <ul class="sidebar-nav">
+                        
+                        
+                        <li class="sidebar-nav-item" style="display: inline-block">
+                          <a href="https:&#x2F;&#x2F;github.com&#x2F;stratis-storage">
+                            
+                              <i class="fab fa-github"></i>
+                            
+                          </a>
+                        </li>
+                        
+                        <li class="sidebar-nav-item" style="display: inline-block">
+                          <a href="https:&#x2F;&#x2F;twitter.com&#x2F;stratisstorage">
+                            
+                              <i class="fab fa-twitter"></i>
+                            
+                          </a>
+                        </li>
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div class="content container">
+            
+
+<div class="post">
+  <h1 class="post-title">Stratis 3.6.0 Release Notes</h1>
+  <span class="post-date">2023-10-25</span>
+
+  <p><em>mulhern, Stratis Team</em></p>
+<p>Stratis 3.6.0 includes one significant enhancement as well as several smaller
+improvements.</p>
+<p>Most significantly, Stratis 3.6.0 extends its functionality to allow a user
+to set a limit on the size of a filesystem. The limit can be set when the
+filesystem is created, or at a later time.</p>
+<p>In addition, Stratis 3.6.0 allows the user to stop a pool by specifying the pool
+to stop either by UUID or by name, and allows better management of partially
+constructed pools.</p>
+<p>A new <code>--only</code> option was added to <code>stratis-dumpmetadata</code>, to allow it to print
+only the pool-level metadata.</p>
+<p><code>stratis-min</code>, the minimal CLI for Stratis, was extended with <code>bind</code>, <code>unbind</code>,
+and <code>rebind</code> commands.</p>
+<p>The <code>devicemapper</code> dependency lower bound is increased to 0.34.0 which
+includes an enhancement to check for the presence of the udev daemon.
+<code>stratisd</code> and <code>stratisd-min</code> now exit on startup if the udev daemon is not
+present.</p>
+<p>The <code>libcryptsetup-rs</code> dependency lower bound is increased to 0.9.1 and a
+direct dependency is introduced on <code>libcryptsetup-rs-sys</code> 0.3.0 to allow
+registering callbacks with libcryptsetup.</p>
+<p>The <code>nix</code> dependency lower bound is increased to 0.26.3, to avoid compilation
+errors induced by a fix to a lifetime bug in a function in <code>nix</code>'s public API.</p>
+<p>The <code>serde_derive</code> dependency lower bound is increased to 1.0.185 to avoid
+vendoring the <code>serde_derive</code> executable included in some prior versions of the
+package.</p>
+<p><code>stratisd</code> also contains sundry internal improvements, error message
+enhancements, and so forth.</p>
+<p>The <code>stratis-cli</code> command-line interface has been extended with an additional
+option to set the filesystem size limit on creation and two new filesystem
+commands, <code>set-size-limit</code> and <code>unset-size-limit</code>, to set or unset the
+filesystem size limit after a filesystem has been created.</p>
+<p><code>stratis-cli</code> now incorporates password verification when it is used to
+set a key in the kernel keyring via manual entry.</p>
+<p><code>stratis-cli</code> now allows specifying a pool by name or by UUID when stopping
+a pool.</p>
+<p><code>stratis-cli</code> also contains sundry internal improvements, and enforces
+a python requirement of at least 3.9 in its package configuration.</p>
+<span id="continue-reading"></span>
+<p>Please consult the <a href="https://github.com/stratis-storage/stratisd/blob/master/CHANGES.txt">stratisd</a>, <a href="https://github.com/stratis-storage/stratis-cli/blob/master/CHANGES.txt">stratis-cli</a>, <a href="https://github.com/stratis-storage/devicemapper-rs/blob/master/CHANGES.txt">devicemapper</a>, and
+<a href="https://github.com/stratis-storage/libcryptsetup-rs/blob/master/CHANGES.txt">libcryptsetup-rs</a> changelogs for additional information about the release.</p>
+<p>We would like to thank brimworks, cpalv, jelly, kianmeng and ErwanGa for
+contributions to this release.</p>
+
+</div>
+
+        </div>
+
+    </body>
+
+</html>
