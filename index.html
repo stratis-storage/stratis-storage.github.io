@@ -135,6 +135,40 @@ Stratis may also incorporate additional technologies in the future.</p>
                       <div class="post">
                         <article class="post">
                             <h1 class="post-title">
+                              <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratisd-release-notes-3-6-4&#x2F;">
+                                stratisd 3.6.4 Release Notes
+                              </a>
+                            </h1>
+                            <div class="post__summary">
+                                <p><em>mulhern, Stratis Team</em></p>
+<p>This post includes release notes for the prior patch releases in this
+minor release.</p>
+<p><code>stratisd</code> 3.6.4 includes a fix for <code>stratisd-min</code> handling of the start
+command sent by <code>stratis-min</code> to unencrypted pools. It also captures and logs
+errors messages emitted by the <code>thin_check</code> or <code>mkfs.xfs</code> executables.</p>
+<p><code>stratisd</code> 3.6.3 explicitly sets the <code>nrext64</code> option to 0 when invoking
+<code>mkfs.xfs</code>. A recent version of XFS changed the default for <code>nrext64</code> to 1.
+Explicitly setting the value to 0 prevents <code>stratisd</code> from creating XFS
+filesystems that are unmountable on earlier kernels.</p>
+<p><code>stratisd</code> 3.6.2 includes a fix in the way thin devices are allocated in order
+to avoid misalignment of distinct sections of the thin data device. Such
+misalignments may result in a performance degradation.</p>
+<p><code>stratisd</code> 3.6.1 includes a fix to correct a problem where <code>stratisd</code> would fail
+to unlock a pool if the pool was encrypted using both Clevis and the kernel
+keyring methods but the key in the kernel keyring was unavailable.</p>
+<p>All releases include a number of housekeeping and maintenance updates.</p>
+
+                            </div>
+                            <div class="read-more">
+                                <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratisd-release-notes-3-6-4&#x2F;">Read more...</a>
+                            </div>
+                        </article>
+                        
+                      </div>
+                    
+                      <div class="post">
+                        <article class="post">
+                            <h1 class="post-title">
                               <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-3-6-0&#x2F;">
                                 Stratis 3.6.0 Release Notes
                               </a>
