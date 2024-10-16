@@ -389,8 +389,8 @@ as well as an add message for the pool itself. The DbusUdevHandler locks
 the engine when processing a udev event, but does not block on the lock.</p>
 <h1 id="properties-and-consequences">Properties and Consequences</h1>
 <h2 id="unbounded-channels">Unbounded Channels</h2>
-<p>Both the <code>stratisd</code> udev channel and the dbus channel are &quot;unbounded channels&quot;.
-These &quot;unbounded&quot; channels are actually bounded, but the bound on the number
+<p>Both the <code>stratisd</code> udev channel and the dbus channel are "unbounded channels".
+These "unbounded" channels are actually bounded, but the bound on the number
 of messages allowed on the channel is the maximum value of the Rust usize type.
 It is assumed that other machine limits will be encountered before the number
 of messages on the channel reaches that limit. Because both channels are

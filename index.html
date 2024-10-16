@@ -135,6 +135,50 @@ Stratis may also incorporate additional technologies in the future.</p>
                       <div class="post">
                         <article class="post">
                             <h1 class="post-title">
+                              <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-3-7-2&#x2F;">
+                                Stratis 3.7.2 Release Notes
+                              </a>
+                            </h1>
+                            <div class="post__summary">
+                                <p><em>mulhern, Stratis Team</em></p>
+<p>Stratis 3.7.2, which consists of <code>stratisd 3.7.2</code> and <code>stratis-cli 3.7.0</code>
+includes one significant enhancement, several minor enhancements, and a
+number of small improvements.</p>
+<p>Most significantly, Stratis 3.7.2 extends its functionality to allow a user
+to revert a snapshot, i.e., to overwrite a Stratis filesystem with a
+previously taken snapshot of that filesystem. The process of reverting<br />
+requires two steps. First, a snapshot must be scheduled for revert. However,
+the revert can only take place when a pool is started. This can be done
+while <code>stratisd</code> is running, by stopping and then restarting the pool. A
+revert may also be occasioned by a reboot of the system <code>stratisd</code> is running
+on. Restarting <code>stratisd</code> will also cause a scheduled revert to occur,
+so long as the pool containing the filesystem to be reverted has already
+been stopped. To support this functionality, <code>stratis-cli</code> includes
+two new filesystem subcommands, <code>schedule-revert</code> and <code>cancel-revert</code>.</p>
+<p>Some additional functionality has been added to support this revert
+functionality. First, a filesystem's origin field is now included
+among its D-Bus properties and updated as appropriate. <code>stratis-cli</code>
+displays an origin value in its newly introduced filesystem detail view.
+<code>stratisd</code> also support a new filesystem  D-Bus method which returns the
+filesystem metadata. The filesystem debug commands in <code>stratis-cli</code> now
+include a <code>get-metadata</code> option which will display the filesystem metadata
+for a given pool or filesystem. Equivalent functionality has been
+introduced for the pool metadata as well.</p>
+<p><code>stratisd</code> also includes a considerable number of dependency version bumps,
+minor fixes and additional testing, while <code>stratis-cli</code> includes
+improvements to its command-line parsing implementation.</p>
+
+                            </div>
+                            <div class="read-more">
+                                <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-3-7-2&#x2F;">Read more...</a>
+                            </div>
+                        </article>
+                        
+                      </div>
+                    
+                      <div class="post">
+                        <article class="post">
+                            <h1 class="post-title">
                               <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratisd-release-notes-3-6-7&#x2F;">
                                 stratisd 3.6.7 Release Notes
                               </a>
@@ -142,7 +186,7 @@ Stratis may also incorporate additional technologies in the future.</p>
                             <div class="post__summary">
                                 <p><em>mulhern, Stratis Team</em></p>
 <p><code>stratisd</code> 3.6.7 contains two bug fixes. The first bug fix prevents a
-file descriptor from being closed too soon after opening so that the user 
+file descriptor from being closed too soon after opening so that the user
 is prevented from specifying a passphrase via the <code>--capture-key</code>
 option of the <code>stratis-min pool start</code> command. This bug was introduced in
 <code>stratisd</code> 3.6.6.  The second corrects an error in the
@@ -352,8 +396,8 @@ We'll cover them below.</p>
 <li><em>Optional</em> If using Clevis for unlocking encrypted pools, add the following configuration
 under /etc/dracut.conf.d/99-stratisd.conf:</li>
 </ol>
-<pre><code>add_dracutmodules+=&quot; stratis-clevis &quot;
-</code></pre>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>add_dracutmodules+=&quot; stratis-clevis &quot;
+</span></code></pre>
 <ol start="3">
 <li>Test your configuration or ensure you have a rescue kernel and initramfs in case the update of the
 initramfs renders your install unbootable.</li>
@@ -434,7 +478,7 @@ memory leak in the <code>get_tag_value</code> method used by <code>stratisd</cod
 included in any previous release.</li>
 </ul>
 <p>This release also reduces the problem of repetitive log messages and modifies
-the D-Bus API to eliminate the <code>redundancy</code> parameter previously required by 
+the D-Bus API to eliminate the <code>redundancy</code> parameter previously required by
 the <code>CreatePool</code> D-Bus method.</p>
 
                             </div>
@@ -546,7 +590,7 @@ request that the state of all pools be refreshed. The <code>pool list</code> com
 been extended to allow a detailed view of individual pools and to allow the
 user to examine stopped pools. The <code>pool unlock</code> command has been removed
 in favor of the <code>pool start</code> command.</p>
-<p>Other changes include a fix to the algorithm for determining the size of data 
+<p>Other changes include a fix to the algorithm for determining the size of data
 and metadata devices that make up a thinpool device, the elimination of all
 uses of <code>udevadm settle</code> in the <code>stratisd</code> engine, and general improvements to
 the RPC layers used by <code>stratis-min</code> and <code>stratisd-min</code>.</p>
@@ -704,7 +748,7 @@ filesystem extension fails multiple times, once the filesystem is ready to be ex
 stratisd can perform the operation in the background, so that we don't leave users in a state
 where their filesystem can't be extended.</p>
 <h1 id="migration-and-backwards-compatibility">Migration and backwards compatibility</h1>
-<p>There are two types of changes that require migrations from older versions of stratisd: 
+<p>There are two types of changes that require migrations from older versions of stratisd:
 metadata changes and allocation scheme changes.</p>
 <h2 id="metadata-changes">Metadata changes</h2>
 <p>The changes we made required some schema changes in our MDA, the metadata region outside of
@@ -739,14 +783,14 @@ allocations to maximize contiguous allocation extents.</p>
                             </h1>
                             <div class="post__summary">
                                 <p><em>mulhern, Stratis Team</em></p>
-<p>stratisd 3.0.4 contains two fixes to bugs in its D-Bus API. </p>
+<p>stratisd 3.0.4 contains two fixes to bugs in its D-Bus API.</p>
 <p>The D-Bus property changed signal sent on a change to the LockedPools
-property of the &quot;org.storage.stratis3.Manager.r0&quot; interface misidentified the
-interface as the &quot;org.storage.stratis3.pool.r0&quot; interface; the interface
+property of the "org.storage.stratis3.Manager.r0" interface misidentified the
+interface as the "org.storage.stratis3.pool.r0" interface; the interface
 being sent with the signal is now correct.</p>
-<p>The introspection data obtained via the &quot;org.freedesktop.DBus.Introspectable&quot;
-interface's &quot;Introspect&quot; method was not correct for the &quot;GetManagedObjects&quot;
-method of the &quot;org.freedesktop.DBus.ObjectManager&quot; D-Bus interface; it did
+<p>The introspection data obtained via the "org.freedesktop.DBus.Introspectable"
+interface's "Introspect" method was not correct for the "GetManagedObjects"
+method of the "org.freedesktop.DBus.ObjectManager" D-Bus interface; it did
 not include the specification of the out argument. This has been corrected.</p>
 
                             </div>
@@ -768,7 +812,7 @@ not include the specification of the out argument. This has been corrected.</p>
                                 <p><em>mulhern, Stratis Team</em></p>
 <p>stratisd 3.0.3 contains internal improvements and several bug fixes.</p>
 <p>Most significantly, it includes an enhancement to stratisd's original
-multi-threading model to allow <a href="https://stratis-storage.github.io/per-pool-locking/">locking individual pools</a>. </p>
+multi-threading model to allow <a href="https://stratis-storage.github.io/per-pool-locking/">locking individual pools</a>.</p>
 <p>A change was made to the conditions under which the stratis dracut module is
 included in the initramfs.</p>
 <p>Under some conditions, a change in pool size did not result in a corresponding
@@ -1008,7 +1052,7 @@ check using libblkid and exits with an error if libblkid reports that the
 device is in use.</li>
 <li>Handling of errors returned by internal methods is improved; a chaining
 mechanism has been introduced and the error chains can be scrutinized
-programatically to identify expected scenarios like rollback failures.</li>
+programmatically to identify expected scenarios like rollback failures.</li>
 <li>A set of states indicating that a pool has reduced capability have been
 added internally and are published on the D-Bus. A pool's capability is
 reduced on an error being returned internally which contains, somewhere in
@@ -1051,14 +1095,14 @@ on an engine error into a single error code, 1.</li>
 <li>We will remove all the backwards compatible D-Bus interfaces corresponding
 to stratisd 2 and will supply just a single D-Bus interface for stratisd 3.
 Subsequent minor releases of stratisd 3 will retain their backwards compatible
-interfaces as described in the <a href="https://stratis-storage.github.io/DBusAPIReference.pdf">DBus API Reference</a>. Each interface will have 
+interfaces as described in the <a href="https://stratis-storage.github.io/DBusAPIReference.pdf">DBus API Reference</a>. Each interface will have
 a simplified naming convention, always specifying the major version and
 using the stratisd minor version in the revision number. For example, the name
-of the filesystem D-Bus interface under the new system for stratisd 3.0.0 is 
+of the filesystem D-Bus interface under the new system for stratisd 3.0.0 is
 <code>org.storage.stratis3.filesystem.r0</code>.</li>
 </ul>
 <p>The motivation for both these changes is the most typical of all: the
-implementation of stratisd will become unwieldly and bug-ridden if we try to
+implementation of stratisd will become unwieldy and bug-ridden if we try to
 maintain backwards compatibility in the D-Bus layer while simultaneously
 doing necessary redesign, re-implementation, and enhancement of the stratisd
 engine. In particular, changes to the way errors are managed internally will
@@ -1179,7 +1223,7 @@ D-Bus message handling thread.</p>
 associated with r4 D-Bus interfaces were not being sent appropriately,
 now they are.</p>
 <p>In addition, stratisd 2.4.1 includes logging, at the trace level, of lock
-aquisitions and releases and additional logging in the systemd generators
+acquisitions and releases and additional logging in the systemd generators
 included with the release.</p>
 <p>The stratis-cli 2.4.1 release includes:</p>
 <ul>
@@ -1217,7 +1261,7 @@ kernel keyring only, and could bind or unbind using Clevis only.</li>
 </ul>
 <p>More minor user-visible changes are:</p>
 <ul>
-<li>An enhancment to the FetchProperties D-Bus interface in order to disclose
+<li>An enhancement to the FetchProperties D-Bus interface in order to disclose
 more information about sets of encrypted devices.</li>
 <li>The <code>engine_state_report</code> key in the report interface has been stabilized
 and is guaranteed to be supported in future releases.</li>
@@ -1529,8 +1573,8 @@ as well as an add message for the pool itself. The DbusUdevHandler locks
 the engine when processing a udev event, but does not block on the lock.</p>
 <h1 id="properties-and-consequences">Properties and Consequences</h1>
 <h2 id="unbounded-channels">Unbounded Channels</h2>
-<p>Both the <code>stratisd</code> udev channel and the dbus channel are &quot;unbounded channels&quot;.
-These &quot;unbounded&quot; channels are actually bounded, but the bound on the number
+<p>Both the <code>stratisd</code> udev channel and the dbus channel are "unbounded channels".
+These "unbounded" channels are actually bounded, but the bound on the number
 of messages allowed on the channel is the maximum value of the Rust usize type.
 It is assumed that other machine limits will be encountered before the number
 of messages on the channel reaches that limit. Because both channels are
@@ -1727,9 +1771,9 @@ release, 2.4.0.</p>
 <p>This release extends the <code>pool unlock</code> command, and adds two new commands,
 <code>pool bind</code> and <code>pool unbind</code>.</p>
 <p>The <code>pool bind</code> command establishes an alternative mechanism for unlocking
-a pool. The user may select either the &quot;tang&quot; mechanism, which implements
+a pool. The user may select either the "tang" mechanism, which implements
 NBDE (Network-bound Disc Encryption) by means of a Tang server, or the
-&quot;tpm2&quot; mechanism, which uses TPM 2.0 (Trusted Platform Module) encryption.
+"tpm2" mechanism, which uses TPM 2.0 (Trusted Platform Module) encryption.
 Binding the devices in a pool to a supplementary Clevis encryption policy does
 not remove the primary encryption mechanism, which uses a key in the kernel
 keyring.</p>
@@ -1758,7 +1802,7 @@ The <code>Unbind</code> method reverses a <code>Bind</code> action.</p>
 <p>The <code>Bind</code> method may be called with any Clevis pin and configuration;
 we expect that any valid Clevis pin and configuration can be used to bind the
 devices in a pool. However the Stratis project officially supports only the
-&quot;tang&quot; and &quot;tpm2&quot; pins as those are the pins that may be designated via
+"tang" and "tpm2" pins as those are the pins that may be designated via
 <code>stratis</code>. Support for additional Clevis policies may be introduced into
 <code>stratis</code> in later releases.</p>
 <p>When binding a supplementary encryption policy to the devices in a pool
@@ -1855,7 +1899,7 @@ which is included with this version of stratisd.</p>
 <code>org.freedesktop.DBus.ObjectManager.InterfacesRemoved</code> signals on the
 D-Bus whenever a D-Bus object is added to or removed from the D-Bus
 interface.</li>
-<li>It adds a new D-Bus property, <code>PhysicalPath</code>, for the 
+<li>It adds a new D-Bus property, <code>PhysicalPath</code>, for the
 <code>org.storage.stratis2.blockdev.r2</code> interface. This property is
 principally useful for encrypted Stratis block devices; it identifies
 the block device on which the Stratis LUKS2 metadata resides.</li>
@@ -1941,7 +1985,7 @@ It also supports the new <code>Encrypted</code> property.</li>
 additional <code>HasCache</code> property.</li>
 <li><code>org.storage.stratis2.Report.r1</code>: This interface supports a set of
 ad-hoc reports about Stratis. The interface is unstable; the names by
-which the reports can be accesed are not guaranteed to remain stable,
+which the reports can be accessed are not guaranteed to remain stable,
 and the format of any report is only guaranteed to be valid JSON.</li>
 </ul>
 <p>Please consult the D-Bus API Reference for the precise D-Bus specification.</p>

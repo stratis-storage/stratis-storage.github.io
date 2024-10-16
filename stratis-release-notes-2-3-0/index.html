@@ -142,9 +142,9 @@
 <p>This release extends the <code>pool unlock</code> command, and adds two new commands,
 <code>pool bind</code> and <code>pool unbind</code>.</p>
 <p>The <code>pool bind</code> command establishes an alternative mechanism for unlocking
-a pool. The user may select either the &quot;tang&quot; mechanism, which implements
+a pool. The user may select either the "tang" mechanism, which implements
 NBDE (Network-bound Disc Encryption) by means of a Tang server, or the
-&quot;tpm2&quot; mechanism, which uses TPM 2.0 (Trusted Platform Module) encryption.
+"tpm2" mechanism, which uses TPM 2.0 (Trusted Platform Module) encryption.
 Binding the devices in a pool to a supplementary Clevis encryption policy does
 not remove the primary encryption mechanism, which uses a key in the kernel
 keyring.</p>
@@ -173,7 +173,7 @@ The <code>Unbind</code> method reverses a <code>Bind</code> action.</p>
 <p>The <code>Bind</code> method may be called with any Clevis pin and configuration;
 we expect that any valid Clevis pin and configuration can be used to bind the
 devices in a pool. However the Stratis project officially supports only the
-&quot;tang&quot; and &quot;tpm2&quot; pins as those are the pins that may be designated via
+"tang" and "tpm2" pins as those are the pins that may be designated via
 <code>stratis</code>. Support for additional Clevis policies may be introduced into
 <code>stratis</code> in later releases.</p>
 <p>When binding a supplementary encryption policy to the devices in a pool

@@ -118,14 +118,14 @@ on an engine error into a single error code, 1.</li>
 <li>We will remove all the backwards compatible D-Bus interfaces corresponding
 to stratisd 2 and will supply just a single D-Bus interface for stratisd 3.
 Subsequent minor releases of stratisd 3 will retain their backwards compatible
-interfaces as described in the <a href="https://stratis-storage.github.io/DBusAPIReference.pdf">DBus API Reference</a>. Each interface will have 
+interfaces as described in the <a href="https://stratis-storage.github.io/DBusAPIReference.pdf">DBus API Reference</a>. Each interface will have
 a simplified naming convention, always specifying the major version and
 using the stratisd minor version in the revision number. For example, the name
-of the filesystem D-Bus interface under the new system for stratisd 3.0.0 is 
+of the filesystem D-Bus interface under the new system for stratisd 3.0.0 is
 <code>org.storage.stratis3.filesystem.r0</code>.</li>
 </ul>
 <p>The motivation for both these changes is the most typical of all: the
-implementation of stratisd will become unwieldly and bug-ridden if we try to
+implementation of stratisd will become unwieldy and bug-ridden if we try to
 maintain backwards compatibility in the D-Bus layer while simultaneously
 doing necessary redesign, re-implementation, and enhancement of the stratisd
 engine. In particular, changes to the way errors are managed internally will

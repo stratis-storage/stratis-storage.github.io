@@ -209,32 +209,32 @@ details or press on to get started right away!</p>
 <p>Configure the machine with your preferred virtualization solution and then boot the
 Live desktop environment. We'll download the necessary files to the root account home
 directory (<code>/root</code>) and then start the installation process.</p>
-<p>Once the system has booted dismiss the &quot;Install to hard disk&quot; dialog, open a terminal
+<p>Once the system has booted dismiss the "Install to hard disk" dialog, open a terminal
 window and switch to the root account by running <code>su -</code>.</p>
 <p>Download the <code>stratify.py</code> script and example kickstart file from GitHub:</p>
-<pre><code># wget https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;bmr-cymru&#x2F;stratify&#x2F;main&#x2F;stratify.py
-# wget https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;bmr-cymru&#x2F;stratify&#x2F;main&#x2F;ks.cfg
-</code></pre>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span># wget https://raw.githubusercontent.com/bmr-cymru/stratify/main/stratify.py
+</span><span># wget https://raw.githubusercontent.com/bmr-cymru/stratify/main/ks.cfg
+</span></code></pre>
 <p>The kickstart file can be customized before beginning the installation - for
-example to set the system language, timzeone, or package selection for the
+example to set the system language, timezone, or package selection for the
 install. See the <a href="https://pykickstart.readthedocs.io/en/latest/">kickstart
 documentation</a> for further
 information.</p>
-<p>The kickstart file sets the root account password to &quot;changeme&quot; - edit the file
+<p>The kickstart file sets the root account password to "changeme" - edit the file
 to set a new password, or use the openssl command to generate an encrypted
 (hashed) password:</p>
-<pre><code>$ openssl passwd -6 &quot;newpassword&quot;
-$6$ly&#x2F;YwB6&#x2F;b5R6Pezz$zZGzBKgkPZvYHtefBwC7gJKB0BpW7ANJyt0sfjIf46yKS2IGfcnhfFW6wiXJLpYeQXvIBlJG&#x2F;W7wukX0&#x2F;S9Wu&#x2F;
-</code></pre>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ openssl passwd -6 &quot;newpassword&quot;
+</span><span>$6$ly/YwB6/b5R6Pezz$zZGzBKgkPZvYHtefBwC7gJKB0BpW7ANJyt0sfjIf46yKS2IGfcnhfFW6wiXJLpYeQXvIBlJG/W7wukX0/S9Wu/
+</span></code></pre>
 <p>In <code>ks.cfg</code>:</p>
-<pre><code># Root password
-rootpw --iscrypted $6$ly&#x2F;YwB6&#x2F;b5R6Pezz$zZGzBKgkPZvYHtefBwC7gJKB0BpW7ANJyt0sfjIf46yKS2IGfcnhfFW6wiXJLpYeQXvIBlJG&#x2F;W7wukX0&#x2F;S9Wu&#x2F;
-</code></pre>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span># Root password
+</span><span>rootpw --iscrypted $6$ly/YwB6/b5R6Pezz$zZGzBKgkPZvYHtefBwC7gJKB0BpW7ANJyt0sfjIf46yKS2IGfcnhfFW6wiXJLpYeQXvIBlJG/W7wukX0/S9Wu/
+</span></code></pre>
 <h3 id="running-the-script">Running the script</h3>
 <p>Once the <code>stratify.py</code> script and kickstart file have been downloaded, start
 the installation process by running:</p>
-<pre><code>python stratify.py --target vda --kickstart &#x2F;root&#x2F;ks.cfg
-</code></pre>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>python stratify.py --target vda --kickstart /root/ks.cfg
+</span></code></pre>
 <p>This will install required packages in the Live environment, set up the Stratis root
 pool and filesystem, and run anaconda to perform the installation. The process logs
 to the terminal and to a file named <code>stratify.log</code>.</p>
@@ -243,30 +243,30 @@ be prompted for the pool password when it is set up.</p>
 <p>The installation should take less than 20 minutes with a typical network and virtual
 machine configuration.</p>
 <p>When finished the script will print:</p>
-<pre><code>INFO - Stratis root fs installation complete.
-</code></pre>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>INFO - Stratis root fs installation complete.
+</span></code></pre>
 <p>At that point the machine is ready to reboot into the Stratis root filesystem. Use
 either the <code>reboot</code> command or the graphical desktop power menu to reboot the system.</p>
 <h3 id="first-boot">First boot</h3>
 <p>Once the system has booted up log in using the credentials set during the
 installation. The system is now running with Stratis as the root filesystem:</p>
-<pre><code># findmnt -s
-TARGET SOURCE              FSTYPE OPTIONS
-&#x2F;      &#x2F;dev&#x2F;stratis&#x2F;p1&#x2F;fs1 xfs    defaults
-&#x2F;boot  &#x2F;dev&#x2F;vda1           xfs    defaults
-</code></pre>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span># findmnt -s
+</span><span>TARGET SOURCE              FSTYPE OPTIONS
+</span><span>/      /dev/stratis/p1/fs1 xfs    defaults
+</span><span>/boot  /dev/vda1           xfs    defaults
+</span></code></pre>
 <p>The <code>stratis</code> command shows the state of the thin pool and the block devices and
 filesystems that it contains:</p>
-<pre><code># stratis pool
-Name                Total &#x2F; Used &#x2F; Free    Properties                                   UUID   Alerts
-p1     19.02 GiB &#x2F; 2.71 GiB &#x2F; 16.31 GiB   ~Ca,~Cr, Op   f0401402-3710-422b-8ffb-ecb987e7d0c0
-# stratis filesystem
-Pool   Filesystem   Total &#x2F; Used &#x2F; Free              Created             Device                UUID
-p1     fs1          1 TiB &#x2F; 2.19 GiB &#x2F; 1021.81 GiB   Apr 21 2023 12:58   &#x2F;dev&#x2F;stratis&#x2F;p1&#x2F;fs1   68e52045-baa0-440b-8636-128936a0e512
-# stratis blockdev
-Pool Name   Device Node   Physical Size   Tier   UUID
-p1          &#x2F;dev&#x2F;vda2         19.02 GiB   DATA   6a9c7d7c-3d84-4287-80b8-829f0f4de602
-</code></pre>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span># stratis pool
+</span><span>Name                Total / Used / Free    Properties                                   UUID   Alerts
+</span><span>p1     19.02 GiB / 2.71 GiB / 16.31 GiB   ~Ca,~Cr, Op   f0401402-3710-422b-8ffb-ecb987e7d0c0
+</span><span># stratis filesystem
+</span><span>Pool   Filesystem   Total / Used / Free              Created             Device                UUID
+</span><span>p1     fs1          1 TiB / 2.19 GiB / 1021.81 GiB   Apr 21 2023 12:58   /dev/stratis/p1/fs1   68e52045-baa0-440b-8636-128936a0e512
+</span><span># stratis blockdev
+</span><span>Pool Name   Device Node   Physical Size   Tier   UUID
+</span><span>p1          /dev/vda2         19.02 GiB   DATA   6a9c7d7c-3d84-4287-80b8-829f0f4de602
+</span></code></pre>
 <h3 id="conclusion">Conclusion</h3>
 <p>Until operating system installers gain native support for Stratis users face a
 lengthy and complex process to deploy systems with Stratis as the root filesystem.
