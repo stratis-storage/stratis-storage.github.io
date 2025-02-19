@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <link rel="icon" type="image/png" href="https://stratis-storage.github.io/stratis-favicon.png">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+      <!-- Enable responsiveness on mobile devices-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+      <title>Stratis Storage</title>
+
+      <!-- CSS -->
+      <link rel="stylesheet" href="https://stratis-storage.github.io/print.css" media="print">
+      <link rel="stylesheet" href="https://stratis-storage.github.io/poole.css">
+      <link rel="stylesheet" href="https://stratis-storage.github.io/hyde.css">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+      
+
+      
+      
+    </head>
+
+    <body class="theme-base-10 ">
+        
+            <div class="sidebar">
+                <div class="container ">
+                    <div>
+                        <a href="https:&#x2F;&#x2F;stratis-storage.github.io">
+                            <img src="https://stratis-storage.github.io/imgs/stratis_sidebar.png" />
+                        </a>
+                    </div>
+                    <div class="sidebar-about">
+                        
+                            
+                            <p class="about lead">Easy to use local storage management for Linux.</p>
+                            
+                        
+                    </div>
+
+                    User Links:</br>
+                    <ul class="sidebar-nav">
+                        
+                        
+                           <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;howto">How-To</a></li>
+                        
+                           <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;users">Clients and Operating Systems</a></li>
+                        
+                        
+                    </ul>
+                    Developer Links:</br>
+                    <ul class="sidebar-nav">
+                        
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;StratisSoftwareDesign.pdf">Software Design</a></li>
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;DBusAPIReference.pdf">D-Bus API Reference</a></li>
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;StratisStyleGuidelines.pdf">Programming Style Guidelines</a></li>
+                        
+                        
+                    </ul>
+                    D-Bus Introspection Files:</br>
+                    <ul class="sidebar-nav">
+                        
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;manager.xml">Manager object</a></li>
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;pool.xml">Pool object</a></li>
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;filesystem.xml">Filesystem object</a></li>
+                        
+                        <li class="sidebar-nav-item"><a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;blockdev.xml">Blockdev object</a></li>
+                        
+                        
+		    </ul>
+                    Contact Links:</br>
+                    <ul class="sidebar-nav">
+                        
+                        
+                        <li class="sidebar-nav-item" style="display: inline-block">
+                          <a href="https:&#x2F;&#x2F;github.com&#x2F;stratis-storage">
+                            
+                              <i class="fab fa-github"></i>
+                            
+                          </a>
+                        </li>
+                        
+                        <li class="sidebar-nav-item" style="display: inline-block">
+                          <a href="https:&#x2F;&#x2F;twitter.com&#x2F;stratisstorage">
+                            
+                              <i class="fab fa-twitter"></i>
+                            
+                          </a>
+                        </li>
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div class="content container">
+            
+
+<div class="post">
+  <h1 class="post-title">On-disk metadata format and storage stack modifications</h1>
+  <span class="post-date">2025-02-19</span>
+
+<div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content always-active">
+        <nav id="TableOfContents">
+            <ul>
+                
+                <li>
+                    <a href="https://stratis-storage.github.io/metadata-rework/#support-for-v1" class="toc-link">Support for V1</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://stratis-storage.github.io/metadata-rework/#changes-to-encryption" class="toc-link">Changes to encryption</a>
+                    
+                    <ul>
+                        
+                        <li>
+                            <a href="https://stratis-storage.github.io/metadata-rework/#switch-from-full-disk-encryption" class="toc-link">Switch from full disk encryption</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://stratis-storage.github.io/metadata-rework/#higher-position-in-the-stack" class="toc-link">Higher position in the stack</a>
+                        </li>
+                        
+                    </ul>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://stratis-storage.github.io/metadata-rework/#addition-of-metadata-space-reservation" class="toc-link">Addition of metadata space reservation</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://stratis-storage.github.io/metadata-rework/#backports" class="toc-link">Backports</a>
+                    
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+  <p><em>John Baublitz, Stratis Team</em></p>
+<p>Until now, Stratis has had a metadata format that, with a few exceptions, works
+remarkably well for our current feature set. However, as we plan for more features
+like RAID, integrity, and online reencryption, we've decided that we require some
+reworks to the order of our devicemapper devices in the storage stack and the addition
+of space reservation ahead of time for the metadata of new devicemapper layers. The
+metadata rework has been a large effort to pave the way for Stratis moving forward and
+will provide the ability for additional flexibility in enabling and disabling certain layers
+after pool creation time once the features are added.</p>
+<h3 id="support-for-v1">Support for V1</h3>
+<p>V1 will continued to be supported as-is. Features that no longer work on V1 of the metadata
+will be considered bugs, and we intend to continue releasing bug fixes for functionality that
+breaks, even if it is only in V1. However, creating new V1 pools is disabled, and users will
+only be able to create V2 pools in the next version of stratisd.</p>
+<h3 id="changes-to-encryption">Changes to encryption</h3>
+<p>The modifications to how we handle encryption are the single largest difference
+between V1 and V2 of the metadata. The crypt device now sits above the Stratis metadata
+and where RAID and integrity will be in the stack.</p>
+<p>Let's dive into the practical applications of this.</p>
+<h4 id="switch-from-full-disk-encryption">Switch from full disk encryption</h4>
+<p>V1 of the metadata provided full disk encryption, but V2 will not. Data, cache, and
+thinpool/filesystem metadata will all still be encrypted, but integrity metadata, RAID
+metadata, and the Stratis metadata, which is generally just a record of the devicemapper
+tables for the Stratis pool, will not be encrypted.</p>
+<p>We discussed this at length with the cryptsetup maintainers and the security team and the
+general consensus is that leaving this data unencrypted will not result in leaking any
+information about the encrypted data stored above it in the stack.</p>
+<h4 id="higher-position-in-the-stack">Higher position in the stack</h4>
+<p>The switch of encryption's position in the stack also has a surprising number of benefits.</p>
+<p>Firstly, the operation time on encrypted pools no longer scales linearly according to the
+number of devices. Because Stratis can add additional devices to a single pool, FDE required
+encrypting each new device with its own crypt device which resulted in having to pass
+through PBKDF once for each device. This increased execution times for operations like unlock
+based on how many devices were in the pool. For V2 of the metadata, operations that require PBKDF
+execute in constant time.</p>
+<p>Secondly, the encryption layer will be on top of the caching layer. This simplifies the cache handling
+and requires no special handling for encrypting cached data.</p>
+<p>Thirdly, this will avoid the problem we would have run into with RAID of encryption amplification.
+Because previously each leg would have its own crypt device, the CPU load of encryption would
+have been multiplied by the number of legs in the RAID array. This would result in reduced throughput
+due to too much CPU load encrypting each leg separately.</p>
+<h3 id="addition-of-metadata-space-reservation">Addition of metadata space reservation</h3>
+<p>In V2 of the metadata layout, we've begun reserving space for the crypt header and integrity metadata. The end
+result of this is that in future versions, we will increasingly be able to toggle certain features
+on and off after pool creation time. Work has already begun on supporting this for encryption, and we intend to
+do this at least for integrity as well. We are still discussing the best way to support this for RAID given
+certain restrictions in the case of converting from a multi-disk pool to a RAID array.</p>
+<h3 id="backports">Backports</h3>
+<p>Moving forward, we intend to port all features that are compatible with V1 of the metadata layout back to V1, but
+for features that cannot be backported like turning encryption on and off due to the differences outlined here,
+we recommend that users migrate data to a V2 pool to take advantage of these upcoming features.</p>
+<p>Please let us know what you think of the new metadata layout in a Github issue!</p>
+
+</div>
+
+        </div>
+
+    </body>
+
+</html>
