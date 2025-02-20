@@ -123,7 +123,6 @@ command-line experience, a rich API, and a fully automated approach to storage
 management. It builds upon elements of the existing storage stack as much as
 possible.  Specifically, Stratis uses device-mapper, LUKS, XFS, and Clevis.
 Stratis may also incorporate additional technologies in the future.</p>
-
                             </div>
                             <div class="read-more">
                                 <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-intro&#x2F;">Read more...</a>
@@ -140,14 +139,20 @@ Stratis may also incorporate additional technologies in the future.</p>
                               </a>
                             </h1>
                             <div class="post__summary">
-                                
+                                <p><em>John Baublitz, Stratis Team</em></p>
+<p>Until now, Stratis has had a metadata format that, with a few exceptions, works
+remarkably well for our current feature set. However, as we plan for more features
+like RAID, integrity, and online reencryption, we've decided that we require some
+reworks to the order of our devicemapper devices in the storage stack and the addition
+of space reservation ahead of time for the metadata of new devicemapper layers. The
+metadata rework has been a large effort to pave the way for Stratis moving forward and
+will provide the ability for additional flexibility in enabling and disabling certain layers
+after pool creation time once the features are added.</p>
                             </div>
                             <div class="read-more">
                                 <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;metadata-rework&#x2F;">Read more...</a>
                             </div>
                         </article>
-                        
-                            <span class="post-date">2025-02-19</span>
                         
                       </div>
                     
@@ -163,30 +168,6 @@ Stratis may also incorporate additional technologies in the future.</p>
 <p>Stratis 3.7.2, which consists of <code>stratisd 3.7.2</code> and <code>stratis-cli 3.7.0</code>
 includes one significant enhancement, several minor enhancements, and a
 number of small improvements.</p>
-<p>Most significantly, Stratis 3.7.2 extends its functionality to allow a user
-to revert a snapshot, i.e., to overwrite a Stratis filesystem with a
-previously taken snapshot of that filesystem. The process of reverting<br />
-requires two steps. First, a snapshot must be scheduled for revert. However,
-the revert can only take place when a pool is started. This can be done
-while <code>stratisd</code> is running, by stopping and then restarting the pool. A
-revert may also be occasioned by a reboot of the system <code>stratisd</code> is running
-on. Restarting <code>stratisd</code> will also cause a scheduled revert to occur,
-so long as the pool containing the filesystem to be reverted has already
-been stopped. To support this functionality, <code>stratis-cli</code> includes
-two new filesystem subcommands, <code>schedule-revert</code> and <code>cancel-revert</code>.</p>
-<p>Some additional functionality has been added to support this revert
-functionality. First, a filesystem's origin field is now included
-among its D-Bus properties and updated as appropriate. <code>stratis-cli</code>
-displays an origin value in its newly introduced filesystem detail view.
-<code>stratisd</code> also support a new filesystem  D-Bus method which returns the
-filesystem metadata. The filesystem debug commands in <code>stratis-cli</code> now
-include a <code>get-metadata</code> option which will display the filesystem metadata
-for a given pool or filesystem. Equivalent functionality has been
-introduced for the pool metadata as well.</p>
-<p><code>stratisd</code> also includes a considerable number of dependency version bumps,
-minor fixes and additional testing, while <code>stratis-cli</code> includes
-improvements to its command-line parsing implementation.</p>
-
                             </div>
                             <div class="read-more">
                                 <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-3-7-2&#x2F;">Read more...</a>
@@ -204,25 +185,6 @@ improvements to its command-line parsing implementation.</p>
                             </h1>
                             <div class="post__summary">
                                 <p><em>mulhern, Stratis Team</em></p>
-<p><code>stratisd</code> 3.6.7 contains two bug fixes. The first bug fix prevents a
-file descriptor from being closed too soon after opening so that the user
-is prevented from specifying a passphrase via the <code>--capture-key</code>
-option of the <code>stratis-min pool start</code> command. This bug was introduced in
-<code>stratisd</code> 3.6.6.  The second corrects an error in the
-<code>stratis-fstab-setup</code> script where the pool UUID was not properly
-supplied to the <code>stratis-min pool is-encrypted</code> command.</p>
-<p><code>stratisd</code> 3.6.6 includes a number of changes. It now defines two
-workspaces, one for itself and one for <code>stratisd_proc_macros</code>, mostly to
-simplify packaging downstream. It increases the lower bounds of many of its
-dependencies; its bindgen dependency lower bound is now increased to
-0.69.0. It includes a restriction on the size of any <code>String</code> value in the
-Stratis pool-level metadata. It ensures that the <code>UserInfo</code> values on
-devices conform to the same restrictions as filesystem names and pool
-names. It fixes a bug in lock file handling where it would be possible
-for the lock file to contain some extra digits at the end of the running
-<code>stratisd</code> process's id.</p>
-<p>Both releases contain many minor fixes and improvements.</p>
-
                             </div>
                             <div class="read-more">
                                 <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratisd-release-notes-3-6-7&#x2F;">Read more...</a>
@@ -246,7 +208,6 @@ precede a lock that does. This change relaxes a fairness restriction that
 gave precedence to locks based solely on the order in which they had been
 placed on a wait queue. This release also includes a number of housekeeping
 commits and minor improvements.</p>
-
                             </div>
                             <div class="read-more">
                                 <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratisd-release-notes-3-6-5&#x2F;">Read more...</a>
@@ -266,21 +227,6 @@ commits and minor improvements.</p>
                                 <p><em>mulhern, Stratis Team</em></p>
 <p>This post includes release notes for the prior patch releases in this
 minor release.</p>
-<p><code>stratisd</code> 3.6.4 includes a fix for <code>stratisd-min</code> handling of the start
-command sent by <code>stratis-min</code> to unencrypted pools. It also captures and logs
-errors messages emitted by the <code>thin_check</code> or <code>mkfs.xfs</code> executables.</p>
-<p><code>stratisd</code> 3.6.3 explicitly sets the <code>nrext64</code> option to 0 when invoking
-<code>mkfs.xfs</code>. A recent version of XFS changed the default for <code>nrext64</code> to 1.
-Explicitly setting the value to 0 prevents <code>stratisd</code> from creating XFS
-filesystems that are unmountable on earlier kernels.</p>
-<p><code>stratisd</code> 3.6.2 includes a fix in the way thin devices are allocated in order
-to avoid misalignment of distinct sections of the thin data device. Such
-misalignments may result in a performance degradation.</p>
-<p><code>stratisd</code> 3.6.1 includes a fix to correct a problem where <code>stratisd</code> would fail
-to unlock a pool if the pool was encrypted using both Clevis and the kernel
-keyring methods but the key in the kernel keyring was unavailable.</p>
-<p>All releases include a number of housekeeping and maintenance updates.</p>
-
                             </div>
                             <div class="read-more">
                                 <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratisd-release-notes-3-6-4&#x2F;">Read more...</a>
@@ -300,41 +246,6 @@ keyring methods but the key in the kernel keyring was unavailable.</p>
                                 <p><em>mulhern, Stratis Team</em></p>
 <p>Stratis 3.6.0 includes one significant enhancement as well as several smaller
 improvements.</p>
-<p>Most significantly, Stratis 3.6.0 extends its functionality to allow a user
-to set a limit on the size of a filesystem. The limit can be set when the
-filesystem is created, or at a later time.</p>
-<p>In addition, Stratis 3.6.0 allows the user to stop a pool by specifying the pool
-to stop either by UUID or by name, and allows better management of partially
-constructed pools.</p>
-<p>A new <code>--only</code> option was added to <code>stratis-dumpmetadata</code>, to allow it to print
-only the pool-level metadata.</p>
-<p><code>stratis-min</code>, the minimal CLI for Stratis, was extended with <code>bind</code>, <code>unbind</code>,
-and <code>rebind</code> commands.</p>
-<p>The <code>devicemapper</code> dependency lower bound is increased to 0.34.0 which
-includes an enhancement to check for the presence of the udev daemon.
-<code>stratisd</code> and <code>stratisd-min</code> now exit on startup if the udev daemon is not
-present.</p>
-<p>The <code>libcryptsetup-rs</code> dependency lower bound is increased to 0.9.1 and a
-direct dependency is introduced on <code>libcryptsetup-rs-sys</code> 0.3.0 to allow
-registering callbacks with libcryptsetup.</p>
-<p>The <code>nix</code> dependency lower bound is increased to 0.26.3, to avoid compilation
-errors induced by a fix to a lifetime bug in a function in <code>nix</code>'s public API.</p>
-<p>The <code>serde_derive</code> dependency lower bound is increased to 1.0.185 to avoid
-vendoring the <code>serde_derive</code> executable included in some prior versions of the
-package.</p>
-<p><code>stratisd</code> also contains sundry internal improvements, error message
-enhancements, and so forth.</p>
-<p>The <code>stratis-cli</code> command-line interface has been extended with an additional
-option to set the filesystem size limit on creation and two new filesystem
-commands, <code>set-size-limit</code> and <code>unset-size-limit</code>, to set or unset the
-filesystem size limit after a filesystem has been created.</p>
-<p><code>stratis-cli</code> now incorporates password verification when it is used to
-set a key in the kernel keyring via manual entry.</p>
-<p><code>stratis-cli</code> now allows specifying a pool by name or by UUID when stopping
-a pool.</p>
-<p><code>stratis-cli</code> also contains sundry internal improvements, and enforces
-a python requirement of at least 3.9 in its package configuration.</p>
-
                             </div>
                             <div class="read-more">
                                 <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-3-6-0&#x2F;">Read more...</a>
@@ -359,7 +270,6 @@ previously missing D-Bus property change signals and removing D-Bus object
 paths to partially torn down pools which had in some cases persisted past the
 point when the pool should be considered stopped. In addition, it removes
 the <code>dracut</code> subpackage's dependency on plymouth.</p>
-
                             </div>
                             <div class="read-more">
                                 <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratisd-release-notes-3-5-8&#x2F;">Read more...</a>
@@ -383,7 +293,6 @@ systems for testing.</p>
 <p>This blog post will look at a quick method for installing systems with Stratis
 as the root filesystem using the Fedora Live ISO, kickstart, and a Python script to
 simplify and automate the process.</p>
-
                             </div>
                             <div class="read-more">
                                 <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratify&#x2F;">Read more...</a>
@@ -405,24 +314,6 @@ simplify and automate the process.</p>
 on Fedora to enable Stratis as the root filesystem for a Fedora install.</p>
 <p>If you have not already looked at <a href="https://stratis-storage.github.io/stratis-rootfs/">the guide</a> for root filesystem work, please read that first. It is a
 prerequisite.</p>
-<p>For a little bit of background, stratisd provides an additional subpackage for our dracut modules that we
-use to set up the root filesystem during early boot. This package installs the necessary modules for dracut
-to automate the setup. However there are some steps that may not be obvious to users to get this all to work.
-We'll cover them below.</p>
-<p>Steps:</p>
-<ol>
-<li>Install the <code>stratisd-dracut</code> package. This is the subpackage mentioned above.</li>
-<li><em>Optional</em> If using Clevis for unlocking encrypted pools, add the following configuration
-under /etc/dracut.conf.d/99-stratisd.conf:</li>
-</ol>
-<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>add_dracutmodules+=&quot; stratis-clevis &quot;
-</span></code></pre>
-<ol start="3">
-<li>Test your configuration or ensure you have a rescue kernel and initramfs in case the update of the
-initramfs renders your install unbootable.</li>
-<li>Once you've verified that everything works as expected, run <code>dracut --force --kver=[KERNEL_VERSION]</code></li>
-</ol>
-
                             </div>
                             <div class="read-more">
                                 <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-rootfs-fedora&#x2F;">Read more...</a>
@@ -442,21 +333,6 @@ initramfs renders your install unbootable.</li>
                                 <p><em>mulhern, Stratis Team</em></p>
 <p><code>stratisd</code> 3.5.2 includes three significant enhancements as well as a bug
 fix.</p>
-<p>The enhancements are:</p>
-<ul>
-<li><code>stratisd</code> 3.5.2 is the first <code>stratisd</code> release to include a subpackage,
-<code>stratisd-tools</code>, which incorporates <code>stratis-dumpmetadata</code>, an application
-which may be used for troubleshooting.</li>
-<li><code>stratisd</code> 3.5.2 now depends on <code>devicemapper-rs</code> 0.33.1, which includes
-support for synchronization between udev and devicemapper. See
-the <a href="https://github.com/stratis-storage/devicemapper-rs/blob/master/CHANGES.txt">devicemapper-rs</a> changelog and <a href="https://github.com/stratis-storage/stratisd/pull/3069">stratisd pr 3069</a> for additional details.</li>
-<li><code>stratisd</code> 3.5.2 modifies the way takeover by <code>stratisd</code> from <code>stratisd-min</code>
-is managed during early boot. See <a href="https://github.com/stratis-storage/stratisd/pull/3269">stratisd pr 3269</a> for further details.</li>
-</ul>
-<p><code>stratisd</code> 3.5.2 also fixes a bug in a script used by the stratisd-dracut
-subpackage. This fix was included in the <code>stratisd</code> 3.5.1 release. See
-<a href="https://github.com/stratis-storage/stratisd/pull/3256">stratisd pr 3256</a> for further details.</p>
-
                             </div>
                             <div class="read-more">
                                 <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratisd-release-notes-3-5-2&#x2F;">Read more...</a>
@@ -476,30 +352,6 @@ subpackage. This fix was included in the <code>stratisd</code> 3.5.1 release. Se
                                 <p><em>mulhern, Stratis Team</em></p>
 <p>Stratis 3.5.0 includes one significant enhancement as well as several smaller
 improvements.</p>
-<p>Most significantly, Stratis 3.5.0 extends its functionality to allow a user
-to add a cache to an encrypted pool. The cache devices are each encrypted with
-the same mechanism as the data devices; consequently the cache itself is
-encrypted.</p>
-<p>Stratis 3.5.0 also fixes a few bugs:</p>
-<ul>
-<li>It extends the thin metadata device more eagerly, and responds to
-thin metadata low water mark devicemapper events. This fix was included in
-the <code>stratisd</code> 3.4.2 release.</li>
-<li>It makes the pool name field in the Stratis LUKS2 metadata optional; this
-prevents a failure to start an encrypted pool when upgrading from a previous
-<code>stratisd</code> version to <code>stratisd</code> 3.4.0. This fix was included in the
-<code>stratisd</code> 3.4.3 release.</li>
-<li>It requires a new version of the Stratis devicemapper-rs library, which
-contains a fix which eliminates undefined behavior in the management of ioctls
-with large result values. This fix was included in the <code>stratisd</code> 3.4.4 release.</li>
-<li>It requires a new version of the Stratis libblkid-rs library, which fixes a
-memory leak in the <code>get_tag_value</code> method used by <code>stratisd</code>. This fix is not
-included in any previous release.</li>
-</ul>
-<p>This release also reduces the problem of repetitive log messages and modifies
-the D-Bus API to eliminate the <code>redundancy</code> parameter previously required by
-the <code>CreatePool</code> D-Bus method.</p>
-
                             </div>
                             <div class="read-more">
                                 <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-3-5-0&#x2F;">Read more...</a>
@@ -519,19 +371,6 @@ the <code>CreatePool</code> D-Bus method.</p>
                                 <p><em>mulhern, Stratis Team</em></p>
 <p>Stratis 3.4.0 includes one significant enhancement as well as several smaller
 improvements.</p>
-<p>Most significantly, Stratis 3.4.0 extends its functionality to allow users to
-specify a pool by its name when starting a stopped pool. Previously it was
-only possible to identify a stopped pool by its UUID.</p>
-<p>In addition, <code>stratisd</code> enforces some checks on the compatibility of the block
-devices which make up a pool. It now takes into account the logical and
-physical sector sizes of the individual block devices when creating a pool,
-adding a cache, or extending the data or cache tier with additional devices.</p>
-<p>The <code>stratis pool start</code> command has been modified to accept either a UUID
-or a name option, while the <code>stratis pool list --stopped</code> command now displays
-the pool name if it is available.</p>
-<p>This release also includes improvements to <code>stratisd</code>'s internal locking
-mechanism.</p>
-
                             </div>
                             <div class="read-more">
                                 <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-3-4-0&#x2F;">Read more...</a>
@@ -551,29 +390,6 @@ mechanism.</p>
                                 <p><em>mulhern, Stratis Team</em></p>
 <p>Stratis 3.3.0 includes one significant enhancement and several smaller
 enhancements as well as number of stability and efficiency improvements.</p>
-<p>Most significantly, Stratis 3.3.0 extends its functionality to allow users to
-instruct <code>stratisd</code> to include additional space that may have become available
-on a component data device in the space that is available to the device's pool.
-The most typical use case for this is when a RAID device which presents as a
-single device to <code>stratisd</code> is expanded.</p>
-<p><code>stratis</code> supports these changes with a new command <code>stratis pool extend-data</code>
-that allows the user to specify that the pool should make use of
-additional space on its devices. The <code>stratis pool list</code> command has been
-extended to show an alert if a pool's device has changed in size. The
-<code>stratis blockdev list</code> command will display two device sizes if the size
-that stratisd has on record differs from a device's detected size.</p>
-<p>A less user-visible change is an improvement to the way that <code>stratisd</code>
-allocates space for its thin pool metadata and data devices from the backing
-store. The new approach is less precise but always more conservative when
-allocating space for the thin pool metadata device and will consistently reduce
-possible fragmentation of the thin pool metadata device over the backing
-store.</p>
-<p>Checks for Clevis executables occur whenever a Clevis executable that is
-depended on by <code>stratisd</code> needs to be invoked to complete a user's command.
-Previously, the check occurred only once, when <code>stratisd</code> was started. We
-believe that this change will be more convenient for users who may install
-needed Clevis executables after <code>stratisd</code> has already been started.</p>
-
                             </div>
                             <div class="read-more">
                                 <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-3-3-0&#x2F;">Read more...</a>
@@ -593,30 +409,6 @@ needed Clevis executables after <code>stratisd</code> has already been started.<
                                 <p><em>mulhern, Stratis Team</em></p>
 <p>Stratis 3.2.0 includes one significant enhancement, one bug fix, and a number
 of more minor improvements.</p>
-<p>Most significantly, Stratis 3.2.0 extends its functionality to allow users to
-stop and start a pool.</p>
-<p>Stopping a pool consists of tearing down its storage stack in an orderly way,
-but not destroying the pool metadata. It is a <code>pool destroy</code> operation
-without the final step of wiping the Stratis metadata. Starting a pool is
-setting up a pool according to the information stored in the pool level
-metadata of the devices associated with a pool. Whether a pool is stopped or
-started is stored in the pool-level metadata, with the consequence that users
-can control whether a pool is automatically started when <code>stratisd</code> is started
-up, or whether startup of the pool is deferred until explicitly requested.</p>
-<p><code>stratis</code> supports these changes with new commands to start and to stop a
-pool. It includes an additional <code>debug refresh</code> command which allows a user to
-request that the state of all pools be refreshed. The <code>pool list</code> command has
-been extended to allow a detailed view of individual pools and to allow the
-user to examine stopped pools. The <code>pool unlock</code> command has been removed
-in favor of the <code>pool start</code> command.</p>
-<p>Other changes include a fix to the algorithm for determining the size of data
-and metadata devices that make up a thinpool device, the elimination of all
-uses of <code>udevadm settle</code> in the <code>stratisd</code> engine, and general improvements to
-the RPC layers used by <code>stratis-min</code> and <code>stratisd-min</code>.</p>
-<p>In addition, the <code>stratisd-min</code> service now requires the <code>systemd-udevd</code>
-service to ensure that Stratis filesystem symlinks are created when
-<code>stratisd-min</code> sets up a Stratis filesystem.</p>
-
                             </div>
                             <div class="read-more">
                                 <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-3-2-0&#x2F;">Read more...</a>
@@ -637,36 +429,6 @@ service to ensure that Stratis filesystem symlinks are created when
 <p>Stratis 3.1.0 includes significant improvements to the management of the
 thin-provisioning layers, as well as a number of other user-visible
 enhancements and bug fixes.</p>
-<p>Please see <a href="https://stratis-storage.github.io/thin-provisioning-redesign/">this post</a> for a detailed discussion of the thin-provisioning
-changes. To support these changes the Stratis CLI has been enhanced to:</p>
-<ul>
-<li>allow specifying whether or not a pool may be overprovisioned on creation</li>
-<li>allow changing whether or not a pool may be overprovisioned while it is
-running</li>
-<li>allow increasing the filesystem limit for a given pool</li>
-<li>display whether or not a pool is overprovisioned in the pool list view</li>
-</ul>
-<p>Users of the Stratis CLI may also observe the following changes:</p>
-<ul>
-<li>A <code>debug</code> subcommand has been added to the <code>pool</code>, <code>filesystem</code>, and
-<code>blockdev</code> subcommands. Debug commands are not fully supported and may change
-or be removed at any time.</li>
-<li>The <code>--redundancy</code> option is no longer available when creating a pool. This
-option had only one permitted value so specifying it never had any effect.</li>
-</ul>
-<p>stratisd 3.1.0 includes one additional user-visible change:</p>
-<ul>
-<li>The minimum size of a Stratis filesystem is increased to 512 MiB.</li>
-</ul>
-<p>stratisd 3.1.0 also includes a number of internal improvements:</p>
-<ul>
-<li>The size of any newly created MDV is increased to 512 MiB.</li>
-<li>A pool's MDV is mounted in a private mount namespace and remains mounted
-while the pool is in operation.</li>
-<li>Improved handling of udev events on device removal.</li>
-<li>The usual and customary improvements to log messages.</li>
-</ul>
-
                             </div>
                             <div class="read-more">
                                 <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-3-1-0&#x2F;">Read more...</a>
@@ -695,96 +457,6 @@ allocations.</p>
 <li>Safety</li>
 <li>Reliability</li>
 </ul>
-<h1 id="predictability">Predictability</h1>
-<p>We made two notable changes to make behavior in the thin provisioning layer well-defined and
-predictable for users. Both parts relate to an existing thin provisioning tool,
-<code>thin_metadata_size</code>. This tool allows users to calculate the amount of metadata needed for
-a thin pool with a given size and number of thin devices (filesystems and snapshots in the
-case of stratisd). We have started taking advantage of <code>thin_metadata_size</code> to make our
-metadata space reservation more precise. Instead of our previous approach of allocating
-a fixed fraction of the available space, we now calculate the exact amount of space required for
-a given pool size and number of filesystems and snapshots. The second change is a switch
-to lazy allocation. Previously, we allocated greedily which meant that every time a device
-was added, we would allocate a certain amount of space for data and metadata regardless of
-the individual user's requirements. We now delay allocation and allocate block device storage
-on an as-needed basis allowing users to develop different requirements and adjust accordingly.
-For example, a user may realize that they need more filesystems than they originally planned for.
-With lazy allocation, assuming there is unallocated space on the pool, the user can now redirect
-that unallocated space from data to metadata space so there is enough room for a greater
-number of filesystems than was originally anticipated.</p>
-<p>This change resulted in two API modifications. One is filesystem limits; to appropriately
-ensure that we never exceed the allocated metadata limit, we set a filesystem limit per
-pool. This limit can be increased through the API, triggering a new allocation for
-metadata space. The other API change is related to the switch to lazy allocation. There
-is now information available that reports the amount of space that has been allocated.
-Previously we only concerned ourselves with used and total space, but with lazy allocation,
-it is now also important to report space that has been allocated but may not be in use yet.</p>
-<h1 id="safety">Safety</h1>
-<p>A key drawback of thin provisioning is often the failure cases. When overprovisioning a
-storage stack, the stack can get into a bad state when the pool becomes full due to the
-filesystem being far larger than the pool backing it. We have added in two safety features
-to help users cope with this.</p>
-<p>One measure is the addition of a mode to disable overprovisioning. This ensures that the size
-of all filesystems on the pool does not exceed the available physical storage provided by the
-pool. This feature is not necessarily useful for all users, particularly with heavy snapshot
-usage because even if storage is shared between a snapshot and a filesystem, this mode will
-treat them as entirely independent entities in terms of storage cost. This ensures that copy-
-on-write operations will not accidentally fill the pool if the shared storage diverges between
-the two, but puts a rather strict limit on snapshot capacity. For users that use Stratis for
-critical applications or the root filesystem, this mode prevents certain failure cases that
-can be challenging to recover from.</p>
-<p>When overprovisioning is enabled, we have also introduced a new API signal to notify the user
-when physical storage has been fully allocated. This does not necessarily mean that the pool
-has run out of space but serves as a warning to the user that once the remaining free space
-fills up, Stratis has no space left to extend to. This gives users time to provide more storage
-from which to allocate space before reaching a failure case.</p>
-<h1 id="reliability">Reliability</h1>
-<p>For a while, we've gotten bug reports about the reliability of filesystem extension. In certain
-cases, Stratis was not able to handle filesystem extension smoothly or at all. Between the
-<a href="https://stratis-storage.github.io/per-pool-locking/">per-pool locking</a> and the thin provisioning redesign, we have now resolved some of the
-previous issues with filesystem extension. The approach we've taken attacks the problem from
-a few different angles.</p>
-<h2 id="earlier-filesystem-extension">Earlier filesystem extension</h2>
-<p>Stratis used to wait until several gigabytes were left to extend the filesystem. If Stratis didn't
-resize the filesystem quickly enough, the filesystem would run out of space before the extension
-could complete. While this would eventually resolve itself once the filesystem was extended,
-it would cause some unnecessary IO errors. We now extend the filesystem at 50% usage
-to ensure that users always have a large buffer of free space available for even very IO-heavy
-usage patterns.</p>
-<h2 id="parallelized-filesystem-extension-operations">Parallelized filesystem extension operations</h2>
-<p>Stratis could previously only iterate sequentially through pools. Now stratisd can handle filesystem
-extension on two separate pools in parallel, reducing the latency between the point where
-high usage is detected and the extension operation being performed.</p>
-<h2 id="periodic-checks-for-filesystem-usage">Periodic checks for filesystem usage</h2>
-<p>Checking filesystem usage used to be a devicemapper event-dependent operation. This led to
-some problems around filesystem extension. A devicemapper event would be generated periodically
-as the filesystem filled up, but if the filesystem failed to extend a few times,
-devicemapper events would no longer be generated once the pool filled up and users would be
-left with a filesystem that couldn't be extended. We've removed our dependency on devicemapper
-events for filesystem monitoring and use devicemapper events for pool handling exclusively.
-Instead, we run periodic checks in the background on filesystems to ensure that even if
-filesystem extension fails multiple times, once the filesystem is ready to be extended,
-stratisd can perform the operation in the background, so that we don't leave users in a state
-where their filesystem can't be extended.</p>
-<h1 id="migration-and-backwards-compatibility">Migration and backwards compatibility</h1>
-<p>There are two types of changes that require migrations from older versions of stratisd:
-metadata changes and allocation scheme changes.</p>
-<h2 id="metadata-changes">Metadata changes</h2>
-<p>The changes we made required some schema changes in our MDA, the metadata region outside of
-the superblock that records longer form JSON about the specifics of the pool topology. The
-migration should be invisible to the user and will be performed the first time the new
-version of stratisd detects legacy pools. The migration adds some additional devicemapper
-information, information about filesystem limits on a pool, and other bookkeeping information.</p>
-<h2 id="allocation-scheme-changes">Allocation scheme changes</h2>
-<p>As mentioned above, the previous metadata allocation scheme was less precise and allocated
-a larger segment for metadata space than was necessary for the amount of data space present.
-Migration for old pools will cause stratisd to detect that the metadata device is already larger
-than it needs to be and no additional metadata device growth will occur until the data device
-size becomes large enough to require additional metadata space.</p>
-<h1 id="future-work">Future work</h1>
-<p>We hope to eventually provide some smarter allocation strategies for our data and metadata
-allocations to maximize contiguous allocation extents.</p>
-
                             </div>
                             <div class="read-more">
                                 <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;thin-provisioning-redesign&#x2F;">Read more...</a>
@@ -803,15 +475,6 @@ allocations to maximize contiguous allocation extents.</p>
                             <div class="post__summary">
                                 <p><em>mulhern, Stratis Team</em></p>
 <p>stratisd 3.0.4 contains two fixes to bugs in its D-Bus API.</p>
-<p>The D-Bus property changed signal sent on a change to the LockedPools
-property of the "org.storage.stratis3.Manager.r0" interface misidentified the
-interface as the "org.storage.stratis3.pool.r0" interface; the interface
-being sent with the signal is now correct.</p>
-<p>The introspection data obtained via the "org.freedesktop.DBus.Introspectable"
-interface's "Introspect" method was not correct for the "GetManagedObjects"
-method of the "org.freedesktop.DBus.ObjectManager" D-Bus interface; it did
-not include the specification of the out argument. This has been corrected.</p>
-
                             </div>
                             <div class="read-more">
                                 <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratisd-release-notes-3-0-4&#x2F;">Read more...</a>
@@ -830,14 +493,6 @@ not include the specification of the out argument. This has been corrected.</p>
                             <div class="post__summary">
                                 <p><em>mulhern, Stratis Team</em></p>
 <p>stratisd 3.0.3 contains internal improvements and several bug fixes.</p>
-<p>Most significantly, it includes an enhancement to stratisd's original
-multi-threading model to allow <a href="https://stratis-storage.github.io/per-pool-locking/">locking individual pools</a>.</p>
-<p>A change was made to the conditions under which the stratis dracut module is
-included in the initramfs.</p>
-<p>Under some conditions, a change in pool size did not result in a corresponding
-property changed signal for the relevant D-Bus property change; this has been
-fixed.</p>
-
                             </div>
                             <div class="read-more">
                                 <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratisd-release-notes-3-0-3&#x2F;">Read more...</a>
@@ -863,114 +518,6 @@ about <a href="https://stratis-storage.github.io/multi-threading/">here</a>. Thi
 in a separate <a href="https://tokio.rs/tokio/tutorial/spawning">tokio task</a>, but the Stratis engine, the part of our code that
 handles all of the storage stack operations, could still only be accessed
 sequentially.</p>
-<h1 id="motivation">Motivation</h1>
-<p>After having conversations with the LVM team, it seemed like sequential accesses
-of storage operations was not entirely necessary. While modifying multiple layers
-of the pool stack at once can cause problems, modifying independent pools in
-parallel is safe, and we wanted to take advantage of the potential for increased
-concurrency. A large part of this is due to how we handle D-Bus properties. Our
-D-Bus properties expose aspects of the storage stack that sometimes require
-querying the device-mapper stack for information. With sequential accesses,
-this would mean that even two list operations on any two pools could not run in
-parallel, a restriction that causes a bad user experience and is not technically
-necessary.</p>
-<h1 id="requirements">Requirements</h1>
-<p>Despite the motivation being clear, the solution turned out to be more complicated.
-One of the major problems that we bumped into when trying to achieve more granular
-concurrency was the interaction between standard Rust synchronization structures
-and the API for listing D-Bus objects.</p>
-<p>Our initial idea was to wrap the data structure containing the record of all of
-the pools in a read-write lock. This had a few notable drawbacks. For one, you
-could not acquire mutable access to two independent pools at a time even though
-this is a completely safe operation.</p>
-<p>This led us to the idea of wrapping each pool in a read-write lock. Unfortunately,
-this also had some major drawbacks. One notable example of this was the behavior of
-our list operation with this solution. A list operation would require a read lock
-on every single pool and this means that the time that it would take to list all of
-the pools or filesystems would increase proportionally with the number of pools
-on the system. Because locking is relatively expensive, we noticed a significant
-slowdown when listing larger numbers of pools and filesystems.</p>
-<p>Our ideal scenario was to have the benefits of a read-write lock so that list
-operations could run in parallel but to provide an ability to either lock single
-pools or all pools in one operation so that locking all pools would take the
-same amount of time no matter how many were present on the system.</p>
-<h1 id="design">Design</h1>
-<p>After determining that no locking data structure like this appeared to exist
-in tokio, we took some time to look into how tokio implements its locking data
-structures. The API for much of the locking data structures appeared to
-be a lock acquisition method that returned a future. This future would poll the state
-of the lock and either update the internal data structures to indicate that
-the lock had been acquired or put itself to sleep until it was ready to poll
-again. The <code>drop</code> method on the data structure returned by the future would
-trigger waking up a task to poll again. This seemed perfectly workable with
-a more granular read-write lock. The only difference would be that we would
-need to keep track of locks on individual pools as well as locks on the entire
-collection. The proper locking conflict rules would need to be checked:</p>
-<ul>
-<li><code>WriteAll</code> conflicts with all other operations.</li>
-<li><code>ReadAll</code> conflicts with <code>WriteAll</code> and <code>Write</code> on any pool.</li>
-<li><code>Write</code> conflicts with <code>WriteAll</code> and <code>Read</code> or <code>Write</code> on the same pool.</li>
-<li><code>Read</code> conflicts with <code>WriteAll</code> and <code>Write</code> on the same pool.</li>
-</ul>
-<p>Any attempt to acquire two conflicting locks would queue one of the tasks to
-be woken up once the conflicting lock was dropped.</p>
-<h1 id="notable-design-choices">Notable design choices</h1>
-<p>We chose to implement our lock as a starvation-free lock. Implementing a lock
-that allows <code>ReadAll</code> to bypass <code>Write*</code> requests that are queued when another
-<code>ReadAll</code> request has already acquired the lock leads to behavior where <code>Write*</code>
-requests could block indefinitely. This behavior could cause list operations to
-block filesystem extension handling indefinitely, potentially leading to IO errors
-and a full filesystem. A starvation-free locking approach puts a task in a FIFO
-queue if any are already queued in front of it. The notable downside of this is
-slightly more latency for handling locking requests, but the benefits seemed to
-outweigh this.</p>
-<p>Because tokio can cause spurious wake ups for tasks, we assign a unique integer
-ID to each future responsible for polling the lock for readiness. In the case
-where there is both a legitimate and spurious wake up at the same time, this
-allows our lock to differentiate between the two woken tasks to determine which
-one should be given priority and which should be put to sleep. This prevents
-spurious wake ups from acquiring the lock before they are scheduled to.</p>
-<p>Because tokio does not currently allow lifetimes shorter than <code>'static</code> when
-passing a reference across thread boundaries, our locking data structure
-heavily uses automatic reference counting (<code>Arc</code>). This enables shared access
-between multiple threads and the ability to pass an acquired lock handle to
-a separate thread after acquisition. Without the use of <code>Arc</code>, the pool would
-have to be operated on in the same task as the lock acquisition which would
-prevent passing lock handles to separate tasks to process them in parallel.</p>
-<h1 id="optimizations">Optimizations</h1>
-<p>After our initial implementation of the write-all lock, we bumped into an issue
-where we could not pass all pool lock handles into separate threads to handle
-them all in parallel. This was particularly problematic for our implementation
-of background devicemapper event handling. Our solution for this was to allow
-acquiring all locks at once to avoid the penalty of locking each pool individually
-and then converting that lock handle to a set of individual locks that can all
-be released when they are no longer needed. This addressed both the issue of
-parallelization and constant time locking for all pools nicely.</p>
-<p>Originally we also only woke one queued task at a time when a lock was released.
-This proved to be less performant. If two <code>ReadAll</code> tasks were queued, these could
-both be woken up in parallel and acquire the lock with no conflict. The solution
-to this was to factor out the part of the code that tests for conflicts and traverse
-the queue and wake up all tasks until a conflicting task is found. This allowed
-waking up a batch of queued tasks that could all operate in parallel without
-also waking up a conflicting task that would immediately be put back to sleep.</p>
-<h1 id="future-work">Future work</h1>
-<p>Recently, we discovered that we should be able to provide even more
-parallelization for filesystem background operations. While we cannot perform
-multiple pool mutation operations in parallel, the filesystems on top of the
-pool can be modified independently in parallel. We expect to change the way
-background checks on filesystem usage are handled by spawning each filesystem
-extension in its own tokio task so that, for pools with many filesystems, the
-filesystem extension will be more responsive. Rather than iterating through
-hundreds of filesystems, stratisd will be able to handle multiple filesystem
-extensions in parallel, speeding up the checking process if there is more than
-one filesystem that needs to be extended at once. This will benefit IO performance
-by ensuring that the filesystems are extended in a timely manner to avoid cases
-where the filesystem is filled before it can be extended.</p>
-<h1 id="final-notes">Final notes</h1>
-<p>We've added extensive debugging for the locking data structure in case users run
-into issues. To enable these logs and see the state of the per-pool locking data
-structure over time, simply enable trace logs in stratisd!</p>
-
                             </div>
                             <div class="read-more">
                                 <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;per-pool-locking&#x2F;">Read more...</a>
@@ -990,105 +537,6 @@ structure over time, simply enable trace logs in stratisd!</p>
                                 <p><em>mulhern, Stratis Team</em></p>
 <p>Stratis 3.0.0 includes many internal improvements, bug fixes, and
 user-visible changes.</p>
-<p>Users of the Stratis CLI may observe the following changes:</p>
-<ul>
-<li>It is now possible to set the filesystem logical size when creating a
-filesystem.</li>
-<li>It is possible to rebind a pool using a Clevis tang server or with a key
-in the kernel keyring.</li>
-<li>Filesystem and pool list output have been extended and improved. The pool
-listing includes an <code>Alerts</code> column. Currently this column is used to indicate
-whether the pool is in a restricted operation mode. A new subcommand,
-<code>stratis pool explain</code>, which provides a fuller explanation of the codes
-displayed in the <code>Alerts</code> column has been added.  The filesystem listing
-now displays a filesystem's logical size.</li>
-<li>With encrypted pools it was previously possible for the display of block
-device paths to change format if <code>stratisd</code> was restarted after an encrypted
-pool had been created. Now the display of the block device paths is consistent
-across <code>stratisd</code> restarts.</li>
-</ul>
-<p>In stratisd 3.0.0 the D-Bus API has undergone a revision and the prior
-interfaces are all removed. The <code>FetchProperties</code> interfaces that
-were supported by all objects have been removed. The values that were
-previously obtainable via the <code>FetchProperties</code> methods
-are now conventional D-Bus properties. The possible values of error codes
-returned by the D-Bus methods have been reduced to 0 and 1, with the usual
-interpretation.</p>
-<p>stratisd 3.0.0 includes a number of significant internal improvements and a few
-bug fixes.</p>
-<p><code>stratisd</code> bug fixes:</p>
-<ul>
-<li>Previously the Stratis release included a dracut.conf.d file which made
-the Stratis dracut modules required in the initramfs. The consequence of this
-was that the initramfs could not be built unless all files required for the
-Stratis modules were present; if the initramfs is not built a reboot will fail.
-That file has been removed in this release.</li>
-<li>The <code>--prompt</code> option was not passed to <code>stratis-min</code> in the
-<code>stratis-fstab-setup</code> script; this prevented the user from entering the
-password necessary to unlock an encrypted pool during boot. This is
-no longer the case.</li>
-<li>Previously, stratisd did not increase the amount of space allocated to
-its spare metadata device when its in-use thinpool metadata device was
-extended. In some situations, when setting up a pool, stratisd might attempt
-a repair operation on the thinpool metadata device; if the space allocated
-for the spare metadata device was not large enough to accommodate all the
-metadata, then the repair operation would fail. Now the space allocated for
-the spare metadata device is increased whenever the metadata device is extended.</li>
-<li><code>stratisd</code> was not immediately updating the devicemapper device stack when
-a cache was initialized with the result that the cache was not immediately
-put in use. This is no longer the case.</li>
-<li><code>stratisd</code> was not immediately updating the Clevis encryption info associated
-with a pool on a command to bind an encrypted pool with Clevis. This problem
-has been corrected.</li>
-<li><code>stratisd</code> was sending an incorrect D-Bus signal on a pool name change; this
-has been fixed.</li>
-<li>Previously, when <code>stratisd-min</code>, which runs during boot before D-Bus
-functionality is available, gave way to <code>stratisd</code> when the D-Bus had been set
-up, it was possible for inconsistencies to arise if the Stratis engine was
-performing an operation which required invoking a distinct executable. The
-executable might be terminated during its execution, and <code>stratisd-min</code> would
-take the action appropriate to the command failure before exiting. Now, systemd
-is instructed to send a kill signal only to <code>stratisd-min</code> and not to any of
-<code>stratisd-min</code>'s child processes when shutting down <code>stratisd-min</code>.</li>
-<li>Previously, if the same device was specified using two different paths
-when creating or extending a pool the different paths would be
-interpreted as two different devices and an error would be returned when
-<code>stratisd</code> attempted to initialize the device a second time. Now, the
-different paths are canonicalized eagerly, and converted into a single
-canonical representation of the device, <code>stratisd</code> initializes the device only
-once, and no error is returned.</li>
-<li>Previously, <code>stratisd</code> did not report all existing object paths in the
-result of a D-Bus Introspect() call. This was due to a bug in version
-0.9.1 and previous of <code>stratisd</code>'s dbus-tree dependency. <code>stratisd</code> now
-requires dbus-tree 0.9.2, so all nodes are reported.</li>
-</ul>
-<p>Other <code>stratisd</code> improvements:</p>
-<ul>
-<li>Previously, <code>stratisd</code> relied entirely on udev information when deciding
-whether a storage device was not in use by another application and could
-safely be overwritten with Stratis metadata. Now it performs a supplementary
-check using libblkid and exits with an error if libblkid reports that the
-device is in use.</li>
-<li>Handling of errors returned by internal methods is improved; a chaining
-mechanism has been introduced and the error chains can be scrutinized
-programmatically to identify expected scenarios like rollback failures.</li>
-<li>A set of states indicating that a pool has reduced capability have been
-added internally and are published on the D-Bus. A pool's capability is
-reduced on an error being returned internally which contains, somewhere in
-its chain, the appropriate identifying error variant.</li>
-<li>The code used to roll back failed encryption operations on a list of
-pool devices has been refactored and generalized. It is now capable of
-returning an error that can be used to identify a restricted pool capability
-due to a rollback failure.</li>
-<li><code>stratisd</code> uses sha-256 instead of sha-1 for Clevis-related encryption
-operations to conform with Clevis's own usage.</li>
-<li><code>stratisd</code> exits more elegantly and less frequently if it encounters an
-error during execution of the distinct tasks that are assigned to the
-individual threads that it manages internally.</li>
-<li>In preparation for edition 2021 of the Rust language, <code>stratisd</code> source code
-has been updated to conform entirely to edition 2018 recommendations.</li>
-</ul>
-
                             </div>
                             <div class="read-more">
                                 <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-3-0-0&#x2F;">Read more...</a>
@@ -1106,32 +554,6 @@ has been updated to conform entirely to edition 2018 recommendations.</li>
                             </h1>
                             <div class="post__summary">
                                 <p><em>mulhern, Stratis Team</em></p>
-<p>The next version of stratisd will be 3.0.0.</p>
-<p>We have already decided on two breaking changes for this release:</p>
-<ul>
-<li>We will collapse all the non-zero error codes returned over the D-Bus
-on an engine error into a single error code, 1.</li>
-<li>We will remove all the backwards compatible D-Bus interfaces corresponding
-to stratisd 2 and will supply just a single D-Bus interface for stratisd 3.
-Subsequent minor releases of stratisd 3 will retain their backwards compatible
-interfaces as described in the <a href="https://stratis-storage.github.io/DBusAPIReference.pdf">DBus API Reference</a>. Each interface will have
-a simplified naming convention, always specifying the major version and
-using the stratisd minor version in the revision number. For example, the name
-of the filesystem D-Bus interface under the new system for stratisd 3.0.0 is
-<code>org.storage.stratis3.filesystem.r0</code>.</li>
-</ul>
-<p>The motivation for both these changes is the most typical of all: the
-implementation of stratisd will become unwieldy and bug-ridden if we try to
-maintain backwards compatibility in the D-Bus layer while simultaneously
-doing necessary redesign, re-implementation, and enhancement of the stratisd
-engine. In particular, changes to the way errors are managed internally will
-not allow us to ensure consistency of error codes returned over the D-Bus with
-the ones that were previously used.</p>
-<p>Since we are increasing the major version, dropping the stratisd 2 D-Bus API is
-an obvious next step.</p>
-<p>We are reviewing other possible API changes at this time in order to minimize
-the number of subsequent major version increases that we will be obliged to do.</p>
-
                             </div>
                             <div class="read-more">
                                 <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-announce-3-0-0&#x2F;">Read more...</a>
@@ -1153,7 +575,6 @@ the number of subsequent major version increases that we will be obliged to do.<
 command-line dependencies for the stratis dracut module. stratisd and
 stratisd-min both require these dependencies to be available in order to
 start up.</p>
-
                             </div>
                             <div class="read-more">
                                 <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-2-4-2&#x2F;">Read more...</a>
@@ -1175,35 +596,6 @@ start up.</p>
 a separate subpackage, <code>stratisd-dracut</code>. This package must be installed
 in order to support booting from a Stratis filesystem. All other
 functionality is included in the <code>stratisd</code> package.</p>
-<p>The motivation for this change is to allow users greater flexibility and
-robustness. We understand that some users may choose to use Stratis but not to
-use Stratis for their root filesystem. These users may choose to install only
-the <code>stratisd</code> package.</p>
-<p>Other users may prefer to use a Stratis root filesystem. They should install
-the <code>stratisd-dracut</code> package, which has a hard dependency on the <code>stratisd</code>
-package. The <code>stratisd-dracut</code> package also includes a hard dependency on
-<code>dracut</code> itself and on <code>plymouth</code>. <code>plymouth</code> is used in order to obtain a
-password to unlock an encrypted Stratis root filesystem. Please consult
-[Stratis filesystem as the root filesystem] for further information about
-Stratis support for a root filesystem.</p>
-<p>We decided to implement this division due to a problem which would ensue
-if stratisd was installed but plymouth was not. In that case, the regeneration
-of the initramfs on kernel updates would fail and render the system unbootable
-with the new kernel.</p>
-<p>The solution of adding plymouth as a hard requirement for stratisd would
-place an unnecessary dependency burden on a user who did not choose to
-maintain a Stratis root filesystem. However, without such a requirement a
-user who had stratisd but not plymouth installed would eventually end up
-with an unbootable system.</p>
-<p>We believe that a separate subpackage is the most robust and flexible
-solution; it is one which requires no manual intervention by the user.</p>
-<p>To properly construct the stratisd-dracut subpackage, it is imperative that
-the stratisd source code be compiled twice; once with the default features,
-in order to build stratisd itself, and again with a different set of
-features, in order to correctly build supporting scripts for the dracut
-module.</p>
-<p>We recommend that other downstream packagers adopt a similar scheme.</p>
-
                             </div>
                             <div class="read-more">
                                 <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratisd-rootfs-packaging&#x2F;">Read more...</a>
@@ -1223,33 +615,6 @@ module.</p>
                                 <p><em>mulhern, Stratis Team</em></p>
 <p>Stratis 2.4.1 is a bug fix release, which addresses a flaw in the
 multi-threading implementation.</p>
-<p>A user could observe the behavior caused by the flaw when CLI commands would
-either take far longer to complete than normal or the D-Bus connection would
-eventually time out.</p>
-<p>The cause of the observed problem was that stratisd was accepting a
-GetManagedObjects call on the D-Bus but not returning the result. This
-could occur when numerous object paths, i.e., several hundred, were being
-supported on the D-Bus, generally due to the creation of many filesystems.</p>
-<p>We have addressed this problem by:</p>
-<ul>
-<li>modifying the D-Bus message handling implementation</li>
-<li>implementing a custom ObjectManager class in the D-Bus layer</li>
-</ul>
-<p>In addition, we have refined the method by which individual threads are
-terminated when stratisd receives a shutdown signal to better terminate the
-D-Bus message handling thread.</p>
-<p>The stratisd 2.4.1 release includes one additional fix: the signals
-associated with r4 D-Bus interfaces were not being sent appropriately,
-now they are.</p>
-<p>In addition, stratisd 2.4.1 includes logging, at the trace level, of lock
-acquisitions and releases and additional logging in the systemd generators
-included with the release.</p>
-<p>The stratis-cli 2.4.1 release includes:</p>
-<ul>
-<li>an improvement to the listing of block devices</li>
-<li>a new report with key <code>managed_objects_report</code></li>
-</ul>
-
                             </div>
                             <div class="read-more">
                                 <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-2-4-1&#x2F;">Read more...</a>
@@ -1278,33 +643,6 @@ create a pool with encryption managed either by the kernel keyring or
 mechanism. Previously, the user could create an encrypted pool using the
 kernel keyring only, and could bind or unbind using Clevis only.</li>
 </ul>
-<p>More minor user-visible changes are:</p>
-<ul>
-<li>An enhancement to the FetchProperties D-Bus interface in order to disclose
-more information about sets of encrypted devices.</li>
-<li>The <code>engine_state_report</code> key in the report interface has been stabilized
-and is guaranteed to be supported in future releases.</li>
-<li>A new executable, <code>stratis-predict-usage</code> to predict free space on a newly
-created pool is distributed with stratisd.</li>
-</ul>
-<p>This release of Stratis also includes a number of significant but less
-visible changes:</p>
-<ul>
-<li>Support for multi-threading in stratisd. The new multi-threading
-implementation replaces the prior event-loop implementation. See the prior
-post <a href="https://stratis-storage.github.io/multi-threading/">Multi-threading Support in stratisd</a> for a detailed discussion.</li>
-<li>The management of Stratis filesystem symlinks has been simplified.
-Determining the filesystem and pool name that comprise the symlink path no
-longer requires communication with stratisd over the D-Bus; it is
-now accomplished via standard udev-based mechanisms.</li>
-<li>stratisd now emits a log message at the info level in connection with every
-mutating D-Bus method call that it completes without an error.</li>
-</ul>
-<p>The support for migrating symlinks introduced in Stratis 2.2.0 is no longer
-included in this release.</p>
-<p>The ongoing and perpetual but entirely routine work of improvements to
-individual log and error messages continues.</p>
-
                             </div>
                             <div class="read-more">
                                 <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-2-4-0&#x2F;">Read more...</a>
@@ -1326,93 +664,6 @@ individual log and error messages continues.</p>
 for a Linux installation with proper customization of the initramfs, our most
 recent feature provides all of the plumbing to fully support Stratis filesystems
 as the root filesystem of a Linux installation.</p>
-<h3 id="ipc">IPC</h3>
-<p>Stratis relies on D-Bus for interprocess communication between the daemon and the
-client. D-Bus does not currently ship in the initramfs so the first order of business
-was to choose an alternate form of IPC. Because we require the ability to pass a file
-descriptor from the client to the daemon, this made Unix sockets the only reasonable
-transport mechanism. After evaluating several JSON RPC libraries with Unix socket
-support, we decided to write a minimal RPC interface ourselves. This was due to a
-few constraints:</p>
-<ul>
-<li>JSON RPC libraries with Unix socket support did not support setting the ancillary
-data for packets required to send file descriptors.</li>
-<li>The libraries had relatively complicated threading models, and we preferred to take
-a simple approach of processing each new request using a Tokio task.</li>
-<li>It was relatively trivial to serialize full data structures as JSON thanks to
-[<code>serde_json</code>].</li>
-</ul>
-<p>This approach proved successful and we were able to implement an IPC mechanism
-that left our internal stratisd API unchanged. The alternate IPC mechanism is
-distributed in a separate pair of executables, stratis-min and stratisd-min.</p>
-<h3 id="support-in-the-initramfs">Support in the initramfs</h3>
-<p>The next step was to integrate stratisd-min into the initramfs. This involved quite a
-bit of configuration for dracut and systemd.</p>
-<p>Our current model uses systemd generators that are enabled by passing information on
-the kernel command line at boot to properly set up and unlock any devices that need
-to be unlocked. We aim to do this in as user-friendly of a way as possible by
-leveraging existing tools like Plymouth to handle prompting users for a passphrase
-on the splash screen.</p>
-<p>To set up the generators and necessary dependencies, we wrote two dracut modules:
-stratis and stratis-clevis. stratis-clevis depends on stratis and is required for
-automated unlocking using clevis.</p>
-<p>The required information on the kernel command line is:</p>
-<ul>
-<li><code> root=[STRATIS_FS_SYMLINK]</code>: The symlink under <code>/dev/stratis</code> that corresponds to
-the desired Stratis filesystem. This is required by dracut.</li>
-<li><code> stratis.rootfs.pool_uuid=[POOL_UUID]</code>: The UUID of the pool that contains the
-root filesystem.</li>
-</ul>
-<p>If the user requires networking (for example, unlocking a pool using Tang), the
-parameter <code>rd.neednet=1</code> is required as well.</p>
-<h3 id="testing-on-fedora-using-anaconda">Testing on Fedora using Anaconda</h3>
-<p>This process was relatively simple once it came time to test with Fedora. Anaconda
-provides the parameter <code>--dirinstall</code> which allows the user to install into a path
-with the mounted Stratis filesystem as the root directory. It requires a bit more
-configuration after the fact (manual <code>/etc/fstab</code> or <code>.mount</code> file configuration) but
-works quite well.</p>
-<h3 id="etc-fstab-or-mount-files"><code>/etc/fstab</code> or <code>.mount</code> files</h3>
-<p>We now also provide a systemd service to manage setting up non-root filesystems in
-/etc/fstab.  For devices that require a passphrase or are critical for a working
-system, the following line can be used:</p>
-<p><code>/dev/stratis/[STRATIS_SYMLINK] [MOUNT_POINT] xfs defaults,x-systemd.requires=stratis-fstab-setup@[POOL_UUID].service,x-systemd.after=stratis-fstab-setup@[POOL_UUID].service 0 2</code></p>
-<p>The absence of <code>nofail</code> here is due to the fact that <code>nofail</code> causes the boot to
-proceed prior to a successful mount. This means that passphrase prompts
-will not work properly, and most users will want critical system partitions to be
-mounted successfully or else have the boot fail.</p>
-<p>For devices that do not require interaction to set up, such as unencrypted devices or
-devices that have Clevis bindings, and are not critical for a working system, the
-following line can be optionally used:</p>
-<p><code>/dev/stratis/[STRATIS_SYMLINK] [MOUNT_POINT] xfs defaults,x-systemd.requires=stratis-fstab-setup@[POOL_UUID].service,x-systemd.after=stratis-fstab-setup@[POOL_UUID].service,nofail 0 2</code></p>
-<p>The addition of <code>nofail</code> here will cause mounting of this device to proceed
-independently from the boot which can speed up boot times. The set up process will
-continue running in the background until it either succeeds or fails.</p>
-<p>Because the root filesystem is mostly set up in the initramfs, the entry is slightly
-different and does not require the <code>stratis-fstab-setup</code> service. It should be:</p>
-<p><code>/dev/stratis/[STRATIS_SYMLINK] / xfs defaults 0 1</code></p>
-<h3 id="recovery-console">Recovery console</h3>
-<p>While we mention above that stratisd could previously be used in the initramfs, there
-is one major caveat: it could be started but commands could not be issued. This had
-one major drawback of not allowing users to interact with stratisd in the recovery
-console. D-Bus is not available in the recovery console, so the move to stratis-min
-and stratisd-min now allows users to perform recovery actions in the emergency console
-by starting stratisd-min and running the necessary commands using stratis-min. This
-will make rescuing systems that do not boot significantly easier moving forward.</p>
-<h3 id="scope-of-dracut-modules-and-systemd-service-files">Scope of dracut modules and systemd service files</h3>
-<p>While our dracut modules and systemd service files are meant to work for almost all
-users, they may not meet the requirements of everyone using them. We encourage those
-with more advanced configurations to design their own configurations and reach out
-for guidance as needed. Our configuration is also meant as a template that you can
-build on!</p>
-<h3 id="conclusion">Conclusion</h3>
-<p>While this took quite a bit of effort to put all of the pieces together, the Linux
-boot utilities had all of the features we needed to accomplish this. We're excited
-for future work with other teams to make using Stratis as the root filesystem
-for Linux installations even easier!</p>
-<h3 id="release-version">Release version</h3>
-<p>All of the utilities required for booting from a Stratis filesystem as the root
-filesystem will be included in stratisd 2.4.0.</p>
-
                             </div>
                             <div class="read-more">
                                 <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-rootfs&#x2F;">Read more...</a>
@@ -1430,343 +681,6 @@ filesystem will be included in stratisd 2.4.0.</p>
                             </h1>
                             <div class="post__summary">
                                 <p><em>mulhern, Stratis Team</em></p>
-<h1 id="introducing-support-for-multi-threading-in-stratisd">Introducing Support for Multi-threading in stratisd</h1>
-<p><code>stratisd</code> is an entirely single-threaded application;
-it is a daemon with a single event loop that consults a list of possible
-event sources in a prescribed order, handling the events on each event
-source before proceeding to the next.
-The event sources are udev, device-mapper, and D-Bus events which are
-handled in that order. <code>stratisd</code> can also be terminated cleanly by an
-interrupt signal, which it checks for on every loop iteration.</p>
-<p>Because <code>stratisd</code> is single threaded, every action taken by <code>stratisd</code> must be
-completed before another action is performed. For example, if a client issues
-a D-Bus message to create a filesystem, that command will be processed, the
-engine will create a filesystem, and a response will be transmitted on the
-D-Bus before any other action can be taken. If another D-Bus message is
-received before the first is completed, that D-Bus message will then be
-processed.  The engine will continue to process D-Bus messages until none are
-left, preventing it from handling any other categories of signals or
-events while any D-Bus messages remain.</p>
-<p>For this reason, <code>stratisd</code> itself can not parallelize long-running
-operations. It is well known that, for example, filesystem creation can be
-time consuming, as it is necessary to write the filesystem metadata when
-creating the filesystem. Ideally, <code>stratisd</code> would be able to run such time
-consuming operations in parallel, initiating one operation and then
-proceeding to initiate another before the first operation completes.</p>
-<p>Additionally, as in the example above, if <code>stratisd</code> is continually receiving
-D-Bus messages, it will not proceed to deal with a device-mapper event,
-even if the device-mapper event is urgent and not in any conflict with the
-D-Bus messages, for example, if it is associated with a different pool than
-any D-Bus messages.</p>
-<p>For these reasons, the next release introduces multi-threading capabilities
-into <code>stratisd</code>. These capabilities do not solve all the problems that
-multi-threading is intended to solve, but lay the essential foundation for
-multi-threaded event handling.</p>
-<p>We have chosen to implement multi-threading using the Rust <a href="https://tokio.rs/">tokio</a> crate.
-The alternative is to use operating system threads explicitly via the
-Rust standard library <a href="https://doc.rust-lang.org/std/thread/">thread</a> module. We have chosen <code>tokio</code> in order to
-get the benefits of code reuse from the <code>tokio</code> runtime, and because we
-expect that this choice will allow <code>stratisd</code> to operate efficiently while
-consuming fewer operating system resources.</p>
-<p>We have also made use of the newest version of the <a href="https://crates.io/crates/dbus">dbus</a> crate, which
-includes support for multi-threading via the <a href="https://crates.io/crates/dbus-tokio/">dbus-tokio</a> crate.</p>
-<h1 id="nomenclature">Nomenclature</h1>
-<p>The following words have a precise definition in the context of
-multi-threading:</p>
-<ul>
-<li>object - an instance of a Rust struct and the methods implemented for it.</li>
-<li>task - A task is a program which has been designed so that it can
-be run concurrently  with its fellow tasks. The multi-threaded incarnation
-of <code>stratisd</code> consists of a set of tasks, some code to facilitate interactions
-between the tasks, and the <code>tokio</code> runtime.</li>
-<li>context - the context of a process is all the information required to
-begin running the process when it resumes after having been suspended by the
-operating system scheduler. A context switch is the action of storing this
-information for the process being suspended and loading the information for
-the process being resumed.</li>
-<li>thread - a thread is a sub-division of a process. When an operating system
-switches processes, a context switch is required. When an operating
-system switches threads, the new thread shares much of its process' context
-with the previous thread. Consequently, switching between threads, as opposed
-to processes, may be an order of magnitude less expensive. All threads
-belonging to a process share the same memory and may communicate via this
-shared memory.</li>
-<li>runtime - the <code>tokio</code> runtime manages scheduling of tasks.</li>
-<li>block - a task is said to block on an operation if the task must wait
-for the operation to complete and is not able to be replaced in the same
-thread by another task until the operation is completed. Examples of typical
-operations are I/O or network interactions. Another sort of operation is
-the acquisition of a shared resource via a mutex or other synchronization
-primitive.</li>
-<li>blocking - a blocking task is a task that may block.</li>
-<li>non-blocking - a non-blocking task is a task that does not need to wait
-for any operation to complete; if it initiates an operation that may take
-a while to complete, it is able to yield to another task, and may be resumed
-later from the instruction where it yielded.</li>
-<li>mutex - a synchronization primitive which enforces mutual exclusion. With
-<code>tokio</code> the exclusion is enforced on a particular object. If a task obtains
-a mutex, it has exclusive use of the object until it releases the mutex.  If
-a mutex is already held by another task, a task requesting the mutex may
-block or it may yield until the mutex can be obtained.</li>
-<li>read/write lock - a mutex which is relaxed in so far as that it allows
-multiple tasks to share an object if none mutate the object. If a task
-mutates the object then it must obtain exclusive possession of the mutex.</li>
-<li>lock - to enter a mutex guarding an object is synonymous with locking
-an object.</li>
-</ul>
-<h1 id="design">Design</h1>
-<p><code>stratisd</code> divides its work among a number of tasks which handle
-different event sources. Some tasks are non-blocking, others are blocking
-tasks. Non-blocking tasks may yield, and can share a single thread with
-other non-blocking tasks. The tasks communicate using two unbounded MPSC
-(Multi-Producer Single-Consumer) channels; a channel for udev events and
-a channel for D-Bus updates.</p>
-<h2 id="termination-variable">Termination Variable</h2>
-<p>One boolean variable, <code>should_exit</code>, is shared among some of the tasks.
-It is set to true only if SIGINT is detected. It is observed only by the
-udev task, which checks its value on every iteration of its loop, and
-immediately returns if the value is <code>true</code>. For all other tasks, termination
-is handled by <code>tokio</code> constructs. The udev task requires special handling
-because it does not yield and because it contains a non-terminating loop.</p>
-<h2 id="the-dbus-tree">The dbus <code>tree</code></h2>
-<p>The dbus tree is a data structure which contains the state of the D-Bus
-layers. Access to the dbus tree is controlled by a read/write lock.</p>
-<h2 id="the-stratisd-engine">The stratisd engine</h2>
-<p>The <code>stratisd</code> engine is the core of the <code>stratisd</code> daemon. It manages all the
-essential functionality of <code>stratisd</code>. Access to the engine is controlled
-by a mutex.</p>
-<h2 id="the-dbus-channel">The dbus channel</h2>
-<p>The dbus channel is an unbounded multi-producer, single-consumer channel.
-It carries messages instructing the DbusTreeHandler how to update the dbus
-tree. The DbusTreeHandler task is the unique consumer of the messages.
-The DbusConnectionHandler, which processes D-Bus messages sent by the client,
-and the DbusUdevhandler, which handles udev events, may both place messages
-on the dbus channel.</p>
-<h2 id="the-udev-channel">The udev channel</h2>
-<p>The udev channel is an unbounded multi-producer, single-consumer channel.
-It carries messages about udev events to the DbusUdevHandler. There is
-only one producer for this channel, the udev event handling task,
-which monitors udev events and places those events on the channel.</p>
-<h2 id="signal-handling-task">signal handling task</h2>
-<p>The signal handling task is a non-blocking task which waits for SIGINT. If
-it receives the signal it sets <code>should_exit</code> to true and finishes.</p>
-<h2 id="device-mapper-event-task">device-mapper event task</h2>
-<p>The device-mapper event task loops forever waiting for a device-mapper event.
-On receipt of any event, it locks the <code>stratisd</code> engine, and processes the
-event. It yields when waiting for a new device-mapper event or when waiting
-for a lock on the engine.</p>
-<h2 id="udev-event-handling-task">udev event handling task</h2>
-<p>The udev event handling task uses a polling mechanism to detect udev events.
-If a udev event is detected it places a message on the <code>stratisd</code> udev channel.
-It reads <code>should_exit</code> after every udev event or, if no udev event has
-occurred, after a designated time interval. If  <code>should_exit</code> is <code>true</code> when
-read it returns immediately.</p>
-<h2 id="d-bus-tasks">D-Bus Tasks</h2>
-<p>The management of the D-Bus layer is handled by several cooperating tasks.
-The dbus crate supplies one task, which detects D-Bus messages and places
-them on its own unbounded channel. The <code>stratisd</code> tasks are the
-DbusTreeHandler task, the DbusConnectionHandler task, and the
-DbusUdevHandler task.</p>
-<h2 id="dbustreehandler-task">DbusTreeHandler task</h2>
-<p><code>stratisd</code> defines a DbusTreehandler task which updates the dbus tree and
-may also handle emitting D-Bus signals. It is the unique receiver on
-the <code>stratisd</code> dbus channel and the only task which obtains a write lock
-on the dbus tree. It is a non-blocking task.</p>
-<h2 id="dbusconnectionhandler-task">DbusConnectionHandler task</h2>
-<p><code>stratisd</code> defines a DbusConnectionHandler task which spawns a
-new task for every D-Bus method call. Each spawned task obtains a read
-lock on the dbus tree before it begins to process the D-Bus method call,
-and may also lock the engine. If it locks the engine, it blocks on the lock.
-Each spawned task may place messages on the <code>stratisd</code> dbus channel. Each
-task is responsible for sending replies to its D-Bus message on the D-Bus.
-This is the only part of the implementation where new tasks can be spawned
-during <code>stratisd</code>'s regular operation.</p>
-<h2 id="dbusudevhandler-task">DbusUdevHandler task</h2>
-<p><code>stratisd</code> defines a DbusUdevHandler task which removes udev event information
-from the <code>stratisd</code> udev channel, allows the engine to process it, and puts
-any messages that may be necessary as a result of the engine processing the
-udev event on the <code>stratisd</code> dbus channel. Currently, a udev event may result in
-a pool being set up; when that happens an add message must be placed on the
-dbus channel for every filesystem or block device belonging to the pool,
-as well as an add message for the pool itself. The DbusUdevHandler locks
-the engine when processing a udev event, but does not block on the lock.</p>
-<h1 id="properties-and-consequences">Properties and Consequences</h1>
-<h2 id="unbounded-channels">Unbounded Channels</h2>
-<p>Both the <code>stratisd</code> udev channel and the dbus channel are "unbounded channels".
-These "unbounded" channels are actually bounded, but the bound on the number
-of messages allowed on the channel is the maximum value of the Rust usize type.
-It is assumed that other machine limits will be encountered before the number
-of messages on the channel reaches that limit. Because both channels are
-unbounded, tasks do not block placing a message on the channel, sending
-always succeeds.</p>
-<p>We chose to make the dbus channel unbounded, as there exist two situations
-where a large number of messages may be placed on the channel. When a pool
-is constructed, the number of messages placed on the channel is proportional
-to the number of devices in the pool. On startup, when <code>stratisd</code> sets up
-a pool from its constituent devices, the number of messages is proportional
-to the number of devices and to the number of filesystems that the pool
-supports. We prefer to use an unbounded channel rather than to bound the
-number of filesystems by the channel size.</p>
-<p>Generally speaking, we expect the number of messages on the channel, except
-on the occasion of pool creation or setup, to be no greater than 1; no other
-action currently implemented requires more than one message to be sent to the
-DbusTreeHandler. Messages will be rapidly consumed by the DbusTreeHandler, as
-it is the only task that takes a write lock on the dbus tree, and a task
-waiting for a write lock takes precedence over one waiting for a read lock.</p>
-<p>The choice of unbounded channels also eliminates one possible source of
-deadlock.</p>
-<h2 id="bounded-number-of-blocking-threads">Bounded Number of Blocking Threads</h2>
-<p>We have accepted, at this time, the <code>tokio</code> default for the number of blocking
-threads, which is 512. Because the DbusConnectionHandler's generated tasks
-are blocking, this places an upper bound on the number of
-distinct D-Bus messages that can be handled concurrently. Note that it
-is quite possible for 512 D-Bus messages to be handled by just one thread,
-as each task may be run in sequence on a single thread if the tasks complete
-rapidly.</p>
-<p>We do not believe that this restriction will prove important in practice.
-The dbus crate's message channel is unbounded, so D-Bus messages can not be
-dropped although they may be handled very slowly if there is a backlog.
-Depending on the client's configuration, this may cause the client to hang
-indefinitely waiting for a response or the client may receive a message
-indicating that no response was transmitted in the allotted time. However,
-this situation can only arise if many messages require long-running actions
-to be taken and if these messages are sent in parallel.</p>
-<p>In any case, the improvement with respect to a single-threaded approach is
-obvious. In the existing single threaded design, <code>stratisd</code> would be
-unable to handle any other events until all the D-Bus messages had been
-handled. With the multi-threaded design, udev and device-mapper events can
-be handled when they arrive, interspersed with the handling of the D-Bus
-messages.</p>
-<h2 id="one-task-per-d-bus-message-model">One Task per D-Bus Message Model</h2>
-<p>In the single-threaded design, every D-Bus message is handled completely
-before handling of the next D-Bus message is begun. In our multi-threaded
-design multiple D-Bus message handling tasks may be being processed at the same
-time if the <code>tokio</code> scheduler allocates two message handling tasks to separate
-threads.</p>
-<p>Each such task must:</p>
-<ol>
-<li>Acquire a read lock on the dbus tree.</li>
-<li>Query the tree in order to find the necessary information to call the engine
-method.</li>
-<li>Enter a mutex on the <code>stratisd</code> engine.</li>
-<li>Operate on the <code>stratisd</code> engine.</li>
-<li>Place any required messages on the dbus channel.</li>
-<li>Exit the mutex.</li>
-<li>Relinquish the read lock.</li>
-</ol>
-<p>While processing of each message will be started precisely in the sequence
-in which the messages arrive, the order in which messages complete may not
-be the same, because a later task may enter the engine mutex before an earlier
-task.</p>
-<p>The motivation for this design is obvious, although the benefits are not
-yet realized in this preliminary multi-threading implementation. In future,
-we expect to relax the requirement that each task have exclusive access to
-the entire engine and lock only the relevant parts of the engine. With that
-extension two non-interfering D-Bus commands may be run separately. The
-same general advantage from this proposed enhancement will also be gained
-in the matter of, for example, handling device-mapper events while
-simultaneously handling a D-Bus method.</p>
-<p>This change introduces a relaxation of certain properties that held in
-the single-threaded case.</p>
-<ol>
-<li>
-<p>If a D-Bus method that mutates state and requires an update to the
-dbus tree is invoked the changes to the dbus tree resulting from that method
-call are not visible until some time after the call has returned as updates
-to the dbus tree can only occur after the method has completed. This can
-be observed by a client, if the client invokes a second method immediately
-after the first has returned. For example, if the client invokes the CreatePool
-method and then immediately invokes the GetManagedObjects() method, some
-pool object paths corresponding to the pool or its devices may not yet
-be present in the tree. The opposite behavior can also be observed, for
-example, if the client invokes the DestroyPool method, some object paths
-belonging to the destroyed pool may still be found by a GetManagedObjects()
-invocation.</p>
-</li>
-<li>
-<p>If two D-Bus methods are invoked in separate processes, the same behaviors
-described in (1) are somewhat easier to observe.</p>
-</li>
-<li>
-<p>We believe that we have made it impossible to incorrectly update the
-tree by returning rich result types from the engine methods.</p>
-</li>
-</ol>
-<p>Given two distinct mutating D-Bus methods running in separate threads
-there is a possibility of a situation rather analogous to a race-condition
-arising. Two tasks may read the dbus tree, update the internal engine state,
-and then send update messages on the dbus channel. It is uncertain which
-task will acquire the engine mutex. This is
-partially analogous to the classic race-condition where two processes read a
-single variable, and then both update that variable in an undetermined order.</p>
-<p>What makes this analogy only partial is the interposition of the engine,
-which restricts the updates that may be requested of the DbusTreeHandler by
-the DbusRequestHandler. The engine methods invoked by the D-Bus layer return
-a result which sufficiently distinguishes the actions actually taken by
-the engine so that conflicting updates to the dbus tree can not be
-requested. Thus the updates are constrained to be correct.</p>
-<p>For example, consider that two conflicting commands may be handled at the
-same time: one command to delete a filesystem and the other to rename
-the same filesystem. If both commands are being handled in separate threads
-each will read the same data based on the filesystem object. Then, either
-one may enter the engine mutex. If the rename task enters the mutex first,
-it will be the first to place a message on the dbus channel. The DbusTreeHandler
-will remove the rename message first and then the remove message placed
-on the dbus channel after the remove request completes. Clearly,
-this order of processing can not result in an error. With the other order,
-the remove message will be placed on the dbus channel before the rename
-occurs. But in this case, the engine method will return a result indicating
-that no rename could occur, because the filesystem could not be found.
-Consequently, no rename message will be put on the dbus channel, and so the
-DbusTreeHandler will receive the remove message only. Thus, no incorrect
-update is performed on the dbus tree.</p>
-<h2 id="error-behavior">Error Behavior</h2>
-<p><code>stratisd</code> exits if any task returns an error, using the same mechanism
-and general procedure that it uses on receipt of SIGINT. Causes of error
-may include:</p>
-<ul>
-<li>an error when polling for udev events</li>
-<li>an error when polling for device-mapper events</li>
-<li>failure to properly set up a D-Bus connection on startup</li>
-<li>an error when consuming a message on one of the <code>stratisd</code> channels</li>
-</ul>
-<p>A properly handled error within the <code>stratisd</code> engine will not
-result in the termination of any tasks. In the case of a D-Bus method call,
-for example, an error result is interpreted by the D-Bus layer, and some
-representation of that error is then incorporated into the message returned
-on the D-Bus.</p>
-<p>We have taken great care to avoid panics within <code>stratisd</code>. Nonetheless,
-it is reasonable to discuss possible behavior on any panic which may
-occur.</p>
-<p>If one of the dynamically spawned DbusTreeHandler tasks experiences a panic
-while executing, <code>stratisd</code> will not be terminated. Only the currently running
-task will fail to complete.  When a new D-Bus message is received, a new task
-will be spawned and will execute as usual.</p>
-<p>However, a panic that occurs during the execution of a task like the
-udev event handling task, of which there is only one spawned when
-<code>stratisd</code> is started, will cause <code>stratisd</code> to exit.</p>
-<h2 id="ensuring-a-clean-and-prompt-exit">Ensuring a Clean and Prompt Exit</h2>
-<p>On SIGINT, <code>stratisd</code> should exit promptly and cleanly. This is ensured by:</p>
-<ol>
-<li>Having a separate signal handling task that waits on SIGINT. The <code>tokio</code>
-scheduler will ensure that this task is run regularly; thus the signal
-can not be ignored. Note that in the single-threaded case it is possible
-for the signal handling code never to be reached.</li>
-<li>Causing asynchronous tasks to terminate at their next synchronization point
-when the signal handling task terminates.</li>
-<li>Having the udev event handling loop check the flag set by the signal
-handling task on every iteration, and terminate if the flag
-is true.</li>
-<li>Each distinct D-Bus method processing task is allowed to run to completion,
-so that every action that it has begun can be completed.</li>
-</ol>
-<h1 id="statistics">Statistics</h1>
-<p>Using <code>tokio</code> increases the size of the <code>stratisd</code> executable by about 1 MiB,
-which at <code>stratisd</code>'s current size is an increase of approximately 20%.</p>
-<h1 id="remarks">Remarks</h1>
-<p>Preliminary multi-threading support will be included in the next <code>stratisd</code>
-release, 2.4.0.</p>
-
                             </div>
                             <div class="read-more">
                                 <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;multi-threading&#x2F;">Read more...</a>
@@ -1786,64 +700,6 @@ release, 2.4.0.</p>
                                 <p><em>mulhern, Stratis Team</em></p>
 <p>Stratis 2.3.0 adds additional flexibility to its encryption support via
 <a href="https://github.com/latchset/clevis">Clevis</a>.</p>
-<h2 id="stratis-2-3-0">stratis 2.3.0</h2>
-<p>This release extends the <code>pool unlock</code> command, and adds two new commands,
-<code>pool bind</code> and <code>pool unbind</code>.</p>
-<p>The <code>pool bind</code> command establishes an alternative mechanism for unlocking
-a pool. The user may select either the "tang" mechanism, which implements
-NBDE (Network-bound Disc Encryption) by means of a Tang server, or the
-"tpm2" mechanism, which uses TPM 2.0 (Trusted Platform Module) encryption.
-Binding the devices in a pool to a supplementary Clevis encryption policy does
-not remove the primary encryption mechanism, which uses a key in the kernel
-keyring.</p>
-<p>The <code>pool unbind</code> command simply unbinds a previously added encryption
-policy from all the devices in the specified pool.</p>
-<p>In the <code>pool unlock</code> command it is now necessary to specify the mechanism.
-Use <code>clevis</code> to make use of the Clevis unlocking policy previously
-specified for the devices in the pool. Use <code>keyring</code>, to make use of the
-mechanism that uses a key in the kernel keyring, which was introduced
-in Stratis 2.1.0. Note that the <code>pool unlock</code> command unlocks all currently
-locked pools.</p>
-<h2 id="stratisd-2-3-0">stratisd 2.3.0</h2>
-<p>This release introduces two D-Bus interface revisions, which differ in the
-following way from the previous revisions.</p>
-<p><code>org.storage.stratis2.Manager.r3</code> modifies the <code>UnlockPool</code> method to take
-an additional parameter, <code>unlock_method</code>, which may be <code>keyring</code> or <code>clevis</code>.</p>
-<p><code>org.storage.stratis2.pool.r3</code> adds two new method: <code>Bind</code> and <code>Unbind</code>.
-The <code>Bind</code> method takes two arguments, <code>pin</code> and <code>json</code>. The <code>pin</code> argument
-designates the Clevis pin as a string, and the <code>json</code> argument encodes
-a Clevis configuration appropriate to the designated pin. The configuration
-is a JSON object. Besides Clevis information, it may include Stratis-specific
-keys that encode configuration decisions that Stratis may implement. At
-present there is just one such key: <code>stratis:tang:trust_url</code>.
-The <code>Unbind</code> method reverses a <code>Bind</code> action.</p>
-<h2 id="remarks">Remarks</h2>
-<p>The <code>Bind</code> method may be called with any Clevis pin and configuration;
-we expect that any valid Clevis pin and configuration can be used to bind the
-devices in a pool. However the Stratis project officially supports only the
-"tang" and "tpm2" pins as those are the pins that may be designated via
-<code>stratis</code>. Support for additional Clevis policies may be introduced into
-<code>stratis</code> in later releases.</p>
-<p>When binding a supplementary encryption policy to the devices in a pool
-using Clevis, the primary key, which is the key in the kernel keyring which
-was originally used to encrypt each device, must be supplied. stratisd
-obtains the appropriate key from the kernel keyring in order to provide it
-to the Clevis binding mechanism. The correct key must be present in the
-keyring for the bind operation to succeed. It is not necessary for the user
-to specify the key, stratisd obtains the necessary information from the
-LUKS2 metadata on the devices in the pool.</p>
-<p>In general, it is unwise to write a key consisting of arbitrary binary data
-to a keyfile. An accidental newline character in the data may cause the
-contents of the file to be truncated at the newline when read in one context
-while all the data may be read from the file in some other context.</p>
-<p>We are not aware that such a mistake would result in any error in Stratis's
-operation when Stratis is used in the way that we recommend. We explicitly
-acknowledge that it might be possible, through some direct interaction with
-the stratisd D-Bus API, or by, e.g., setting a key in the kernel keyring
-without using stratis, to manufacture a situation where stratisd could not
-bind the devices in a pool, even when the correct key is set in the kernel
-keyring. We would not treat such a situation as evidence of a bug in Stratis.</p>
-
                             </div>
                             <div class="read-more">
                                 <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-2-3-0&#x2F;">Read more...</a>
@@ -1862,18 +718,6 @@ keyring. We would not treat such a situation as evidence of a bug in Stratis.</p
                             <div class="post__summary">
                                 <p><em>mulhern, Stratis Team</em></p>
 <p>Stratis 2.2.1 is a bug fix release. It fixes the following bugs:</p>
-<ul>
-<li>It was possible to cause stratisd to hang by leaving open a D-Bus
-connection when setting a key in the kernel keyring.</li>
-<li>stratis would pass as arguments on the D-Bus and stratisd would accept
-relative, rather than absolute, path names to specify devices.</li>
-<li>Pool and filesystem names that included characters that would be escaped
-by udev when constructing filesystem symlinks were permitted.</li>
-<li>The man page entry for the <code>key list</code> command was missing.</li>
-</ul>
-<p>Other general improvements were made, and several crate version requirements
-were increased.</p>
-
                             </div>
                             <div class="read-more">
                                 <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-2-2-1&#x2F;">Read more...</a>
@@ -1900,36 +744,6 @@ encryption-key entry in stratisd rather than in stratis-cli.</p>
 <p>This release also includes enhancements to the stratisd D-Bus interface,
 various bug fixes, and a change in the stratisd CLI specification for
 log levels.</p>
-<h2 id="stratisd-2-2-0">stratisd 2.2.0</h2>
-<p>This release creates and maintains Stratis filesystem symlinks in
-<code>/dev/stratis</code> by means of udev rules. It includes a small Rust script,
-<code>stratis_uuids_to_names</code> which is invoked by the Stratis udev rule which
-sets the Stratis filesystem symlinks.</p>
-<p>In the case where stratisd is updated in place, some filesystem symlinks
-may remain in <code>/stratis</code>. This release includes a shell script,
-<code>stratis_migrate_symlinks.sh</code> which may be used to clean up the <code>/stratis</code>
-directory and ensure that the correct symlinks exist in <code>/dev/stratis</code>. The
-script removes the <code>/stratis</code> directory once it has completed without error.
-The shell script relies on a small Rust script, <code>stratis_dbusquery_version</code>
-which is included with this version of stratisd.</p>
-<p>This release also extends the D-Bus interface in a few ways:</p>
-<ul>
-<li>It sends <code>org.freedesktop.DBus.ObjectManager.InterfacesAdded</code>and
-<code>org.freedesktop.DBus.ObjectManager.InterfacesRemoved</code> signals on the
-D-Bus whenever a D-Bus object is added to or removed from the D-Bus
-interface.</li>
-<li>It adds a new D-Bus property, <code>PhysicalPath</code>, for the
-<code>org.storage.stratis2.blockdev.r2</code> interface. This property is
-principally useful for encrypted Stratis block devices; it identifies
-the block device on which the Stratis LUKS2 metadata resides.</li>
-<li>It adds a new key, <code>LockedPools</code>, to the
-<code>org.storage.stratis2.FetchProperties.r2</code> interface for objects that
-implement the <code>org.storage.stratis2.Manager</code> interface. This key
-returns a D-Bus object that maps the UUIDs of locked pools to their
-corresponding key descriptions.</li>
-</ul>
-<p>Please consult the D-Bus API Reference for the precise D-Bus specification.</p>
-
                             </div>
                             <div class="read-more">
                                 <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-2-2-0&#x2F;">Read more...</a>
@@ -1950,7 +764,6 @@ corresponding key descriptions.</li>
 <p>stratis-cli 2.1.1 fixes a bug where if one encrypted pool could not be
 unlocked, execution terminated, and no attempt was made to unlock any other
 pools that might need to be unlocked (<a href="https://github.com/stratis-storage/stratis-cli/issues/618">stratis issue 618</a>).</p>
-
                             </div>
                             <div class="read-more">
                                 <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-cli-release-notes-2-1-1&#x2F;">Read more...</a>
@@ -1972,89 +785,6 @@ pools that might need to be unlocked (<a href="https://github.com/stratis-storag
 <p>It supports per-pool encryption of the devices that form a pool's data
 tier. A pool may be encrypted, or its constituent encrypted devices may
 be activated, by means of a key stored in the kernel keyring.</p>
-<h2 id="stratisd-2-1-0">stratisd 2.1.0</h2>
-<p>This release implements encryption support and adds several new D-Bus
-interfaces to administer or monitor that support.</p>
-<p>It implements encryption support in the following way:</p>
-<ul>
-<li>A single instance of stratisd can support both encrypted and unencrypted
-pools.</li>
-<li>The choice to encrypt a pool must be made at the time a pool is created.</li>
-<li>At present, the use of a cache and of encryption are mutually exclusive;
-if the pool is created with encryption enabled, then it is not possible
-to create a cache.</li>
-<li>Each pool may be encrypted by means of a key in the kernel keyring; each
-encrypted pool may make use of a different key, but all devices in a pool
-are encrypted with a single key.</li>
-<li>Any additional devices that are added to an encrypted pool's data tier
-will be encrypted using the key that was specified when the pool was
-initialized.</li>
-</ul>
-<p>stratisd 2.1.0 supplies several new D-Bus interfaces:</p>
-<ul>
-<li><code>org.storage.stratis2.manager.r1</code>: This interface supplies an
-extended <code>CreatePool</code> method, to support an optional argument for
-encryption. In addition, it supplies a number of method for key
-management.</li>
-<li><code>org.storage.stratis2.pool.r1</code>: This interface supports explicit
-initialization of a cache tier. Previously, a cache was initialized as
-a side-effect of the addition of the first device to the cache tier.
-It also supports the new <code>Encrypted</code> property.</li>
-<li><code>org.storage.stratis2.FetchProperties.r1</code>: This interface supports an
-additional <code>HasCache</code> property.</li>
-<li><code>org.storage.stratis2.Report.r1</code>: This interface supports a set of
-ad-hoc reports about Stratis. The interface is unstable; the names by
-which the reports can be accessed are not guaranteed to remain stable,
-and the format of any report is only guaranteed to be valid JSON.</li>
-</ul>
-<p>Please consult the D-Bus API Reference for the precise D-Bus specification.</p>
-<p>The following are significant implementation details:</p>
-<ul>
-<li>Each block device in an encrypted pool's data tier is encrypted with a
-distinct, randomly chosen MEK (Media Encryption Key) on initialization.</li>
-<li>All devices belonging to a single encrypted pool share a single passphrase,
-supplied via the kernel keyring.</li>
-<li>The release requires cryptsetup version 2.3.</li>
-</ul>
-<p>We would like to thank our external contributor GuillaumeGomez for further
-work on metadata refactoring (<a href="https://github.com/stratis-storage/stratisd/issues/1573">stratisd issue 1573</a>).</p>
-<h2 id="stratis-cli-2-1-0">stratis-cli 2.1.0</h2>
-<p>This release requires stratisd 2.1.0. The user will observe the following
-changes:</p>
-<ul>
-<li>The <code>pool create</code> command has been extended to allow encryption.</li>
-<li>There is a new <code>pool init_cache</code> command, for initializing a cache.</li>
-<li>There is a new subcommand, <code>key</code>, for key management tasks.</li>
-<li>There is a new subcommand, <code>report</code>, which allows the display of certain
-reports generated by stratisd.</li>
-<li>The output of <code>pool list</code> now includes a <code>Properties</code> column; each
-entry in the column is a string encoding the following properties of the
-pool:
-<ul>
-<li>whether or not it has a cache</li>
-<li>whether or not it is encrypted</li>
-</ul>
-</li>
-</ul>
-<p>All commands now verify that stratis is communicating with a compatible
-version of stratisd and will fail with an appropriate error if stratisd is
-found to have an incompatible version.</p>
-<h2 id="usage">Usage</h2>
-<p>To create an encrypted pool, a user must first ensure that a key is placed
-in the kernel keyring. We strongly encourage using the commands available
-via the stratis <code>key</code> subcommand for this task. This key, which is secret,
-has a corresponding key description, which is public.</p>
-<p>An encrypted pool is then created by specifying the key description
-when using the <code>pool create</code> command.</p>
-<p>It is necessary that the correct key and corresponding key description be set
-in the kernel keyring in order to set up a previously encrypted pool. Setting
-up a previously encrypted pool requires an explicit <code>pool unlock</code> command from
-the user. This command will attempt to unlock the devices belonging to any
-previously encrypted pool; it can only unlock all devices if a key for every
-encrypted pool is in the keyring. Once the devices belonging to a previously
-encrypted pool have been unlocked, the pool will be set up, and can be used in
-exactly the same manner as an unencrypted pool.</p>
-
                             </div>
                             <div class="read-more">
                                 <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-2-1-0&#x2F;">Read more...</a>
@@ -2074,7 +804,6 @@ exactly the same manner as an unencrypted pool.</p>
                                 <p><em>mulhern, Stratis Team</em></p>
 <p>stratisd 2.0.1 contains a number of internal improvements as well as
 enhanced logging.</p>
-
                             </div>
                             <div class="read-more">
                                 <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratisd-release-notes-2-0-1&#x2F;">Read more...</a>
@@ -2094,7 +823,6 @@ enhanced logging.</p>
                                 <p><em>mulhern, Stratis Team</em></p>
 <p>stratis-cli 2.0.1 contains a number of internal improvements as well as
 some improvements to certain error messages.</p>
-
                             </div>
                             <div class="read-more">
                                 <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-cli-release-notes-2-0-1&#x2F;">Read more...</a>
@@ -2112,21 +840,6 @@ some improvements to certain error messages.</p>
                             </h1>
                             <div class="post__summary">
                                 <p><em>John Baublitz, Stratis Team</em></p>
-<p>One major focus in the Stratis project recently has been adding an encryption layer
-for data in Stratis pools. Cryptsetup provides a library backend for programmatically
-setting up device encryption, so we decided to write Rust bindings to access the
-existing Cryptsetup functionality in Rust.</p>
-<p>While designing the bindings, we took every opportunity to make use of Rust's
-type system, leveraging features like reference lifetimes and type parameters
-to ensure that as much of our public API as possible can be validated by the
-compiler.</p>
-<p>Though these bindings were designed with Stratis in mind, it is intended
-to be general-purpose and so we encourage others to try it out. The license
-is MPLv2, but it becomes effectively GPL when linked with libcryptsetup.
-As a result, any project using our bindings will also need to be GPL or
-GPL-compatible.</p>
-<p>If you're interested in seeing more, you can find <a href="https://github.com/stratis-storage/libcryptsetup-rs">the repository here</a>.</p>
-
                             </div>
                             <div class="read-more">
                                 <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;cryptsetup&#x2F;">Read more...</a>
@@ -2147,63 +860,6 @@ GPL-compatible.</p>
 <p>Stratis 2.0 is a significant update for both the daemon and the CLI. The
 changes to the daemon are covered first, followed by the changes to the
 CLI.</p>
-<h2 id="stratisd-2-0-0">stratisd 2.0.0</h2>
-<p>This release makes the D-Bus API more robust, reliable, predictable, and
-extensible. There are several significant changes:</p>
-<ul>
-<li>
-<p>The set of D-Bus properties has been reduced to a core set of fundamental
-and stable properties. Other filesystem, pool, or block devices properties are
-now obtainable via methods in the <code>FetchProperties</code> interface. This change
-increases the robustness of the D-Bus interface to failures occurring in any
-particular pool, filesystem, or block device, and decreases the computational
-cost of most operations requested by the Stratis CLI. Several properties,
-formerly returned as D-Bus properties, are now unavailable by means of the
-D-Bus. In every case, the reason for removing the property was that it did not
-represent a well-defined value. See <a href="https://github.com/stratis-storage/project/issues/52">project issue 52</a> for further details.</p>
-</li>
-<li>
-<p>All D-Bus method calls are idempotent. This should make writing scripts
-using the D-Bus API much simpler and make reasoning about the behavior
-of the engine more straightforward. Henceforth, we will treat as a bug any
-non-idempotent behavior in the D-Bus API. See <a href="https://github.com/stratis-storage/project/issues/51">project issue 51</a> for further
-details.</p>
-</li>
-<li>
-<p>All D-Bus size values are now returned in bytes. Again, this should make
-writing scripts against the D-Bus more straightforward, since it will be
-unnecessary for the script writer to change their interpretation of the number
-returned on the D-Bus depending on the value that it represents. See
-<a href="https://github.com/stratis-storage/stratisd/issues/1243">stratisd issue 1243</a> for further details.</p>
-</li>
-</ul>
-<p>Future enhancements to the D-Bus API will be implemented by means of
-additional versioned interfaces.</p>
-<p>Please consult the D-Bus API Reference for the precise D-Bus specification.</p>
-<h2 id="stratis-cli-2-0-0">stratis-cli 2.0.0</h2>
-<p>This release requires stratisd 2.0.0. The user will observe the following
-significant improvements:</p>
-<ul>
-<li>
-<p>The CLI is significantly more robust. Previously, there was a category of
-error conditions in pools, filesystems, and block devices that would make the
-CLI virtually unusable; this problem has now been entirely resolved. See
-<a href="https://github.com/stratis-storage/project/issues/52">project issue 52</a> for further details.</p>
-</li>
-<li>
-<p>The CLI now reports errors consistently in conditions where a human user
-would generally expect an error to be reported. Previously, many commands in
-the CLI were idempotent, to facilitate scripting. Now there is a clear
-distinction between the CLI behavior and the stratisd D-Bus API behavior: the
-CLI behavior is designed strictly according to the expectations of a human
-user, the stratisd D-Bus API is the programmable interface. See
-<a href="https://github.com/stratis-storage/project/issues/51">project issue 51</a> for further details.</p>
-</li>
-</ul>
-<p>As always, anyone wishing to implement a program that uses Stratis for
-storage management is strongly advised to make use of the stratisd D-Bus API
-rather than the CLI.</p>
-
                             </div>
                             <div class="read-more">
                                 <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-2-0-0&#x2F;">Read more...</a>
@@ -2221,19 +877,6 @@ rather than the CLI.</p>
                             </h1>
                             <div class="post__summary">
                                 <p><em>mulhern, Stratis Team</em></p>
-<p>With this release stratis now recognizes an environment variable,
-<code>STRATIS_DBUS_TIMEOUT</code>. This environment variable controls the timeout for
-any individual D-Bus call that stratis makes. You may want to set it to a
-higher value than the default, which is 120 seconds, if you are running
-tests or otherwise scripting via stratis, and wish to avoid erroneous errors
-resulting from slow operations in your testing environment. See
-<a href="https://github.com/stratis-storage/stratis-cli/issues/252">stratis-cli issue 252</a> for further details.</p>
-<p>This release also introduces simplified and more complete error-reporting.
-For stratis, it constitutes an error if any command issued results in a
-Python stack trace. If you experience any such incident, please
-report it in a GitHub issue, including the full stack trace, and
-circumstances that led up to the incident.</p>
-
                             </div>
                             <div class="read-more">
                                 <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-cli-release-notes-1-1-0&#x2F;">Read more...</a>
@@ -2257,7 +900,6 @@ a failure to properly update the Stratis metadata if stratisd was restarted
 in an environment where the system clock indicated a time earlier than when
 it had previously been running. See <a href="https://github.com/stratis-storage/stratisd/issues/1509">stratisd issue 1509</a> for further
 details.</p>
-
                             </div>
                             <div class="read-more">
                                 <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratisd-release-notes-1-0-6&#x2F;">Read more...</a>
@@ -2279,7 +921,6 @@ details.</p>
 <h2 id="initial-stable-stratis-release">Initial Stable Stratis Release</h2>
 <p>Stratis is a Linux local storage management tool that aims to enable easy use of advanced storage features such as thin provisioning, snapshots, and pool-based management and monitoring.</p>
 <p>After two years of development, Stratis 1.0 has stabilized its on-disk metadata format and command-line interface, and is ready for more widespread testing and evaluation by potential users. Stratis is implemented as a daemon – <code>stratisd</code> – as well as a command-line configuration tool called stratis, and works with Linux kernel versions 4.14 and up.</p>
-
                             </div>
                             <div class="read-more">
                                 <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-1-0-0&#x2F;">Read more...</a>
@@ -2300,7 +941,6 @@ details.</p>
 <p>This release is suitable for developers and early testers. It should not be
 used with valuable data, and pools created with this release will not be
 supported in Stratis 1.0, due to upcoming on-disk format changes.</p>
-
                             </div>
                             <div class="read-more">
                                 <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-0-5&#x2F;">Read more...</a>

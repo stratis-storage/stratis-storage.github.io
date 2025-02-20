@@ -114,6 +114,7 @@
 on Fedora to enable Stratis as the root filesystem for a Fedora install.</p>
 <p>If you have not already looked at <a href="https://stratis-storage.github.io/stratis-rootfs/">the guide</a> for root filesystem work, please read that first. It is a
 prerequisite.</p>
+<span id="continue-reading"></span>
 <p>For a little bit of background, stratisd provides an additional subpackage for our dracut modules that we
 use to set up the root filesystem during early boot. This package installs the necessary modules for dracut
 to automate the setup. However there are some steps that may not be obvious to users to get this all to work.
@@ -131,7 +132,7 @@ under /etc/dracut.conf.d/99-stratisd.conf:</li>
 initramfs renders your install unbootable.</li>
 <li>Once you've verified that everything works as expected, run <code>dracut --force --kver=[KERNEL_VERSION]</code></li>
 </ol>
-<span id="continue-reading"></span>
+
 </div>
 
         </div>

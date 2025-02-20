@@ -175,7 +175,7 @@
 for a Linux installation with proper customization of the initramfs, our most
 recent feature provides all of the plumbing to fully support Stratis filesystems
 as the root filesystem of a Linux installation.</p>
-<h3 id="ipc">IPC</h3>
+<span id="continue-reading"></span><h3 id="ipc">IPC</h3>
 <p>Stratis relies on D-Bus for interprocess communication between the daemon and the
 client. D-Bus does not currently ship in the initramfs so the first order of business
 was to choose an alternate form of IPC. Because we require the ability to pass a file
@@ -261,7 +261,7 @@ for Linux installations even easier!</p>
 <h3 id="release-version">Release version</h3>
 <p>All of the utilities required for booting from a Stratis filesystem as the root
 filesystem will be included in stratisd 2.4.0.</p>
-<span id="continue-reading"></span><h3 id="corrections">Corrections</h3>
+<h3 id="corrections">Corrections</h3>
 <ul>
 <li>The <code>/etc/fstab</code> examples previously omitted <code>.service</code> for <code>stratis-fstab-setup</code>. systemd
 assumes that any unit dependency in <code>/etc/fstab</code> is a <code>.mount</code> unit file unless explicitly

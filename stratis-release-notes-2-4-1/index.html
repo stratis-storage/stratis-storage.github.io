@@ -112,6 +112,7 @@
   <p><em>mulhern, Stratis Team</em></p>
 <p>Stratis 2.4.1 is a bug fix release, which addresses a flaw in the
 multi-threading implementation.</p>
+<span id="continue-reading"></span>
 <p>A user could observe the behavior caused by the flaw when CLI commands would
 either take far longer to complete than normal or the D-Bus connection would
 eventually time out.</p>
@@ -138,7 +139,6 @@ included with the release.</p>
 <li>an improvement to the listing of block devices</li>
 <li>a new report with key <code>managed_objects_report</code></li>
 </ul>
-<span id="continue-reading"></span>
 <p>Previously, stratisd made use of the dbus-tokio crate to implement the
 multi-threading aspects of D-Bus method handling. With this release, it no
 longer depends on dbus-tokio, but handles the implementation using the

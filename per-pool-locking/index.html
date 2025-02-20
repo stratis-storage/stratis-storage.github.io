@@ -169,7 +169,7 @@ about <a href="https://stratis-storage.github.io/multi-threading/">here</a>. Thi
 in a separate <a href="https://tokio.rs/tokio/tutorial/spawning">tokio task</a>, but the Stratis engine, the part of our code that
 handles all of the storage stack operations, could still only be accessed
 sequentially.</p>
-<h1 id="motivation">Motivation</h1>
+<span id="continue-reading"></span><h1 id="motivation">Motivation</h1>
 <p>After having conversations with the LVM team, it seemed like sequential accesses
 of storage operations was not entirely necessary. While modifying multiple layers
 of the pool stack at once can cause problems, modifying independent pools in
@@ -276,7 +276,7 @@ where the filesystem is filled before it can be extended.</p>
 <p>We've added extensive debugging for the locking data structure in case users run
 into issues. To enable these logs and see the state of the per-pool locking data
 structure over time, simply enable trace logs in stratisd!</p>
-<span id="continue-reading"></span>
+
 </div>
 
         </div>
