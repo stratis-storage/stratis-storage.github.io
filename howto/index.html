@@ -145,7 +145,7 @@
                         </li>
                         
                         <li>
-                            <a href="https://stratis-storage.github.io/howto/#add-mount-point-to-etc-fstab-using-file-system-uuid" class="toc-link">Add mount point to &#x2F;etc&#x2F;fstab using file system UUID</a>
+                            <a href="https://stratis-storage.github.io/howto/#modifying-etc-fstab-so-that-your-filesystem-is-mounted-at-boot" class="toc-link">Modifying &#x2F;etc&#x2F;fstab so that your filesystem is mounted at boot</a>
                         </li>
                         
                     </ul>
@@ -306,13 +306,15 @@
 <h2 id="mount-the-file-system">Mount the file system</h2>
 <pre style="background-color:#2b303b;color:#c0c5ce;"><code><span># mount /dev/stratis/stratis_howto/fs_howto /mnt
 </span></code></pre>
-<h2 id="add-mount-point-to-etc-fstab-using-file-system-uuid">Add mount point to <code>/etc/fstab</code> using file system UUID</h2>
-<p>You can use <code>/dev/stratis/&lt;pool name&gt;/&lt;file system name&gt;</code> but each time you rename a pool or file system you will need to update <code>/etc/fstab</code>, thus using file system UUID is recommended.</p>
-<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span># blkid -p /dev/stratis/stratis_howto/fs_howto
-</span><span>/dev/stratis/stratis_howto/fs_howto: UUID=&quot;a38780e5-04e3-49da-8b95-2575d77e947c&quot; TYPE=&quot;xfs&quot; USAGE=&quot;filesystem&quot;
-</span><span>
-</span><span># echo &quot;UUID=a38780e5-04e3-49da-8b95-2575d77e947c /mnt xfs defaults 0 0&quot; &gt;&gt; /etc/fstab
+<h2 id="modifying-etc-fstab-so-that-your-filesystem-is-mounted-at-boot">Modifying /etc/fstab so that your filesystem is mounted at boot</h2>
+<p>If you insert the following line in your /etc/fstab file, your pool will be
+started and your filesystem will be mounted during the boot process.</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>/dev/stratis/&lt;pool name&gt;/&lt;file system name&gt; /mnt xfs defaults,x-systemd.requires=stratis-fstab-setup@&lt;pool uuid&gt;.service,x-systemd.after=stratis-fstab-setup@&lt;pool uuid&gt;.service 0 2
 </span></code></pre>
+<p>This will ensure that the filesystem's pool is started. In case the pool
+is encrypted stratisd will attempt to unlock the pool. If the pool can not
+be unlocked without user intervention, the user will be be prompted for a
+passphrase at boot.</p>
 <h1 id="other-useful-pool-operations">Other useful pool operations</h1>
 <h2 id="add-data-add-a-disk-to-an-existing-pool"><code>add-data</code>: Add a disk to an existing pool</h2>
 <pre style="background-color:#2b303b;color:#c0c5ce;"><code><span># stratis pool add-data tale_of_2_disks /dev/sdc
