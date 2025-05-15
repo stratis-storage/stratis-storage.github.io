@@ -134,6 +134,50 @@ Stratis may also incorporate additional technologies in the future.</p>
                       <div class="post">
                         <article class="post">
                             <h1 class="post-title">
+                              <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-3-8-1&#x2F;">
+                                Stratis 3.8.1 Release Notes
+                              </a>
+                            </h1>
+                            <div class="post__summary">
+                                <p><em>mulhern, Stratis Team</em></p>
+<p>Stratis 3.8.1, which consists of <code>stratisd 3.8.1</code> and <code>stratis-cli 3.8.1</code>
+is a bug fix release which addresses the following problems.</p>
+<p>For <code>stratis-cli</code>, the release fixes a bug where a user would be unable to
+start an encrypted pool previously created with any Stratis release less
+than 3.8.0.</p>
+<p><code>stratis-cli 3.8.1</code> also contains better organized help text and displays
+more complete information in the pool detail view.</p>
+<p>For <code>stratisd</code>, the release makes improvements to the Stratis support for
+mounting filesystems at boot. It introduces a new systemd unit file,
+<code>stratis-fstab-setup-with-network@.service</code>, which should be used when a
+filesystem's pool requires unlocking with the network present, as is the
+case when a pool is encrypted using NBDE (network-bound disk encryption).
+The fstab entry for the filesystem <em>must</em> include the <code>_netdev</code> option if this
+systemd unit file is used.</p>
+<p>If the <code>stratis-fstab-setup-with-network@service</code> unit is used and the
+<code>_netdev</code> option is omitted in the same fstab entry, systemd will calculate
+a cyclic dependency, and the boot process will fail.</p>
+<p>An example fstab entry for a filesystem on a pool that is encrypted using
+NBDE should look something like this:</p>
+<p><code>/dev/stratis/&lt;POOL_NAME&gt;/&lt;FILESYSTEM_NAME&gt; &lt;MOUNTPOINT&gt; xfs defaults,_netdev,x-systemd.requires=stratis-fstab-setup-with-network@&lt;POOL_UUID&gt;.service,x-systemd.after=stratis-fstab-setup-with-network@&lt;POOL_UUID&gt;.service 0 2</code></p>
+<p>If a filesystem's pool does not require that the network is up to be
+unlocked then the fstab entry may use the existing
+<code>stratis-fstab-setup@.service</code> unit instead.</p>
+<p><code>stratisd 3.8.1</code> also contains some minor fixes: it adds a previously
+omitted D-Bus <code>PropertiesChanged</code> signal for the revision 8 <code>MergeScheduled</code>
+property, includes additional information about stopped pools in the
+D-Bus <code>StoppedPools</code> property, and improves some error messages.</p>
+                            </div>
+                            <div class="read-more">
+                                <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-3-8-1&#x2F;">Read more...</a>
+                            </div>
+                        </article>
+                        
+                      </div>
+                    
+                      <div class="post">
+                        <article class="post">
+                            <h1 class="post-title">
                               <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-3-8-0&#x2F;">
                                 Stratis 3.8.0 Release Notes
                               </a>
