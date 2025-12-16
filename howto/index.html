@@ -309,7 +309,7 @@
 <h2 id="modifying-etc-fstab-so-that-your-filesystem-is-mounted-at-boot">Modifying /etc/fstab so that your filesystem is mounted at boot</h2>
 <p>If you insert the following line in your /etc/fstab file, your pool will be
 started and your filesystem will be mounted during the boot process.</p>
-<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>/dev/stratis/&lt;pool name&gt;/&lt;file system name&gt; /mnt xfs defaults,x-systemd.requires=stratis-fstab-setup@&lt;pool uuid&gt;.service,x-systemd.after=stratis-fstab-setup@&lt;pool uuid&gt;.service 0 2
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>/dev/stratis/&lt;pool name&gt;/&lt;file system name&gt; /mnt xfs defaults,x-systemd.requires=stratis-fstab-setup@&lt;pool uuid&gt;.service 0 2
 </span></code></pre>
 <p>This will ensure that the filesystem's pool is started. In case the pool
 is encrypted stratisd will attempt to unlock the pool. If the pool can not

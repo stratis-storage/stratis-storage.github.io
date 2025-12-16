@@ -134,6 +134,55 @@ Stratis may also incorporate additional technologies in the future.</p>
                       <div class="post">
                         <article class="post">
                             <h1 class="post-title">
+                              <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-3-8-2&#x2F;">
+                                Stratis 3.8.2 Release Notes
+                              </a>
+                            </h1>
+                            <div class="post__summary">
+                                <p><em>mulhern, Stratis Team</em></p>
+<p>Stratis 3.8.2, which consists of <code>stratisd 3.8.2</code> and <code>stratis-cli 3.8.2</code>
+adds a facility for maintaining keys of an encrypted pool.</p>
+<p><code>stratisd</code> now maintains an encrypted pool's volume key in the <code>stratisd</code>
+process keyring. The key is automatically loaded into the process keyring
+by <code>stratisd</code> when the pool is unlocked or when <code>stratisd</code> is started when
+an encrypted pool is already set up. The key is removed when <code>stratisd</code>
+exits or when the pool is destroyed or stopped. This ensures that when
+<code>stratisd</code> extends the pool, something that <code>stratisd</code> does automatically
+when it judges that circumstances require it, the extension of the pool's
+crypt device will not fail due to missing encryption information.</p>
+<p><code>stratisd</code> now supports a pool-level DBus property, <code>VolumeKeyLoaded</code>,
+which is:</p>
+<ul>
+<li>false if the pool is a V1 pool or not encrypted</li>
+<li>true if the pool is a V2 pool and encrypted and all is well</li>
+<li>an error message otherwise</li>
+</ul>
+<p>If the pool is a V2 encrypted pool and the <code>VolumeKeyLoaded</code> property is
+not true, <code>stratis-cli</code> will display an alert in its pool listing.</p>
+<p>Subsequent releases of <code>stratisd</code> were made to address the following:</p>
+<ul>
+<li>3.8.3: Failure to build on a newly supported architecture due to an
+outdated libmount dependency.</li>
+<li>3.8.4: Failure to build with a new version of systemd libraries due to
+bindgen-generated uncompilable test code.</li>
+<li>3.8.5: Change to numbering of stratis dracut modules to conform to
+new dracut ordering requirements.</li>
+<li>3.8.6: Failure to build introduced by Rust 1.90.0 due to redundant
+parentheses in a map closure.</li>
+</ul>
+<p>The subsequent release of <code>stratis-cli</code>, <code>stratis-cli 3.8.3</code>, adds some man
+page entries omitted in <code>stratis-cli 3.8.2</code>.</p>
+                            </div>
+                            <div class="read-more">
+                                <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-3-8-2&#x2F;">Read more...</a>
+                            </div>
+                        </article>
+                        
+                      </div>
+                    
+                      <div class="post">
+                        <article class="post">
+                            <h1 class="post-title">
                               <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-3-8-1&#x2F;">
                                 Stratis 3.8.1 Release Notes
                               </a>
@@ -159,7 +208,7 @@ systemd unit file is used.</p>
 a cyclic dependency, and the boot process will fail.</p>
 <p>An example fstab entry for a filesystem on a pool that is encrypted using
 NBDE should look something like this:</p>
-<p><code>/dev/stratis/&lt;POOL_NAME&gt;/&lt;FILESYSTEM_NAME&gt; &lt;MOUNTPOINT&gt; xfs defaults,_netdev,x-systemd.requires=stratis-fstab-setup-with-network@&lt;POOL_UUID&gt;.service,x-systemd.after=stratis-fstab-setup-with-network@&lt;POOL_UUID&gt;.service 0 2</code></p>
+<p><code>/dev/stratis/&lt;POOL_NAME&gt;/&lt;FILESYSTEM_NAME&gt; &lt;MOUNTPOINT&gt; xfs defaults,_netdev,x-systemd.requires=stratis-fstab-setup-with-network@&lt;POOL_UUID&gt;.service 0 2</code></p>
 <p>If a filesystem's pool does not require that the network is up to be
 unlocked then the fstab entry may use the existing
 <code>stratis-fstab-setup@.service</code> unit instead.</p>

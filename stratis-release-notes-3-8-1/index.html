@@ -129,7 +129,7 @@ systemd unit file is used.</p>
 a cyclic dependency, and the boot process will fail.</p>
 <p>An example fstab entry for a filesystem on a pool that is encrypted using
 NBDE should look something like this:</p>
-<p><code>/dev/stratis/&lt;POOL_NAME&gt;/&lt;FILESYSTEM_NAME&gt; &lt;MOUNTPOINT&gt; xfs defaults,_netdev,x-systemd.requires=stratis-fstab-setup-with-network@&lt;POOL_UUID&gt;.service,x-systemd.after=stratis-fstab-setup-with-network@&lt;POOL_UUID&gt;.service 0 2</code></p>
+<p><code>/dev/stratis/&lt;POOL_NAME&gt;/&lt;FILESYSTEM_NAME&gt; &lt;MOUNTPOINT&gt; xfs defaults,_netdev,x-systemd.requires=stratis-fstab-setup-with-network@&lt;POOL_UUID&gt;.service 0 2</code></p>
 <p>If a filesystem's pool does not require that the network is up to be
 unlocked then the fstab entry may use the existing
 <code>stratis-fstab-setup@.service</code> unit instead.</p>
