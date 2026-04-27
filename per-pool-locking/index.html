@@ -166,7 +166,7 @@
 stratisd.  Previously, we had made some changes to the IPC layer to provide the
 ability for stratisd to handle incoming requests in parallel which you can read
 about <a href="https://stratis-storage.github.io/multi-threading/">here</a>. This work allowed IPC requests to each be handled
-in a separate <a href="https://tokio.rs/tokio/tutorial/spawning">tokio task</a>, but the Stratis engine, the part of our code that
+in a separate <a rel="external" href="https://tokio.rs/tokio/tutorial/spawning">tokio task</a>, but the Stratis engine, the part of our code that
 handles all of the storage stack operations, could still only be accessed
 sequentially.</p>
 <span id="continue-reading"></span><h1 id="motivation">Motivation</h1>

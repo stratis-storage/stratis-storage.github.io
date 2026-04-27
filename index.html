@@ -134,6 +134,40 @@ Stratis may also incorporate additional technologies in the future.</p>
                       <div class="post">
                         <article class="post">
                             <h1 class="post-title">
+                              <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-3-9-0&#x2F;">
+                                Stratis 3.9.0 Release Notes
+                              </a>
+                            </h1>
+                            <div class="post__summary">
+                                <p><em>mulhern, Stratis Team</em></p>
+<p>Stratis 3.9.0, which consists of <code>stratisd 3.9.0</code> and <code>stratis-cli 3.9.0</code>
+introduces two major new features.</p>
+<h2 id="online-encryption-decryption-and-reencryption">Online Encryption, Decryption, and Reencryption</h2>
+<p>With Stratis 3.9.0 it is now possible to perform in-place encryption,<br />
+decryption, and reencryption of Stratis pools. Previously, the decision
+whether or not a pool should be encrypted had to be made when the pool was
+created. With Stratis 3.9.0 the storage administrator may choose to encrypt
+a pool after it has been put into use. Moreover, with Stratis 3.9.0, it is
+possible to reencrypt a pool, i.e., to change the key used to encrypt the
+pool, a task that may be performed as a housekeeping measure or in the case
+a key is known to have been compromised.</p>
+<h2 id="starting-a-stratis-pool-without-its-cache">Starting a Stratis Pool Without its Cache</h2>
+<p>With Stratis 3.9.0 it is now possible to start a pool while explicitly
+instructing stratisd not to set up the pool's cache. This facility can be
+useful if the pool's cache devices are missing or otherwise unusable. Once
+the pool is set up, it is a pool without a cache; restoring the cache
+requires adding new cache devices to the pool.</p>
+                            </div>
+                            <div class="read-more">
+                                <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-3-9-0&#x2F;">Read more...</a>
+                            </div>
+                        </article>
+                        
+                      </div>
+                    
+                      <div class="post">
+                        <article class="post">
+                            <h1 class="post-title">
                               <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-3-8-2&#x2F;">
                                 Stratis 3.8.2 Release Notes
                               </a>
@@ -588,7 +622,7 @@ enhancements and bug fixes.</p>
 <h1 id="overview">Overview</h1>
 <p>For a while, we've bumped into a number of problems with our thin provisioning implementation
 around reliability and safety for users. After gathering a lot of feedback on our thin
-provisioning layer, we put together <a href="https://github.com/stratis-storage/stratisd/issues/2814">a proposal</a> for improvements to how we currently handle
+provisioning layer, we put together <a rel="external" href="https://github.com/stratis-storage/stratisd/issues/2814">a proposal</a> for improvements to how we currently handle
 allocations.</p>
 <p>The changes can largely be divided up into three areas of improvement:</p>
 <ul>
@@ -654,7 +688,7 @@ allocations.</p>
 stratisd.  Previously, we had made some changes to the IPC layer to provide the
 ability for stratisd to handle incoming requests in parallel which you can read
 about <a href="https://stratis-storage.github.io/multi-threading/">here</a>. This work allowed IPC requests to each be handled
-in a separate <a href="https://tokio.rs/tokio/tutorial/spawning">tokio task</a>, but the Stratis engine, the part of our code that
+in a separate <a rel="external" href="https://tokio.rs/tokio/tutorial/spawning">tokio task</a>, but the Stratis engine, the part of our code that
 handles all of the storage stack operations, could still only be accessed
 sequentially.</p>
                             </div>
@@ -774,11 +808,11 @@ multi-threading implementation.</p>
 <p>Stratis 2.4.0 includes two major user-visible changes:</p>
 <ul>
 <li>All the functionality required to boot from a Stratis-managed root
-filesystem. See the prior post <a href="https://stratis-storage.github.io/stratis-rootfs/">Stratis filesystems as the root filesystem</a>
+filesystem. See the prior post <a rel="external" href="https://stratis-storage.github.io/stratis-rootfs/">Stratis filesystems as the root filesystem</a>
 for a more detailed discussion.</li>
 <li>An enhancement to existing encryption support that allows the user to
 create a pool with encryption managed either by the kernel keyring or
-<a href="https://github.com/latchset/clevis">Clevis</a>, and to subsequently bind an already encrypted pool using either
+<a rel="external" href="https://github.com/latchset/clevis">Clevis</a>, and to subsequently bind an already encrypted pool using either
 mechanism. Previously, the user could create an encrypted pool using the
 kernel keyring only, and could bind or unbind using Clevis only.</li>
 </ul>
@@ -838,7 +872,7 @@ as the root filesystem of a Linux installation.</p>
                             <div class="post__summary">
                                 <p><em>mulhern, Stratis Team</em></p>
 <p>Stratis 2.3.0 adds additional flexibility to its encryption support via
-<a href="https://github.com/latchset/clevis">Clevis</a>.</p>
+<a rel="external" href="https://github.com/latchset/clevis">Clevis</a>.</p>
                             </div>
                             <div class="read-more">
                                 <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-release-notes-2-3-0&#x2F;">Read more...</a>
@@ -902,7 +936,7 @@ log levels.</p>
                                 <p><em>mulhern, Stratis Team</em></p>
 <p>stratis-cli 2.1.1 fixes a bug where if one encrypted pool could not be
 unlocked, execution terminated, and no attempt was made to unlock any other
-pools that might need to be unlocked (<a href="https://github.com/stratis-storage/stratis-cli/issues/618">stratis issue 618</a>).</p>
+pools that might need to be unlocked (<a rel="external" href="https://github.com/stratis-storage/stratis-cli/issues/618">stratis issue 618</a>).</p>
                             </div>
                             <div class="read-more">
                                 <a href="https:&#x2F;&#x2F;stratis-storage.github.io&#x2F;stratis-cli-release-notes-2-1-1&#x2F;">Read more...</a>
@@ -1037,7 +1071,7 @@ CLI.</p>
 <p>The bug was caused by an inconsistency in the metadata handling which led to
 a failure to properly update the Stratis metadata if stratisd was restarted
 in an environment where the system clock indicated a time earlier than when
-it had previously been running. See <a href="https://github.com/stratis-storage/stratisd/issues/1509">stratisd issue 1509</a> for further
+it had previously been running. See <a rel="external" href="https://github.com/stratis-storage/stratisd/issues/1509">stratisd issue 1509</a> for further
 details.</p>
                             </div>
                             <div class="read-more">
